@@ -98,27 +98,26 @@ export function FilterBar({
   ];
 
   return (
-    <section className="relative z-20 rounded-3xl border-2 border-[#211F1C] bg-white p-4 sm:p-5 shadow-[5px_5px_0px_#211F1C]">
-      {/* Top row: Search + Filter Chooser */}
+    <section className="relative z-20 rounded-2xl border border-[#E6E0D5] bg-white p-4 sm:p-5 shadow-xs">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
         <div className="relative flex-1">
-          <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#6B655B]" />
+          <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8A8378]" />
           <input
             type="text"
             value={filters.busca}
             onChange={(e) => onChange({ ...filters, busca: e.target.value })}
             placeholder="Buscar por nome do congresso, sigla (ex.: CBR27), cidade ou especialidade..."
-            className="w-full rounded-2xl border-2 border-[#E4DDD0] bg-[#FAF7F1] py-2.5 pl-10 pr-10 text-sm text-[#211F1C] placeholder:text-[#8E8679] transition-colors focus:border-[#211F1C] focus:bg-white focus:outline-none"
+            className="w-full rounded-xl border border-[#E6E0D5] bg-[#F8F6F1] py-2.5 pl-10 pr-10 text-sm text-[#1F1D1A] placeholder:text-[#8A8378] transition-colors focus:border-[#5A6D3A] focus:bg-white focus:outline-none"
           />
           <AnimatePresence>
             {filters.busca && (
               <motion.button
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
+                exit={{ opacity: 0, scale: 0.85 }}
                 type="button"
                 onClick={() => onChange({ ...filters, busca: '' })}
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-[#6B655B] hover:bg-[#EFE8DA] hover:text-[#211F1C]"
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-[#5E584F] hover:bg-[#EFEBE2] hover:text-[#1F1D1A]"
                 aria-label="Limpar busca"
               >
                 <X className="h-3.5 w-3.5" />
@@ -127,38 +126,37 @@ export function FilterBar({
           </AnimatePresence>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2.5">
           <div className="relative">
-            <motion.button
-              whileTap={{ scale: 0.97 }}
+            <button
               type="button"
               onClick={() => setShowFilterChooser((v) => !v)}
-              className={`inline-flex items-center gap-2 rounded-2xl border-2 px-3.5 py-2.5 text-xs sm:text-sm font-semibold transition-all ${
+              className={`inline-flex items-center gap-2 rounded-xl border px-3.5 py-2.5 text-xs font-semibold transition-colors ${
                 showFilterChooser
-                  ? 'border-[#211F1C] bg-[#F3D2A2] text-[#211F1C] shadow-[2px_2px_0px_#211F1C]'
-                  : 'border-[#211F1C] bg-[#FDF6E9] text-[#211F1C] hover:bg-[#F7E9CE]'
+                  ? 'border-[#5A6D3A] bg-[#EEF2E7] text-[#35441E]'
+                  : 'border-[#E6E0D5] bg-[#F8F6F1] text-[#1F1D1A] hover:border-[#CFC7B8]'
               }`}
             >
-              <SlidersHorizontal className="h-4 w-4" />
+              <SlidersHorizontal className="h-3.5 w-3.5 text-[#5E584F]" />
               <span>Escolher filtros</span>
-              <span className="rounded-full bg-[#211F1C] px-1.5 py-0.5 text-[10px] font-bold text-[#FAF7F1]">
-                {enabledPanels.length}
+              <span className="text-[11px] text-[#5E584F] tabular-nums">
+                ({enabledPanels.length})
               </span>
-            </motion.button>
+            </button>
 
             <AnimatePresence>
               {showFilterChooser && (
                 <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                  initial={{ opacity: 0, y: 6, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 6, scale: 0.97 }}
-                  transition={{ type: 'spring', stiffness: 360, damping: 26 }}
-                  className="absolute right-0 mt-2 w-64 rounded-2xl border-2 border-[#211F1C] bg-white p-3 shadow-[4px_4px_0px_#211F1C] z-30"
+                  exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                  transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute right-0 mt-2 w-64 rounded-xl border border-[#DCD4C6] bg-white p-2.5 shadow-lg z-30"
                 >
-                  <div className="mb-2 text-[11px] font-bold uppercase tracking-wider text-[#6B655B]">
-                    Filtros visíveis na barra
+                  <div className="mb-1.5 px-2 text-[10px] font-semibold uppercase tracking-wider text-[#8A8378]">
+                    Filtros ativos na barra
                   </div>
-                  <div className="space-y-1">
+                  <div className="space-y-0.5">
                     {panelMeta.map((p) => {
                       const active = enabledPanels.includes(p.key);
                       const Icon = p.icon;
@@ -167,20 +165,20 @@ export function FilterBar({
                           key={p.key}
                           type="button"
                           onClick={() => toggleEnabledPanel(p.key)}
-                          className="flex w-full items-center justify-between rounded-xl px-2.5 py-2 text-left text-xs font-medium transition-colors hover:bg-[#FAF7F1]"
+                          className="flex w-full items-center justify-between rounded-lg px-2.5 py-2 text-left text-xs font-medium transition-colors hover:bg-[#F8F6F1]"
                         >
-                          <span className="flex items-center gap-2 text-[#211F1C]">
-                            <Icon className="h-3.5 w-3.5 text-[#6B655B]" />
+                          <span className="flex items-center gap-2 text-[#1F1D1A]">
+                            <Icon className="h-3.5 w-3.5 text-[#5E584F]" />
                             {p.label}
                           </span>
                           <span
                             className={`flex h-4 w-4 items-center justify-center rounded border ${
                               active
-                                ? 'border-[#211F1C] bg-[#B7CC49] text-[#211F1C]'
-                                : 'border-[#CFC6B8] bg-white'
+                                ? 'border-[#5A6D3A] bg-[#5A6D3A] text-white'
+                                : 'border-[#CFC7B8] bg-white'
                             }`}
                           >
-                            {active && <Check className="h-3 w-3 stroke-[3]" />}
+                            {active && <Check className="h-3 w-3" />}
                           </span>
                         </button>
                       );
@@ -191,9 +189,10 @@ export function FilterBar({
             </AnimatePresence>
           </div>
 
-          <div className="rounded-2xl border border-[#E4DDD0] bg-[#FAF7F1] px-3 py-2.5 text-xs font-semibold text-[#5C554C] tabular-nums">
-            <span className="text-[#211F1C]">{totalFiltered}</span> de {totalAll} eventos
-          </div>
+          <span className="px-1 text-xs text-[#5E584F] tabular-nums">
+            Exibindo <strong className="font-semibold text-[#1F1D1A]">{totalFiltered}</strong> de{' '}
+            {totalAll}
+          </span>
         </div>
       </div>
 
@@ -276,16 +275,15 @@ export function FilterBar({
         <AnimatePresence>
           {activeCount > 0 && (
             <motion.button
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              whileTap={{ scale: 0.95 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               type="button"
               onClick={clearAll}
-              className="inline-flex items-center gap-1.5 rounded-full border border-[#D49A4A] bg-[#FDF4E3] px-3 py-1.5 text-xs font-semibold text-[#7A4F16] transition-colors hover:bg-[#F9E8C6]"
+              className="inline-flex items-center gap-1 rounded-full border border-[#DFCEB2] bg-[#F6EFE4] px-3 py-1.5 text-xs font-medium text-[#7A592A] transition-colors hover:bg-[#EFE2CE]"
             >
               <X className="h-3.5 w-3.5" />
-              Limpar filtros ({activeCount})
+              <span>Limpar filtros ({activeCount})</span>
             </motion.button>
           )}
         </AnimatePresence>
@@ -302,11 +300,11 @@ export function FilterBar({
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <div className="mt-3 rounded-2xl border border-[#E4DDD0] bg-[#FAF7F1] p-3.5">
+            <div className="mt-3 rounded-xl border border-[#E6E0D5] bg-[#F8F6F1] p-3.5">
               {openPanel === 'temas' && (
                 <div>
                   <div className="mb-2.5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#6B655B]">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#5E584F]">
                       Selecione uma ou mais especialidades
                     </span>
                     <input
@@ -314,29 +312,28 @@ export function FilterBar({
                       value={themeQuery}
                       onChange={(e) => setThemeQuery(e.target.value)}
                       placeholder="Filtrar especialidades..."
-                      className="rounded-xl border border-[#DDD4C4] bg-white px-3 py-1.5 text-xs focus:border-[#211F1C] focus:outline-none sm:w-56"
+                      className="rounded-lg border border-[#DCD4C6] bg-white px-3 py-1.5 text-xs focus:border-[#5A6D3A] focus:outline-none sm:w-56"
                     />
                   </div>
                   <div className="flex max-h-48 flex-wrap gap-1.5 overflow-y-auto pr-1">
                     {filteredThemes.map((t) => {
                       const selected = filters.temas.includes(t.name);
                       return (
-                        <motion.button
+                        <button
                           key={t.name}
-                          whileTap={{ scale: 0.96 }}
                           type="button"
                           onClick={() => toggleTheme(t.name)}
-                          className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                          className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
                             selected
-                              ? 'border-[#211F1C] bg-[#B7CC49] text-[#211F1C] shadow-[1.5px_1.5px_0px_#211F1C]'
-                              : 'border-[#DDD4C4] bg-white text-[#413D37] hover:border-[#211F1C]'
+                              ? 'border-[#5A6D3A] bg-[#EEF2E7] text-[#35441E]'
+                              : 'border-[#E6E0D5] bg-white text-[#433F39] hover:border-[#CFC7B8]'
                           }`}
                         >
                           <span>{t.name}</span>
-                          <span className="rounded-full bg-black/5 px-1.5 py-0.2 text-[10px] tabular-nums">
+                          <span className="text-[10px] text-[#8A8378] tabular-nums">
                             {t.count}
                           </span>
-                        </motion.button>
+                        </button>
                       );
                     })}
                   </div>
@@ -395,8 +392,8 @@ export function FilterBar({
                       onClick={() => onChange({ ...filters, regiao: 'exterior' })}
                     />
                   </div>
-                  <div className="border-t border-[#E4DDD0] pt-2">
-                    <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#6B655B]">
+                  <div className="border-t border-[#E6E0D5] pt-2">
+                    <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#5E584F]">
                       Estados (UF)
                     </div>
                     <div className="flex flex-wrap gap-1.5">
@@ -437,23 +434,19 @@ export function FilterBar({
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
-            className="mt-2.5 flex flex-wrap items-center gap-1.5 border-t border-[#EFE8DA] pt-2.5"
+            className="mt-2.5 flex flex-wrap items-center gap-1.5 border-t border-[#EFEBE2] pt-2.5"
           >
-            <span className="text-[11px] font-semibold text-[#6B655B]">Temas ativos:</span>
+            <span className="text-[11px] font-medium text-[#5E584F]">Temas ativos:</span>
             {filters.temas.map((t) => (
-              <motion.button
+              <button
                 key={t}
-                layout
-                initial={{ opacity: 0, scale: 0.85 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.85 }}
                 type="button"
                 onClick={() => toggleTheme(t)}
-                className="inline-flex items-center gap-1 rounded-full border border-[#211F1C] bg-[#F2F6DF] px-2.5 py-0.5 text-xs font-medium text-[#211F1C] hover:bg-[#E4EEB8]"
+                className="inline-flex items-center gap-1 rounded-full border border-[#CED9BC] bg-[#EEF2E7] px-2.5 py-0.5 text-xs font-medium text-[#35441E] hover:bg-[#E4ECD8]"
               >
                 <span>{t}</span>
                 <X className="h-3 w-3" />
-              </motion.button>
+              </button>
             ))}
           </motion.div>
         )}
@@ -476,22 +469,21 @@ function FilterTriggerButton({
   onClick: () => void;
 }) {
   return (
-    <motion.button
-      whileTap={{ scale: 0.97 }}
+    <button
       type="button"
       onClick={onClick}
-      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all ${
+      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
         active
-          ? 'border-[#211F1C] bg-[#211F1C] text-[#FAF7F1]'
+          ? 'border-[#1F1D1A] bg-[#1F1D1A] text-[#F8F6F1]'
           : hasValue
-            ? 'border-[#211F1C] bg-[#B7CC49] text-[#211F1C] shadow-[2px_2px_0px_#211F1C]'
-            : 'border-[#DCD3C4] bg-white text-[#3F3B35] hover:border-[#211F1C] hover:bg-[#FAF7F1]'
+            ? 'border-[#5A6D3A] bg-[#EEF2E7] text-[#35441E]'
+            : 'border-[#E6E0D5] bg-white text-[#433F39] hover:border-[#CFC7B8] hover:bg-[#FAF8F4]'
       }`}
     >
       {icon}
       <span>{label}</span>
       <ChevronDown className={`h-3.5 w-3.5 transition-transform ${active ? 'rotate-180' : ''}`} />
-    </motion.button>
+    </button>
   );
 }
 
@@ -505,17 +497,16 @@ function ChipOption({
   onClick: () => void;
 }) {
   return (
-    <motion.button
-      whileTap={{ scale: 0.96 }}
+    <button
       type="button"
       onClick={onClick}
-      className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+      className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
         selected
-          ? 'border-[#211F1C] bg-[#F3D2A2] text-[#211F1C] shadow-[1.5px_1.5px_0px_#211F1C]'
-          : 'border-[#DDD4C4] bg-white text-[#413D37] hover:border-[#211F1C]'
+          ? 'border-[#8F6B3A] bg-[#F6EFE4] text-[#5C411D]'
+          : 'border-[#E6E0D5] bg-white text-[#433F39] hover:border-[#CFC7B8]'
       }`}
     >
       {label}
-    </motion.button>
+    </button>
   );
 }

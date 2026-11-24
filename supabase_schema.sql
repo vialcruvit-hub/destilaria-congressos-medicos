@@ -1,0 +1,2778 @@
+-- Script idempotente para PostgreSQL (DDL + UPSERT)
+BEGIN;
+
+CREATE TABLE IF NOT EXISTS congressos (
+    id BIGSERIAL PRIMARY KEY,
+    slug TEXT NOT NULL UNIQUE,
+    nome TEXT NOT NULL,
+    data_inicio DATE,
+    data_fim DATE,
+    data_status TEXT NOT NULL CHECK (data_status IN ('confirmada', 'a_confirmar', 'a_definir')),
+    data_observacao TEXT,
+    modalidade TEXT NOT NULL CHECK (modalidade IN ('presencial', 'online', 'hibrido', 'a_definir')),
+    cidade TEXT,
+    estado_uf CHAR(2),
+    pais TEXT,
+    local_formatado TEXT NOT NULL,
+    tema_principal TEXT NOT NULL,
+    temas TEXT[] NOT NULL DEFAULT '{}',
+    fontes TEXT[] NOT NULL DEFAULT '{}',
+    atualizado_em TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    CONSTRAINT chk_congressos_datas CHECK (data_fim IS NULL OR data_inicio IS NULL OR data_fim >= data_inicio)
+);
+
+CREATE INDEX IF NOT EXISTS idx_congressos_data_inicio ON congressos (data_inicio);
+CREATE INDEX IF NOT EXISTS idx_congressos_estado_uf ON congressos (estado_uf);
+CREATE INDEX IF NOT EXISTS idx_congressos_tema_principal ON congressos (tema_principal);
+CREATE INDEX IF NOT EXISTS idx_congressos_temas_gin ON congressos USING GIN (temas);
+
+ALTER TABLE congressos ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Leitura pública de congressos" ON congressos;
+CREATE POLICY "Leitura pública de congressos" ON congressos FOR SELECT TO anon, authenticated USING (true);
+
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('x-congresso-brasileiro-de-medicina-de-emergencia-adulto-e-pediatrica-2026', 'X Congresso Brasileiro de Medicina de Emergência Adulto e Pediátrica', '2026-11-25'::DATE, '2026-11-28'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Medicina de Emergência', ARRAY['Medicina de Emergência', 'Medicina de Emergência Pediátrica', 'Terapia Intensiva']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('71-cba-congresso-brasileiro-de-anestesiologia-2026', '71° CBA - Congresso Brasileiro de Anestesiologia', '2026-11-26'::DATE, '2026-11-29'::DATE, 'confirmada', NULL, 'presencial', 'Fortaleza', 'CE'::CHAR(2), 'Brasil', 'Fortaleza, CE - Brasil', 'Anestesiologia', ARRAY['Anestesiologia', 'Medicina Perioperatória', 'Medicina da Dor']::TEXT[], ARRAY['agrupamed.com.br', 'medicinahub.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('hpb-summit-uerj-2026-cirurgia-hepatologia-oncologia-e-transplante-2026', 'HPB Summit UERJ 2026 – Cirurgia, Hepatologia, Oncologia e Transplante', '2026-11-26'::DATE, '2026-11-27'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Cirurgia Geral', ARRAY['Cirurgia Geral', 'Cirurgia Hepatopancreatobiliar', 'Cirurgia Oncológica']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('ii-congresso-brasileiro-de-neuroimunologia-2026', 'II Congresso Brasileiro de Neuroimunologia', '2026-11-26'::DATE, '2026-11-28'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Neurologia', ARRAY['Neurologia', 'Neuroimunologia', 'Neurologia Clínica']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('29o-congresso-de-oftalmologia-da-usp-29o-cousp-2026', '29º Congresso de Oftalmologia da USP — 29º CoUSP 2026', '2026-12-01'::DATE, '2026-12-05'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Oftalmologia', ARRAY['Oftalmologia', 'Oftalmopediatria']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('congresso-baiano-de-infectologia-infecto-bahia-2026', 'Congresso Baiano de Infectologia — INFECTO BAHIA 2026', '2026-12-02'::DATE, '2026-12-03'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Infectologia', ARRAY['Infectologia', 'Clínica Médica', 'Medicina Preventiva e Social']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('congresso-brasileiro-do-sono-2026', 'CONGRESSO BRASILEIRO DO SONO 2026', '2026-12-02'::DATE, '2026-12-05'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Medicina do Sono', ARRAY['Medicina do Sono', 'Neurologia', 'Pneumologia']::TEXT[], ARRAY['agrupamed.com.br', 'medicinahub.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('43o-congresso-brasileiro-de-arritmias-cardiacas-2026', '43º Congresso Brasileiro de Arritmias Cardíacas', '2026-12-03'::DATE, '2026-12-05'::DATE, 'confirmada', NULL, 'presencial', 'Porto Alegre', 'RS'::CHAR(2), 'Brasil', 'Porto Alegre, RS - Brasil', 'Cardiologia', ARRAY['Cardiologia', 'Arritmia Cardíaca', 'Eletrofisiologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('8a-jornada-de-ultrassonografia-da-sbus-ba-2026', '8ª Jornada de Ultrassonografia da SBUS/BA', '2026-12-04'::DATE, '2026-12-05'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Ultrassonografia', ARRAY['Ultrassonografia', 'Radiologia e Diagnóstico por Imagem']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('2o-congresso-de-boas-praticas-medicas-do-cremesp-2o-cbpmc-2026', '2º Congresso de Boas Práticas Médicas do Cremesp — 2º CBPMC', '2026-12-18'::DATE, '2026-12-19'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Cardiologia', ARRAY['Cardiologia', 'Ginecologia e Obstetrícia', 'Infectologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('cornea-2027-congresso-regional-de-neurologia-e-neurociencia-aplicada-2027', 'Cornea 2027 – Congresso Regional de Neurologia e Neurociência Aplicada', '2027-01-14'::DATE, '2027-01-15'::DATE, 'confirmada', NULL, 'online', NULL, NULL, NULL, 'Online', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('cordclimed-2027-i-congresso-regional-de-clinica-medica-e-saude-da-familia-2027', 'Cordclimed 2027 – I Congresso Regional de Clínica Médica e Saúde da Família', '2027-01-20'::DATE, '2027-01-22'::DATE, 'confirmada', NULL, 'online', NULL, NULL, NULL, 'Online', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('concardio-2027-ii-congresso-nacional-de-cardiologia-e-praticas-clinicas-avancadas-2027', 'CONCARDIO 2027 – II Congresso Nacional de Cardiologia e Práticas Clínicas Avançadas', '2027-02-04'::DATE, '2027-02-06'::DATE, 'confirmada', NULL, 'online', NULL, NULL, NULL, 'Online', 'Cardiologia', ARRAY['Cardiologia']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('49o-simasp-simposio-internacional-moacyr-alvaro-2027', '49º SIMASP – Simpósio Internacional Moacyr Álvaro', '2027-02-24'::DATE, '2027-02-27'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Oftalmologia', ARRAY['Oftalmologia', 'Catarata', 'Cirurgia Refrativa']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('aaos-annual-meeting-2027', 'AAOS Annual Meeting 2027', '2027-03-03'::DATE, '2027-03-06'::DATE, 'confirmada', NULL, 'presencial', 'Las Vegas', NULL, 'Estados Unidos', 'Las Vegas, Estados Unidos', 'Ortopedia', ARRAY['Ortopedia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('ecr-2027', 'ECR 2027', '2027-03-03'::DATE, '2027-03-07'::DATE, 'confirmada', NULL, 'presencial', 'Viena', NULL, 'Áustria', 'Viena, Áustria', 'Radiologia e Diagnóstico por Imagem', ARRAY['Radiologia e Diagnóstico por Imagem']::TEXT[], ARRAY['star.med.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xv-congresso-brasileiro-de-laser-em-medicina-e-cirurgia-2027', 'XV Congresso Brasileiro de Laser em Medicina e Cirurgia', '2027-03-04'::DATE, '2027-03-06'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Oftalmologia', ARRAY['Oftalmologia', 'Dermatologia', 'Cirurgia Vascular']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('iii-simposio-de-neuro-oncologia-2027', 'III Simpósio de Neuro-Oncologia', '2027-03-11'::DATE, '2027-03-13'::DATE, 'confirmada', NULL, 'presencial', 'Chapecó', 'SC'::CHAR(2), 'Brasil', 'Chapecó, SC - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('1o-congresso-baiano-de-longevidade-e-saude-integrativa-2027', '1º Congresso Baiano de Longevidade e Saúde Integrativa 2027', '2027-03-12'::DATE, '2027-03-14'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('congresso-de-doencas-raras-e-neurodiversidade-2027', 'Congresso de Doenças Raras e Neurodiversidade 2027', '2027-03-12'::DATE, '2027-03-14'::DATE, 'confirmada', NULL, 'presencial', 'Fortaleza', 'CE'::CHAR(2), 'Brasil', 'Fortaleza, CE - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('jornada-nordeste-de-anestesiologia-jona-2027', 'Jornada Nordeste de Anestesiologia (JONA 2027)', '2027-03-13'::DATE, '2027-03-14'::DATE, 'confirmada', NULL, 'presencial', 'São Luís', 'MA'::CHAR(2), 'Brasil', 'São Luís, MA - Brasil', 'Anestesiologia', ARRAY['Anestesiologia']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('17o-congresso-paulista-de-pediatria-spsp-2027', '17º Congresso Paulista de Pediatria (SPSP)', '2027-03-17'::DATE, '2027-03-20'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Pediatria', ARRAY['Pediatria', 'Neonatologia']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('10o-congresso-clinica-psiquiatrica-ccp-2027', '10º Congresso Clínica Psiquiátrica — CCP 2027', '2027-03-18'::DATE, '2027-03-20'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Psiquiatria', ARRAY['Psiquiatria', 'Neurologia', 'Medicina do Sono']::TEXT[], ARRAY['tivita.com', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('1a-feira-brasileira-de-pesquisa-clinica-ii-congresso-brasileiro-de-pesquisa-clinica-sbppc', '1ª Feira Brasileira de Pesquisa Clínica / II Congresso Brasileiro de Pesquisa Clínica – SBPPC 2027', '2027-03-18'::DATE, '2027-03-20'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Pesquisa Clínica Humana e Veterinária', ARRAY['Pesquisa Clínica Humana e Veterinária', 'Ciência', 'Tecnologia e Inovação']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('41o-encontro-de-angiologia-e-de-cirurgia-vascular-do-rio-de-janeiro-2027', '41º Encontro de Angiologia e de Cirurgia Vascular do Rio de Janeiro', '2027-03-18'::DATE, '2027-03-20'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Angiologia', ARRAY['Angiologia', 'Cirurgia Vascular', 'Cirurgia Endovascular']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('aad-annual-meeting-2027', 'AAD Annual Meeting 2027', '2027-03-19'::DATE, '2027-03-23'::DATE, 'confirmada', NULL, 'presencial', 'San Francisco', NULL, 'Estados Unidos', 'San Francisco, Estados Unidos', 'Dermatologia', ARRAY['Dermatologia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('eau-congress-eau27-42o-congresso-anual-da-european-association-of-urology-2027', 'EAU Congress — EAU27 (42º Congresso Anual da European Association of Urology)', '2027-03-19'::DATE, '2027-03-22'::DATE, 'confirmada', NULL, 'presencial', 'Amsterdã', NULL, 'Países Baixos', 'Amsterdã, Países Baixos', 'Urologia', ARRAY['Urologia', 'Oncologia', 'Urologia Reconstrutiva']::TEXT[], ARRAY['agenciadomedico.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('congresso-norte-nordeste-de-oftalmologia-2027-cnno-2027', 'Congresso Norte-Nordeste de Oftalmologia 2027 — CNNO 2027', '2027-04-01'::DATE, '2027-04-03'::DATE, 'confirmada', NULL, 'presencial', 'Recife', 'PE'::CHAR(2), 'Brasil', 'Recife, PE - Brasil', 'Oftalmologia', ARRAY['Oftalmologia']::TEXT[], ARRAY['querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('gineco-onco-2027-13o-simposio-internacional-multidisciplinar-de-ginecologia-oncologica-202', 'GINECO ONCO 2027 — 13º Simpósio Internacional Multidisciplinar de Ginecologia Oncológica', '2027-04-02'::DATE, '2027-04-03'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Ginecologia e Obstetrícia', ARRAY['Ginecologia e Obstetrícia', 'Oncologia Clínica', 'Oncologia Cirúrgica']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('viii-congresso-brasileiro-de-dor-orofacial-2027', 'VIII Congresso Brasileiro de Dor Orofacial 2027', '2027-04-05'::DATE, '2027-04-07'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('29o-congresso-brasileiro-de-cardiopatias-congenitas-cardiologia-pediatrica-intervencao-e-c', '29º Congresso Brasileiro de Cardiopatias Congênitas, Cardiologia Pediátrica, Intervenção e Cirurgia Cardíaca Pediátrica', '2027-04-07'::DATE, '2027-04-10'::DATE, 'confirmada', NULL, 'presencial', 'Recife', 'PE'::CHAR(2), 'Brasil', 'Recife, PE - Brasil', 'Cardiologia Pediátrica', ARRAY['Cardiologia Pediátrica']::TEXT[], ARRAY['usebip.com', 'agenciadomedico.com.br', 'tivita.com', 'agrupamed.com.br', 'querocongressos.com.br', 'medicinahub.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('15o-congresso-goiano-de-ginecologia-e-obstetricia-51a-jornada-goiana-de-ginecologia-e-obst', '15º Congresso Goiano de Ginecologia e Obstetrícia / 51ª Jornada Goiana de Ginecologia e Obstetrícia', '2027-04-08'::DATE, '2027-04-10'::DATE, 'confirmada', NULL, 'presencial', 'Goiânia', 'GO'::CHAR(2), 'Brasil', 'Goiânia, GO - Brasil', 'Ginecologia e Obstetrícia', ARRAY['Ginecologia e Obstetrícia', 'Mastologia', 'Reprodução Humana']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('euro-brazil-2027-congresso-euro-brasileiro-de-medicina-intensiva-2027', 'Euro-Brazil 2027 — Congresso Euro-Brasileiro de Medicina Intensiva', '2027-04-08'::DATE, '2027-04-09'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Medicina Intensiva', ARRAY['Medicina Intensiva', 'Anestesiologia', 'Medicina de Emergência']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('v-congresso-brasileiro-de-neurogenetica-2027', 'V Congresso Brasileiro de Neurogenética 2027', '2027-04-08'::DATE, '2027-04-10'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Neurologia', ARRAY['Neurologia', 'Neurologia Infantil', 'Neurogenética']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('23o-sine-simposio-de-neuroendocrinologia-2027', '23º SINE — Simpósio de Neuroendocrinologia', '2027-04-09'::DATE, '2027-04-11'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Endocrinologia e Metabologia', ARRAY['Endocrinologia e Metabologia', 'Neuroendocrinologia', 'Neurologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xii-congresso-internacional-oncologia-d-or-onco-in-rio-2027', 'XII Congresso Internacional Oncologia D''Or (Onco in Rio)', '2027-04-09'::DATE, '2027-04-10'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Oncologia', ARRAY['Oncologia', 'Oncologia Clínica', 'Cirurgia Oncológica']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxiii-jornada-alagoana-de-ginecologia-e-obstetricia-2027', 'XXIII Jornada Alagoana de Ginecologia e Obstetrícia 2027', '2027-04-09'::DATE, '2027-04-10'::DATE, 'confirmada', NULL, 'presencial', 'Maceió', 'AL'::CHAR(2), 'Brasil', 'Maceió, AL - Brasil', 'Ginecologia e Obstetrícia', ARRAY['Ginecologia e Obstetrícia', 'Mastologia', 'Patologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('acc-27-2027', 'ACC.27', '2027-04-10'::DATE, '2027-04-12'::DATE, 'confirmada', NULL, 'presencial', 'Houston', NULL, 'Estados Unidos', 'Houston, Estados Unidos', 'Cardiologia', ARRAY['Cardiologia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('world-congress-of-cardiology-2027', 'World Congress of Cardiology 2027', '2027-04-10'::DATE, '2027-04-12'::DATE, 'confirmada', NULL, 'presencial', 'Houston', NULL, 'Estados Unidos', 'Houston, Estados Unidos', 'Cardiologia', ARRAY['Cardiologia']::TEXT[], ARRAY['star.med.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('17o-brazilian-lymphoma-conference-blc-2027', '17º Brazilian Lymphoma Conference (BLC 2027)', '2027-04-14'::DATE, '2027-04-17'::DATE, 'confirmada', NULL, 'online', NULL, NULL, NULL, 'Online', 'Hematologia', ARRAY['Hematologia']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('18o-congresso-internacional-de-uro-oncologia-uro-onco-2027', '18º Congresso Internacional de Uro-Oncologia — URO-ONCO 2027', '2027-04-14'::DATE, '2027-04-17'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Urologia', ARRAY['Urologia', 'Oncologia Clínica', 'Oncologia Cirúrgica']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('51o-bravs-meeting-retina-2027', '51º BRAVS Meeting – RETINA 2027', '2027-04-14'::DATE, '2027-04-17'::DATE, 'confirmada', NULL, 'presencial', 'Belo Horizonte', 'MG'::CHAR(2), 'Brasil', 'Belo Horizonte, MG - Brasil', 'Oftalmologia', ARRAY['Oftalmologia', 'Retina e Vítreo']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('37o-congresso-brasileiro-de-cirurgia-dermatologica-cbcd-2027', '37º Congresso Brasileiro de Cirurgia Dermatológica (CBCD 2027)', '2027-04-15'::DATE, '2027-04-17'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Dermatologia', ARRAY['Dermatologia', 'Cirurgia Dermatológica']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('40o-congresso-norte-nordeste-de-coloproctologia-2027', '40º Congresso Norte-Nordeste de Coloproctologia', '2027-04-16'::DATE, '2027-04-17'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Coloproctologia', ARRAY['Coloproctologia', 'Cirurgia Geral', 'Cirurgia do Aparelho Digestivo']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxxiii-slac-congresso-latino-americano-de-citopatologia-e-tutorial-da-academia-internacion', 'XXXIII SLAC - Congresso Latino-Americano de Citopatologia e Tutorial da Academia Internacional de Citologia (IAC)', '2027-04-20'::DATE, '2027-04-23'::DATE, 'confirmada', NULL, 'presencial', 'Florianópolis', 'SC'::CHAR(2), 'Brasil', 'Florianópolis, SC - Brasil', 'Citopatologia', ARRAY['Citopatologia', 'Patologia', 'Anatomia Patológica']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('espu-2027-37th-congress-of-the-european-society-for-paediatric-urology-2027', 'ESPU 2027 — 37th Congress of the European Society for Paediatric Urology', '2027-04-21'::DATE, '2027-04-24'::DATE, 'confirmada', NULL, 'presencial', 'Valletta', NULL, 'Malta', 'Valletta, Malta', 'Urologia', ARRAY['Urologia', 'Urologia Pediátrica', 'Cirurgia Pediátrica']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxii-congresso-da-academia-brasileira-de-neurocirurgia-xxii-cabnc-2027', 'XXII Congresso da Academia Brasileira de Neurocirurgia — XXII CABNc 2027', '2027-04-21'::DATE, '2027-04-24'::DATE, 'confirmada', NULL, 'presencial', 'Curitiba', 'PR'::CHAR(2), 'Brasil', 'Curitiba, PR - Brasil', 'Neurocirurgia', ARRAY['Neurocirurgia', 'Neuro-Oncologia', 'Cirurgia da Base do Crânio']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'agrupamed.com.br', 'querocongressos.com.br', 'medicinahub.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxv-congresso-brasileiro-de-geriatria-e-gerontologia-cbgg-2027', 'XXV Congresso Brasileiro de Geriatria e Gerontologia (CBGG 2027)', '2027-04-21'::DATE, '2027-04-23'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Geriatria e Gerontologia', ARRAY['Geriatria e Gerontologia', 'Gerontologia', 'Medicina Interna']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('17o-congresso-paulista-de-endocrinologia-e-metabologia-copem-2027', '17º Congresso Paulista de Endocrinologia e Metabologia — COPEM 2027', '2027-04-22'::DATE, '2027-04-24'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Endocrinologia e Metabologia', ARRAY['Endocrinologia e Metabologia', 'Clínica Médica']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('18o-congresso-brasileiro-de-alergia-e-imunologia-pediatrica-e-6o-simposio-internacional-de', '18º Congresso Brasileiro de Alergia e Imunologia Pediátrica e 6º Simpósio Internacional de Dermatologia Pediátrica (Alergoped e Dermaped 2027)', '2027-04-22'::DATE, '2027-04-24'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Alergia e Imunologia', ARRAY['Alergia e Imunologia', 'Pediatria', 'Dermatologia']::TEXT[], ARRAY['usebip.com', 'star.med.br', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('19o-congresso-brasileiro-de-medicina-de-familia-e-comunidade-cbmfc-2027', '19º Congresso Brasileiro de Medicina de Família e Comunidade (CBMFC 2027)', '2027-04-22'::DATE, '2027-04-25'::DATE, 'confirmada', 'Pré-congresso dia 21', 'presencial', 'Porto Alegre', 'RS'::CHAR(2), 'Brasil', 'Porto Alegre, RS - Brasil', 'Medicina de Família e Comunidade', ARRAY['Medicina de Família e Comunidade', 'Atenção Primária à Saúde']::TEXT[], ARRAY['usebip.com', 'agenciadomedico.com.br', 'tivita.com', 'star.med.br', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('32o-congresso-brasileiro-de-reproducao-humana-cbrh-2027', '32º Congresso Brasileiro de Reprodução Humana (CBRH 2027)', '2027-04-22'::DATE, '2027-04-24'::DATE, 'confirmada', NULL, 'presencial', 'Belo Horizonte', 'MG'::CHAR(2), 'Brasil', 'Belo Horizonte, MG - Brasil', 'Reprodução Humana', ARRAY['Reprodução Humana', 'Reprodução Assistida', 'Medicina Reprodutiva']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('copa-saesp-2027-congresso-paulista-de-anestesiologia-2027', 'COPA SAESP 2027 — Congresso Paulista de Anestesiologia', '2027-04-22'::DATE, '2027-04-24'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Anestesiologia', ARRAY['Anestesiologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xviii-cbrao-congresso-brasileiro-de-reconstrucao-e-alongamento-osseo-2027', 'XVIII CBRAO – Congresso Brasileiro de Reconstrução e Alongamento Ósseo 2027', '2027-04-22'::DATE, '2027-04-24'::DATE, 'confirmada', NULL, 'presencial', 'Vitória', 'ES'::CHAR(2), 'Brasil', 'Vitória, ES - Brasil', 'Ortopedia e Traumatologia', ARRAY['Ortopedia e Traumatologia', 'Cirurgia Ortopédica Reconstrutiva', 'Reconstrução e Alongamento Ósseo']::TEXT[], ARRAY['querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xiii-congresso-brasileiro-da-soblec-2027', 'XIII Congresso Brasileiro da SOBLEC', '2027-04-23'::DATE, '2027-04-24'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Oftalmologia', ARRAY['Oftalmologia', 'Córnea', 'Refratometria']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('torax-2027-xxv-congresso-da-sociedade-brasileira-de-cirurgia-toracica-2027', 'Tórax 2027 – XXV Congresso da Sociedade Brasileira de Cirurgia Torácica', '2027-04-28'::DATE, '2027-04-30'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Cirurgia Torácica', ARRAY['Cirurgia Torácica']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('20o-endosul-2027-congresso-de-endocrinologia-e-metabologia-da-regiao-sul-2027', '20º ENDOSUL 2027 — Congresso de Endocrinologia e Metabologia da Região Sul', '2027-04-29'::DATE, '2027-05-01'::DATE, 'confirmada', NULL, 'presencial', 'Curitiba', 'PR'::CHAR(2), 'Brasil', 'Curitiba, PR - Brasil', 'Endocrinologia e Metabologia', ARRAY['Endocrinologia e Metabologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('3o-congresso-cearense-de-genetica-medica-2027', '3º Congresso Cearense de Genética Médica 2027', '2027-04-29'::DATE, '2027-04-29'::DATE, 'confirmada', NULL, 'presencial', 'Fortaleza', 'CE'::CHAR(2), 'Brasil', 'Fortaleza, CE - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('57a-jornada-paulista-de-radiologia-jpr-2027', '57ª Jornada Paulista de Radiologia (JPR 2027)', '2027-04-29'::DATE, '2027-05-02'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Radiologia e Diagnóstico por Imagem', ARRAY['Radiologia e Diagnóstico por Imagem']::TEXT[], ARRAY['usebip.com', 'agenciadomedico.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('viii-cbrate-congresso-da-sociedade-brasileira-de-artroscopia-e-traumatologia-do-esporte-20', 'VIII CBRATE – Congresso da Sociedade Brasileira de Artroscopia e Traumatologia do Esporte 2027', '2027-04-29'::DATE, '2027-05-01'::DATE, 'confirmada', NULL, 'presencial', 'Goiânia', 'GO'::CHAR(2), 'Brasil', 'Goiânia, GO - Brasil', 'Ortopedia e Traumatologia', ARRAY['Ortopedia e Traumatologia', 'Traumatologia do Esporte', 'Artroscopia']::TEXT[], ARRAY['querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('aan-annual-meeting-2027', 'AAN Annual Meeting 2027', '2027-05-01'::DATE, '2027-05-05'::DATE, 'confirmada', NULL, 'hibrido', 'Washington, D.C.', NULL, 'Estados Unidos', 'Washington, D.C., Estados Unidos (Híbrido)', 'Neurologia', ARRAY['Neurologia']::TEXT[], ARRAY['agenciadomedico.com.br', 'star.med.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('apa-annual-meeting-2027', 'APA Annual Meeting 2027', '2027-05-01'::DATE, '2027-05-05'::DATE, 'confirmada', NULL, 'presencial', 'Nova York', NULL, 'Estados Unidos', 'Nova York, Estados Unidos', 'Psiquiatria', ARRAY['Psiquiatria']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxxii-congresso-brasileiro-de-trauma-ortopedico-cbto-2027', 'XXXII Congresso Brasileiro de Trauma Ortopédico (CBTO 2027)', '2027-05-05'::DATE, '2027-05-07'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Ortopedia e Traumatologia', ARRAY['Ortopedia e Traumatologia', 'Trauma Ortopédico', 'Cirurgia do Trauma']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('congresso-socerj-2027-44o-congresso-da-sociedade-de-cardiologia-do-estado-do-rio-de-janeir', 'Congresso SOCERJ 2027 – 44º Congresso da Sociedade de Cardiologia do Estado do Rio de Janeiro', '2027-05-06'::DATE, '2027-05-07'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxii-cbosm-2027-congresso-brasileiro-de-obesidade-e-sindrome-metabolica-2027', 'XXII CBOSM 2027 – Congresso Brasileiro de Obesidade e Síndrome Metabólica', '2027-05-06'::DATE, '2027-05-08'::DATE, 'confirmada', NULL, 'presencial', 'Florianópolis', 'SC'::CHAR(2), 'Brasil', 'Florianópolis, SC - Brasil', 'Endocrinologia e Metabologia', ARRAY['Endocrinologia e Metabologia', 'Clínica Médica', 'Cardiologia']::TEXT[], ARRAY['querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('64o-congresso-brasileiro-de-ginecologia-e-obstetricia-cbgo-2027', '64º Congresso Brasileiro de Ginecologia e Obstetrícia (CBGO 2027)', '2027-05-12'::DATE, '2027-05-15'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Ginecologia e Obstetrícia', ARRAY['Ginecologia e Obstetrícia', 'Medicina Fetal', 'Reprodução Humana']::TEXT[], ARRAY['usebip.com', 'agenciadomedico.com.br', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('21o-congresso-do-departamento-de-hipertensao-arterial-da-sbc-7o-world-hypertension-congres', '21º Congresso do Departamento de Hipertensão Arterial da SBC + 7º World Hypertension Congress', '2027-05-13'::DATE, '2027-05-15'::DATE, 'confirmada', NULL, 'presencial', 'Goiânia', 'GO'::CHAR(2), 'Brasil', 'Goiânia, GO - Brasil', 'Cardiologia', ARRAY['Cardiologia', 'Hipertensão Arterial', 'Nefrologia']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('jornada-centro-oeste-de-reumatologia-2027', 'Jornada Centro-Oeste de Reumatologia 2027', '2027-05-13'::DATE, '2027-05-15'::DATE, 'confirmada', NULL, 'presencial', 'Belo Horizonte', 'MG'::CHAR(2), 'Brasil', 'Belo Horizonte, MG - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xii-combined-meeting-congresso-norte-e-nordeste-2027', 'XII Combined Meeting + Congresso Norte e Nordeste', '2027-05-13'::DATE, '2027-05-15'::DATE, 'confirmada', NULL, 'presencial', 'Recife', 'PE'::CHAR(2), 'Brasil', 'Recife, PE - Brasil', 'Otorrinolaringologia', ARRAY['Otorrinolaringologia', 'Cirurgia de Cabeça e Pescoço', 'Otologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxii-simposio-internacional-da-sociedade-brasileira-de-glaucoma-sbg-2027', 'XXII Simpósio Internacional da Sociedade Brasileira de Glaucoma — SBG 2027', '2027-05-13'::DATE, '2027-05-15'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Oftalmologia', ARRAY['Oftalmologia', 'Glaucoma']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('ats-2027', 'ATS 2027', '2027-05-14'::DATE, '2027-05-19'::DATE, 'confirmada', NULL, 'presencial', 'Nova Orleans', NULL, 'Estados Unidos', 'Nova Orleans, Estados Unidos', 'Pneumologia', ARRAY['Pneumologia']::TEXT[], ARRAY['agenciadomedico.com.br', 'star.med.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('iv-jornada-de-anestesiologia-do-centro-norte-jacen-2027', 'IV Jornada de Anestesiologia do Centro-Norte — JACEN 2027', '2027-05-14'::DATE, '2027-05-15'::DATE, 'confirmada', NULL, 'presencial', 'Belém', 'PA'::CHAR(2), 'Brasil', 'Belém, PA - Brasil', 'Anestesiologia', ARRAY['Anestesiologia', 'Medicina Intensiva', 'Medicina da Dor']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('ddw-2027', 'DDW 2027', '2027-05-15'::DATE, '2027-05-18'::DATE, 'confirmada', NULL, 'presencial', 'Washington, D.C.', NULL, 'Estados Unidos', 'Washington, D.C., Estados Unidos', 'Gastroenterologia', ARRAY['Gastroenterologia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('hospitalar-2027', 'Hospitalar 2027', '2027-05-18'::DATE, '2027-05-21'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Gestão e Tecnologia em Saúde', ARRAY['Gestão e Tecnologia em Saúde']::TEXT[], ARRAY['agenciadomedico.com.br', 'star.med.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('brascrs-2027-xxxiv-congresso-de-catarata-e-cirurgia-refrativa-2027', 'Brascrs 2027 – XXXIV Congresso de Catarata e Cirurgia Refrativa', '2027-05-19'::DATE, '2027-05-22'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Oftalmologia', ARRAY['Oftalmologia', 'Catarata', 'Cirurgia Refrativa']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('6o-congresso-brasileiro-da-cannabis-medicinal-2027', '6º Congresso Brasileiro da Cannabis Medicinal', '2027-05-20'::DATE, '2027-05-22'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Medicina Canabinoide', ARRAY['Medicina Canabinoide', 'Neurologia', 'Psiquiatria']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('congresso-sbao-2027', 'Congresso SBAO 2027', '2027-05-20'::DATE, '2027-05-22'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Administração em Oftalmologia', ARRAY['Administração em Oftalmologia']::TEXT[], ARRAY['usebip.com', 'tivita.com']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xx-congresso-da-latin-american-thyroid-society-lats-2027', 'XX Congresso da Latin American Thyroid Society (LATS 2027)', '2027-05-20'::DATE, '2027-05-23'::DATE, 'confirmada', NULL, 'presencial', 'Foz do Iguaçu', 'PR'::CHAR(2), 'Brasil', 'Foz do Iguaçu, PR - Brasil', 'Endocrinologia e Metabologia', ARRAY['Endocrinologia e Metabologia', 'Cirurgia de Cabeça e Pescoço', 'Medicina Nuclear']::TEXT[], ARRAY['usebip.com', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xx-congresso-latino-americano-de-tireoide-2027', 'XX Congresso Latino-americano de Tireóide', '2027-05-20'::DATE, '2027-05-23'::DATE, 'confirmada', NULL, 'presencial', 'Foz do Iguaçu', 'PR'::CHAR(2), 'Brasil', 'Foz do Iguaçu, PR - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('acog-annual-meeting-2027', 'ACOG Annual Meeting 2027', '2027-05-21'::DATE, '2027-05-23'::DATE, 'a_confirmar', 'Confirmar no site', 'presencial', 'Los Angeles', NULL, 'Estados Unidos', 'Los Angeles, Estados Unidos', 'Ginecologia e Obstetrícia', ARRAY['Ginecologia e Obstetrícia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('aua-2027-american-urological-association-annual-meeting-2027', 'AUA 2027 — American Urological Association Annual Meeting', '2027-05-21'::DATE, '2027-05-24'::DATE, 'confirmada', NULL, 'presencial', 'San Diego', NULL, 'Estados Unidos', 'San Diego, Estados Unidos', 'Urologia', ARRAY['Urologia']::TEXT[], ARRAY['agenciadomedico.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('brain-2027-congress-on-brain-behavior-and-emotions-2027', 'BRAIN 2027 — Congress on Brain, Behavior and Emotions', '2027-05-26'::DATE, '2027-05-29'::DATE, 'confirmada', NULL, 'presencial', 'Porto Alegre', 'RS'::CHAR(2), 'Brasil', 'Porto Alegre, RS - Brasil', 'Neurologia', ARRAY['Neurologia', 'Psiquiatria', 'Neurocirurgia']::TEXT[], ARRAY['querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('cbdor-2027-18-cbdor-congresso-brasileiro-de-dor-2027', 'CBDOR 2027 – 18° CBDor Congresso Brasileiro de Dor', '2027-05-26'::DATE, '2027-05-29'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Medicina da Dor', ARRAY['Medicina da Dor', 'Anestesiologia', 'Neurologia']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('3o-endoscopic-combined-meeting-sbc-2027-endoscopic-spine-surgery-2027', '3º Endoscopic Combined Meeting SBC 2027 — Endoscopic Spine Surgery', '2027-05-27'::DATE, '2027-05-29'::DATE, 'confirmada', NULL, 'presencial', 'Belém', 'PA'::CHAR(2), 'Brasil', 'Belém, PA - Brasil', 'Ortopedia e Traumatologia', ARRAY['Ortopedia e Traumatologia', 'Cirurgia da Coluna', 'Neurocirurgia']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('47o-congresso-da-sociedade-de-cardiologia-do-estado-de-sao-paulo-socesp-2027', '47º Congresso da Sociedade de Cardiologia do Estado de São Paulo (SOCESP 2027)', '2027-05-27'::DATE, '2027-05-29'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Cardiologia', ARRAY['Cardiologia']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xix-congresso-brasileiro-de-medicina-intensiva-pediatrica-cbmiped-2027', 'XIX Congresso Brasileiro de Medicina Intensiva Pediátrica — CBMIPED 2027', '2027-06-02'::DATE, '2027-06-05'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Medicina Intensiva Pediátrica', ARRAY['Medicina Intensiva Pediátrica', 'Pediatria', 'Neonatologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xvi-congresso-paulista-de-neurologia-cpn-2027', 'XVI Congresso Paulista de Neurologia — CPN 2027', '2027-06-02'::DATE, '2027-06-05'::DATE, 'confirmada', NULL, 'presencial', 'Santos', 'SP'::CHAR(2), 'Brasil', 'Santos, SP - Brasil', 'Neurologia', ARRAY['Neurologia']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xiv-troia-2027-congresso-de-trauma-ortopedico-infantil-2027', 'XIV TROIA 2027 — Congresso de Trauma Ortopédico Infantil', '2027-06-03'::DATE, '2027-06-05'::DATE, 'confirmada', NULL, 'presencial', 'Fortaleza', 'CE'::CHAR(2), 'Brasil', 'Fortaleza, CE - Brasil', 'Ortopedia e Traumatologia', ARRAY['Ortopedia e Traumatologia', 'Ortopedia Pediátrica', 'Pediatria']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xx-congresso-sul-brasileiro-de-oftalmologia-sulbra-2027', 'XX Congresso Sul-Brasileiro de Oftalmologia - SULBRA', '2027-06-03'::DATE, '2027-06-05'::DATE, 'confirmada', NULL, 'presencial', 'Curitiba', 'PR'::CHAR(2), 'Brasil', 'Curitiba, PR - Brasil', 'Oftalmologia', ARRAY['Oftalmologia', 'Retina e Vítreo', 'Glaucoma']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxi-congresso-sul-brasileiro-de-medicina-intensiva-2027', 'XXI Congresso Sul-Brasileiro de Medicina Intensiva 2027', '2027-06-03'::DATE, '2027-06-05'::DATE, 'confirmada', NULL, 'presencial', 'Garibaldi', 'RS'::CHAR(2), 'Brasil', 'Garibaldi, RS - Brasil', 'Medicina Intensiva', ARRAY['Medicina Intensiva']::TEXT[], ARRAY['agenciadomedico.com.br', 'querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('asco-annual-meeting-2027', 'ASCO Annual Meeting 2027', '2027-06-04'::DATE, '2027-06-08'::DATE, 'confirmada', NULL, 'presencial', 'Chicago', NULL, 'Estados Unidos', 'Chicago, Estados Unidos', 'Oncologia', ARRAY['Oncologia']::TEXT[], ARRAY['agenciadomedico.com.br', 'star.med.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('iccs-annual-meeting-2027', 'ICCS Annual Meeting 2027', '2027-06-10'::DATE, '2027-06-12'::DATE, 'confirmada', NULL, 'a_definir', NULL, NULL, NULL, 'A definir', 'Não informado', '{}'::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('52o-congresso-brasileiro-de-analises-clinicas-cbac-2027', '52º Congresso Brasileiro de Análises Clínicas (CBAC 2027)', '2027-06-13'::DATE, '2027-06-16'::DATE, 'confirmada', NULL, 'presencial', 'Belo Horizonte', 'MG'::CHAR(2), 'Brasil', 'Belo Horizonte, MG - Brasil', 'Análises Clínicas', ARRAY['Análises Clínicas']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('amwc-brazil-2027-aesthetic-medicine-world-congress-2027', 'AMWC Brazil 2027 – Aesthetic Medicine World Congress', '2027-06-17'::DATE, '2027-06-19'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Dermatologia', ARRAY['Dermatologia', 'Cirurgia Plástica', 'Flebologia']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xx-congresso-mineiro-de-medicina-intensiva-somiti-2027', 'XX Congresso Mineiro de Medicina Intensiva (Somiti 2027)', '2027-06-17'::DATE, '2027-06-19'::DATE, 'confirmada', NULL, 'presencial', 'Belo Horizonte', 'MG'::CHAR(2), 'Brasil', 'Belo Horizonte, MG - Brasil', 'Medicina Intensiva', ARRAY['Medicina Intensiva', 'Medicina de Emergência', 'Anestesiologia']::TEXT[], ARRAY['usebip.com', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('53o-congresso-da-sociedade-brasileira-de-cirurgia-cardiovascular-congresso-sbccv-2027', '53º Congresso da Sociedade Brasileira de Cirurgia Cardiovascular — Congresso SBCCV 2027', '2027-06-18'::DATE, '2027-06-19'::DATE, 'confirmada', NULL, 'presencial', 'Brasília', 'DF'::CHAR(2), 'Brasil', 'Brasília, DF - Brasil', 'Cirurgia Cardiovascular', ARRAY['Cirurgia Cardiovascular', 'Cardiologia', 'Cirurgia Cardíaca']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('87a-ada-scientific-sessions-2027', '87ª ADA Scientific Sessions', '2027-06-18'::DATE, '2027-06-21'::DATE, 'confirmada', NULL, 'presencial', 'Washington, D.C.', NULL, 'Estados Unidos', 'Washington, D.C., Estados Unidos', 'Endocrinologia e Metabologia', ARRAY['Endocrinologia e Metabologia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxiv-congresso-paulista-de-medicina-do-sono-2027', 'XXIV Congresso Paulista de Medicina do Sono 2027', '2027-06-18'::DATE, '2027-06-19'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Medicina do Sono', ARRAY['Medicina do Sono', 'Neurologia', 'Pneumologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('26o-world-congress-of-dermatology-2027', '26º World Congress of Dermatology', '2027-06-21'::DATE, '2027-06-26'::DATE, 'confirmada', NULL, 'presencial', 'Guadalajara', NULL, 'México', 'Guadalajara, México', 'Dermatologia', ARRAY['Dermatologia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('gastrao-2027', 'Gastrão 2027', '2027-06-23'::DATE, '2027-06-25'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Gastroenterologia', ARRAY['Gastroenterologia', 'Cirurgia do Aparelho Digestivo', 'Coloproctologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('89o-congresso-da-sociedade-brasileira-de-oftalmologia-sbo-2027', '89º Congresso da Sociedade Brasileira de Oftalmologia — SBO 2027', '2027-07-01'::DATE, '2027-07-03'::DATE, 'confirmada', NULL, 'presencial', 'Belo Horizonte', 'MG'::CHAR(2), 'Brasil', 'Belo Horizonte, MG - Brasil', 'Oftalmologia', ARRAY['Oftalmologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('endorecife-2027-congresso-pernambucano-de-endocrinologia-2027', 'ENDORECIFE 2027 - Congresso Pernambucano de Endocrinologia', '2027-07-01'::DATE, '2027-07-03'::DATE, 'confirmada', NULL, 'presencial', 'Recife', 'PE'::CHAR(2), 'Brasil', 'Recife, PE - Brasil', 'Endocrinologia e Metabologia', ARRAY['Endocrinologia e Metabologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('ix-congresso-brasileiro-de-hernia-cbh-2027', 'IX Congresso Brasileiro de Hérnia (CBH 2027)', '2027-07-01'::DATE, '2027-07-03'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Cirurgia Geral', ARRAY['Cirurgia Geral']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('41o-congresso-interamericano-de-psicologia-2027', '41º Congresso Interamericano de Psicologia', '2027-07-05'::DATE, '2027-07-09'::DATE, 'confirmada', NULL, 'presencial', 'Belo Horizonte', 'MG'::CHAR(2), 'Brasil', 'Belo Horizonte, MG - Brasil', 'Psiquiatria', ARRAY['Psiquiatria']::TEXT[], ARRAY['agrupamed.com.br', 'medicinahub.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('5o-congresso-brasileiro-de-medicina-geral-cbmg-2027', '5º Congresso Brasileiro de Medicina Geral (CBMG 2027)', '2027-07-08'::DATE, '2027-07-10'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Medicina Geral', ARRAY['Medicina Geral', 'Clínica Médica', 'Medicina de Família e Comunidade']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('aaic-2027', 'AAIC 2027', '2027-07-18'::DATE, '2027-07-22'::DATE, 'confirmada', NULL, 'presencial', 'Chicago', NULL, 'Estados Unidos', 'Chicago, Estados Unidos', 'Neurologia', ARRAY['Neurologia', 'Doença de Alzheimer']::TEXT[], ARRAY['bibliomed.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('cnn-2027-3o-congresso-norte-nordeste-de-nefrologia-em-salvador-2027', 'CNN 2027 – 3º Congresso Norte-Nordeste de Nefrologia em Salvador', '2027-07-21'::DATE, '2027-07-24'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Nefrologia', ARRAY['Nefrologia', 'Nefrologia Pediátrica', 'Transplante Renal']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('4a-jornada-de-anestesiologia-do-sul-e-sudeste-brasileiro-jassbra-2027', '4ª Jornada de Anestesiologia do Sul e Sudeste Brasileiro (JASSBRA 2027)', '2027-07-29'::DATE, '2027-07-31'::DATE, 'confirmada', NULL, 'presencial', 'Belo Horizonte', 'MG'::CHAR(2), 'Brasil', 'Belo Horizonte, MG - Brasil', 'Anestesiologia', ARRAY['Anestesiologia', 'Anestesia Geral', 'Anestesia Regional']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('37o-congresso-brasileiro-de-cirurgia-cbc-2027', '37º Congresso Brasileiro de Cirurgia (CBC 2027)', '2027-08-04'::DATE, '2027-08-07'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Cirurgia Geral', ARRAY['Cirurgia Geral']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('neuro-in-rio-2027-xii-congresso-da-anerj-2027', 'Neuro in Rio 2027 – XII Congresso da ANERJ', '2027-08-05'::DATE, '2027-08-07'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Neurologia', ARRAY['Neurologia', 'Neurologia Pediátrica', 'Neurofisiologia Clínica']::TEXT[], ARRAY['querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('bctrims-2027-28o-congresso-brasileiro-de-esclerose-multipla-e-neuromielite-optica-2027', 'BCTRIMS 2027 – 28º Congresso Brasileiro de Esclerose Múltipla e Neuromielite Óptica', '2027-08-11'::DATE, '2027-08-13'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('32o-congresso-paulista-de-obstetricia-e-ginecologia-32o-congresso-sogesp-2027', '32º Congresso Paulista de Obstetrícia e Ginecologia — 32º Congresso SOGESP 2027', '2027-08-19'::DATE, '2027-08-21'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Ginecologia e Obstetrícia', ARRAY['Ginecologia e Obstetrícia']::TEXT[], ARRAY['usebip.com', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('62o-congresso-da-sociedade-brasileira-de-medicina-tropical-medtrop-2027', '62º Congresso da Sociedade Brasileira de Medicina Tropical (MEDTROP 2027)', '2027-08-22'::DATE, '2027-08-25'::DATE, 'confirmada', NULL, 'presencial', 'Natal', 'RN'::CHAR(2), 'Brasil', 'Natal, RN - Brasil', 'Infectologia', ARRAY['Infectologia', 'Medicina Tropical', 'Medicina Preventiva e Social']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xv-congresso-brasileiro-de-asma-xii-congressos-brasileiros-de-dpoc-e-tabagismo-xiii-congre', 'XV Congresso Brasileiro de Asma + XII Congressos Brasileiros de DPOC e Tabagismo + XIII Congresso Centro-Oeste de Pneumologia e Tisiologia', '2027-08-25'::DATE, '2027-08-28'::DATE, 'confirmada', NULL, 'presencial', 'Goiânia', 'GO'::CHAR(2), 'Brasil', 'Goiânia, GO - Brasil', 'Pneumologia', ARRAY['Pneumologia', 'Clínica Médica', 'Alergia e Imunologia']::TEXT[], ARRAY['usebip.com', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('cti-recife-2027-congresso-de-terapia-intensiva-de-pernambuco-2027', 'CTI Recife 2027 – Congresso de Terapia Intensiva de Pernambuco', '2027-08-27'::DATE, '2027-08-28'::DATE, 'confirmada', NULL, 'presencial', 'Recife', 'PE'::CHAR(2), 'Brasil', 'Recife, PE - Brasil', 'Medicina Intensiva', ARRAY['Medicina Intensiva', 'Medicina de Emergência']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('esc-congress-2027', 'ESC Congress 2027', '2027-08-27'::DATE, '2027-08-30'::DATE, 'confirmada', NULL, 'presencial', 'Milão', NULL, 'Itália', 'Milão, Itália', 'Cardiologia', ARRAY['Cardiologia']::TEXT[], ARRAY['agenciadomedico.com.br', 'star.med.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xii-congresso-brasileiro-de-ecografia-vascular-cbev-2027', 'XII Congresso Brasileiro de Ecografia Vascular — CBEV 2027', '2027-09-02'::DATE, '2027-09-04'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Angiologia', ARRAY['Angiologia', 'Cirurgia Vascular', 'Ecografia Vascular']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xvi-congresso-brasileiro-de-farmacia-hospitalar-sbrafh-2027', 'XVI Congresso Brasileiro de Farmácia Hospitalar — SBRAFH 2027', '2027-09-02'::DATE, '2027-09-04'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Farmácia Hospitalar', ARRAY['Farmácia Hospitalar']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('congresso-brasileiro-de-atualizacao-em-endocrinologia-e-metabologia-cbaem-2027', 'Congresso Brasileiro de Atualização em Endocrinologia e Metabologia (CBAEM 2027)', '2027-09-03'::DATE, '2027-09-06'::DATE, 'confirmada', NULL, 'presencial', 'Brasília', 'DF'::CHAR(2), 'Brasil', 'Brasília, DF - Brasil', 'Endocrinologia e Metabologia', ARRAY['Endocrinologia e Metabologia', 'Metabologia', 'Endocrinologia Pediátrica']::TEXT[], ARRAY['usebip.com', 'agenciadomedico.com.br', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('csbd-2027-80o-congresso-brasileiro-de-dermatologia-2027', 'CSBD 2027 – 80º Congresso Brasileiro de Dermatologia', '2027-09-04'::DATE, '2027-09-06'::DATE, 'confirmada', NULL, 'presencial', 'Brasília', 'DF'::CHAR(2), 'Brasil', 'Brasília, DF - Brasil', 'Dermatologia', ARRAY['Dermatologia']::TEXT[], ARRAY['usebip.com', 'agenciadomedico.com.br', 'star.med.br', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxix-congresso-internacional-da-abead-2027-alcool-e-outras-drogas-2027', 'XXIX Congresso Internacional da ABEAD 2027 (Álcool e outras Drogas)', '2027-09-04'::DATE, '2027-09-07'::DATE, 'confirmada', NULL, 'presencial', 'Nova Petrópolis', 'RS'::CHAR(2), 'Brasil', 'Nova Petrópolis, RS - Brasil', 'Psiquiatria', ARRAY['Psiquiatria', 'Medicina de Família e Comunidade', 'Clínica Médica']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('44o-congresso-brasileiro-de-reumatologia-2027-sbr-2027', '44º Congresso Brasileiro de Reumatologia 2027 — SBR 2027', '2027-09-08'::DATE, '2027-09-11'::DATE, 'confirmada', NULL, 'presencial', 'Florianópolis', 'SC'::CHAR(2), 'Brasil', 'Florianópolis, SC - Brasil', 'Reumatologia', ARRAY['Reumatologia', 'Clínica Médica']::TEXT[], ARRAY['usebip.com', 'agenciadomedico.com.br', 'tivita.com', 'star.med.br', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('47o-congresso-brasileiro-de-cirurgia-de-mao-mao-2027', '47º Congresso Brasileiro de Cirurgia de Mão - MÃO 2027', '2027-09-08'::DATE, '2027-09-10'::DATE, 'confirmada', NULL, 'presencial', 'Campos do Jordão', 'SP'::CHAR(2), 'Brasil', 'Campos do Jordão, SP - Brasil', 'Cirurgia da Mão', ARRAY['Cirurgia da Mão', 'Ortopedia e Traumatologia', 'Cirurgia Plástica']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('71o-congresso-brasileiro-de-oftalmologia-cbo-2027', '71º Congresso Brasileiro de Oftalmologia (CBO 2027)', '2027-09-08'::DATE, '2027-09-11'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Oftalmologia', ARRAY['Oftalmologia']::TEXT[], ARRAY['usebip.com', 'agenciadomedico.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxxi-congresso-brasileiro-de-cirurgia-de-cabeca-e-pescoco-cbccp-2027', 'XXXI Congresso Brasileiro de Cirurgia de Cabeça e Pescoço (CBCCP 2027)', '2027-09-08'::DATE, '2027-09-10'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Cirurgia de Cabeça e Pescoço', ARRAY['Cirurgia de Cabeça e Pescoço']::TEXT[], ARRAY['usebip.com', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('ers-congress-2027', 'ERS Congress 2027', '2027-09-11'::DATE, '2027-09-14'::DATE, 'confirmada', NULL, 'presencial', 'Milão', NULL, 'Itália', 'Milão, Itália', 'Pneumologia', ARRAY['Pneumologia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('25o-congresso-brasileiro-de-infectologia-infecto-2027', '25º Congresso Brasileiro de Infectologia (Infecto 2027)', '2027-09-14'::DATE, '2027-09-17'::DATE, 'confirmada', NULL, 'presencial', 'Belo Horizonte', 'MG'::CHAR(2), 'Brasil', 'Belo Horizonte, MG - Brasil', 'Infectologia', ARRAY['Infectologia', 'Clínica Médica']::TEXT[], ARRAY['usebip.com', 'agenciadomedico.com.br', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('tufh-2027-towards-unity-for-health-2027', 'TUFH 2027 — Towards Unity for Health', '2027-09-14'::DATE, '2027-09-17'::DATE, 'confirmada', NULL, 'presencial', 'Recife', 'PE'::CHAR(2), 'Brasil', 'Recife, PE - Brasil', 'Saúde Coletiva', ARRAY['Multidisciplinar', 'Saúde Coletiva', 'Medicina de Família e Comunidade']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxii-congresso-brasileiro-do-quadril-cbq-2027', 'XXII Congresso Brasileiro do Quadril (CBQ 2027)', '2027-09-15'::DATE, '2027-09-18'::DATE, 'confirmada', NULL, 'presencial', 'Campos do Jordão', 'SP'::CHAR(2), 'Brasil', 'Campos do Jordão, SP - Brasil', 'Ortopedia e Traumatologia', ARRAY['Ortopedia e Traumatologia']::TEXT[], ARRAY['usebip.com', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('56o-congresso-brasileiro-de-radiologia-em-diagnostico-por-imagem-cbr27-2027', '56º Congresso Brasileiro de Radiologia em Diagnóstico por Imagem (CBR27)', '2027-09-16'::DATE, '2027-09-18'::DATE, 'confirmada', NULL, 'presencial', 'Foz do Iguaçu', 'PR'::CHAR(2), 'Brasil', 'Foz do Iguaçu, PR - Brasil', 'Radiologia e Diagnóstico por Imagem', ARRAY['Radiologia e Diagnóstico por Imagem', 'Ultrassonografia', 'Medicina Nuclear']::TEXT[], ARRAY['usebip.com', 'agenciadomedico.com.br', 'tivita.com', 'star.med.br', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('esmo-congress-2027', 'ESMO Congress 2027', '2027-09-17'::DATE, '2027-09-21'::DATE, 'confirmada', NULL, 'presencial', 'Barcelona', NULL, 'Espanha', 'Barcelona, Espanha', 'Oncologia', ARRAY['Oncologia']::TEXT[], ARRAY['agenciadomedico.com.br', 'star.med.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('63o-easd-annual-meeting-2027', '63º EASD Annual Meeting', '2027-09-20'::DATE, '2027-09-24'::DATE, 'confirmada', NULL, 'presencial', 'Budapeste', NULL, 'Hungria', 'Budapeste, Hungria', 'Endocrinologia e Metabologia', ARRAY['Endocrinologia e Metabologia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('36o-eadv-congress-2027', '36º EADV Congress', '2027-09-22'::DATE, '2027-09-25'::DATE, 'confirmada', NULL, 'presencial', 'Amsterdã', NULL, 'Países Baixos', 'Amsterdã, Países Baixos', 'Dermatologia', ARRAY['Dermatologia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xx-congresso-brasileiro-de-transplantes-abto-2027', 'XX Congresso Brasileiro de Transplantes (ABTO 2027)', '2027-09-22'::DATE, '2027-09-25'::DATE, 'confirmada', NULL, 'presencial', 'Belo Horizonte', 'MG'::CHAR(2), 'Brasil', 'Belo Horizonte, MG - Brasil', 'Transplantes', ARRAY['Transplantes', 'Cirurgia Geral']::TEXT[], ARRAY['usebip.com', 'agrupamed.com.br', 'querocongressos.com.br', 'medicinahub.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('51o-congresso-da-associacao-de-ginecologia-e-obstetricia-do-estado-do-rio-de-janeiro-sgorj', '51º Congresso da Associação de Ginecologia e Obstetrícia do Estado do Rio de Janeiro — SGORJ', '2027-09-23'::DATE, '2027-09-25'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Ginecologia e Obstetrícia', ARRAY['Ginecologia e Obstetrícia', 'Medicina Fetal', 'Reprodução Humana']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('congresso-brasileiro-de-microcirurgia-reconstrutiva-2027', 'Congresso Brasileiro de Microcirurgia Reconstrutiva 2027', '2027-09-23'::DATE, '2027-09-25'::DATE, 'confirmada', NULL, 'presencial', NULL, 'RJ'::CHAR(2), 'Brasil', 'RJ - Brasil', 'Microcirurgia Reconstrutiva', ARRAY['Microcirurgia Reconstrutiva']::TEXT[], ARRAY['usebip.com']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('75o-congresso-brasileiro-de-coloproctologia-cbcp-2027', '75º Congresso Brasileiro de Coloproctologia — CBCP 2027', '2027-09-29'::DATE, '2027-10-01'::DATE, 'confirmada', NULL, 'presencial', 'Foz do Iguaçu', 'PR'::CHAR(2), 'Brasil', 'Foz do Iguaçu, PR - Brasil', 'Coloproctologia', ARRAY['Coloproctologia', 'Cirurgia Geral', 'Cirurgia do Aparelho Digestivo']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('65o-congresso-brasileiro-de-educacao-medica-cobem-2027', '65º Congresso Brasileiro de Educação Médica — COBEM 2027', '2027-10-07'::DATE, '2027-10-09'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Educação Médica', ARRAY['Educação Médica', 'Clínica Médica', 'Medicina de Família e Comunidade']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xliv-congresso-brasileiro-de-psiquiatria-cbp-2027', 'XLIV Congresso Brasileiro de Psiquiatria — CBP 2027', '2027-10-13'::DATE, '2027-10-16'::DATE, 'confirmada', NULL, 'presencial', 'Natal', 'RN'::CHAR(2), 'Brasil', 'Natal, RN - Brasil', 'Psiquiatria', ARRAY['Psiquiatria']::TEXT[], ARRAY['usebip.com', 'agenciadomedico.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('82o-congresso-brasileiro-de-cardiologia-82o-cbc-2027-best-of-esc-congress-2027', '82º Congresso Brasileiro de Cardiologia (82º CBC 2027) / Best of ESC Congress 2027', '2027-10-14'::DATE, '2027-10-16'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Cardiologia', ARRAY['Cardiologia']::TEXT[], ARRAY['star.med.br', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('29o-congresso-da-sociedade-brasileira-de-radioterapia-sbrt-2027', '29º Congresso da Sociedade Brasileira de Radioterapia – SBRT 2027', '2027-10-20'::DATE, '2027-10-23'::DATE, 'confirmada', NULL, 'presencial', 'Porto Alegre', 'RS'::CHAR(2), 'Brasil', 'Porto Alegre, RS - Brasil', 'Radioterapia', ARRAY['Radioterapia', 'Oncologia Clínica', 'Oncologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('maac-2027-medical-advanced-aesthetic-congress-2027', 'MAAC 2027 – Medical Advanced Aesthetic Congress', '2027-10-21'::DATE, '2027-10-23'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('chest-2027', 'CHEST 2027', '2027-10-24'::DATE, '2027-10-27'::DATE, 'confirmada', NULL, 'presencial', 'Vancouver', NULL, 'Canadá', 'Vancouver, Canadá', 'Pneumologia', ARRAY['Pneumologia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('congresso-brasileiro-de-hematologia-hemoterapia-e-terapia-celular-hemo-2027', 'Congresso Brasileiro de Hematologia, Hemoterapia e Terapia Celular — HEMO 2027', '2027-10-27'::DATE, '2027-10-30'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Hematologia', ARRAY['Hematologia', 'Hemoterapia', 'Transplantes']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxvi-congresso-da-sociedade-brasileira-de-diabetes-diabetes-2027', 'XXVI Congresso da Sociedade Brasileira de Diabetes (Diabetes 2027)', '2027-10-27'::DATE, '2027-10-29'::DATE, 'confirmada', NULL, 'presencial', 'Curitiba', 'PR'::CHAR(2), 'Brasil', 'Curitiba, PR - Brasil', 'Endocrinologia e Metabologia', ARRAY['Endocrinologia e Metabologia', 'Diabetologia', 'Medicina Interna']::TEXT[], ARRAY['usebip.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxvi-figo-world-congress-2027', 'XXVI FIGO World Congress', '2027-10-31'::DATE, '2027-11-05'::DATE, 'confirmada', NULL, 'presencial', 'Montreal', NULL, 'Canadá', 'Montreal, Canadá', 'Ginecologia e Obstetrícia', ARRAY['Ginecologia e Obstetrícia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('59o-congresso-anual-da-sociedade-brasileira-de-ortopedia-e-traumatologia-sbot-2027', '59º Congresso Anual da Sociedade Brasileira de Ortopedia e Traumatologia – SBOT 2027', '2027-11-10'::DATE, '2027-11-12'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Ortopedia e Traumatologia', ARRAY['Ortopedia e Traumatologia', 'Cirurgia da Mão', 'Cirurgia do Joelho']::TEXT[], ARRAY['agenciadomedico.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxvi-semana-brasileira-do-aparelho-digestivo-sbad-2027', 'XXVI Semana Brasileira do Aparelho Digestivo — SBAD 2027', '2027-11-11'::DATE, '2027-11-13'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Gastroenterologia', ARRAY['Gastroenterologia', 'Endoscopia Digestiva', 'Cirurgia do Aparelho Digestivo']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('xxxii-congresso-brasileiro-de-medicina-intensiva-cbmi-2027', 'XXXII Congresso Brasileiro de Medicina Intensiva — CBMI 2027', '2027-11-11'::DATE, '2027-11-13'::DATE, 'confirmada', NULL, 'presencial', 'Cuiabá', 'MT'::CHAR(2), 'Brasil', 'Cuiabá, MT - Brasil', 'Medicina Intensiva', ARRAY['Medicina Intensiva', 'Anestesiologia', 'Medicina de Emergência']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('rsna-2027', 'RSNA 2027', '2027-11-14'::DATE, '2027-11-18'::DATE, 'confirmada', NULL, 'presencial', 'Chicago', NULL, 'Estados Unidos', 'Chicago, Estados Unidos', 'Radiologia e Diagnóstico por Imagem', ARRAY['Radiologia e Diagnóstico por Imagem']::TEXT[], ARRAY['agenciadomedico.com.br', 'star.med.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('19o-congresso-brasileiro-de-clinica-medica-cbcm-2027', '19º Congresso Brasileiro de Clínica Médica (CBCM 2027)', '2027-11-17'::DATE, '2027-11-20'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Clínica Médica', ARRAY['Clínica Médica']::TEXT[], ARRAY['usebip.com', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('57o-congresso-brasileiro-de-otorrinolaringologia-e-cirurgia-cervico-facial-2027', '57º Congresso Brasileiro de Otorrinolaringologia e Cirurgia Cérvico-Facial', '2027-11-18'::DATE, '2027-11-20'::DATE, 'confirmada', NULL, 'presencial', 'Foz do Iguaçu', 'PR'::CHAR(2), 'Brasil', 'Foz do Iguaçu, PR - Brasil', 'Otorrinolaringologia', ARRAY['Otorrinolaringologia', 'Cirurgia de Cabeça e Pescoço', 'Otologia']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('41o-congresso-brasileiro-de-urologia-cbu-2027', '41º Congresso Brasileiro de Urologia (CBU 2027)', '2027-11-20'::DATE, '2027-11-23'::DATE, 'confirmada', 'UroWeek a partir de 16 de novembro', 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Urologia', ARRAY['Urologia', 'Urologia Geral', 'Urologia Pediátrica']::TEXT[], ARRAY['usebip.com', 'agenciadomedico.com.br', 'tivita.com', 'querocongressos.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('72o-congresso-brasileiro-de-anestesiologia-cba-2027', '72º Congresso Brasileiro de Anestesiologia — CBA 2027', '2027-11-24'::DATE, '2027-11-27'::DATE, 'confirmada', NULL, 'presencial', 'Florianópolis', 'SC'::CHAR(2), 'Brasil', 'Florianópolis, SC - Brasil', 'Anestesiologia', ARRAY['Anestesiologia', 'Medicina Intensiva', 'Medicina da Dor']::TEXT[], ARRAY['agenciadomedico.com.br', 'medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('21o-congresso-brasileiro-de-cirurgia-do-joelho-cbcj-2028', '21º Congresso Brasileiro de Cirurgia do Joelho – CBCJ 2028', '2028-04-05'::DATE, '2028-04-08'::DATE, 'confirmada', NULL, 'presencial', 'Mata de São João', 'BA'::CHAR(2), 'Brasil', 'Mata de São João, BA - Brasil', 'Ortopedia e Traumatologia', ARRAY['Ortopedia e Traumatologia', 'Cirurgia do Joelho', 'Medicina Esportiva']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('sobracil-2028-19o-congresso-brasileiro-de-videocirurgia-2028', 'SOBRACIL 2028 — 19º Congresso Brasileiro de Videocirurgia', '2028-04-06'::DATE, '2028-04-08'::DATE, 'confirmada', NULL, 'presencial', 'Salvador', 'BA'::CHAR(2), 'Brasil', 'Salvador, BA - Brasil', 'Cirurgia Geral', ARRAY['Cirurgia Geral', 'Cirurgia do Aparelho Digestivo', 'Cirurgia Bariátrica']::TEXT[], ARRAY['medsearch.app']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('23-congresso-brasileiro-de-cirurgia-do-tornozelo-e-pe-2028', '23° Congresso Brasileiro de Cirurgia do Tornozelo e Pé 2028', '2028-05-11'::DATE, '2028-05-13'::DATE, 'confirmada', NULL, 'presencial', 'Campo Grande', 'MS'::CHAR(2), 'Brasil', 'Campo Grande, MS - Brasil', 'Ortopedia e Traumatologia', ARRAY['Ortopedia e Traumatologia']::TEXT[], ARRAY['agrupamed.com.br', 'querocongressos.com.br', 'medicinahub.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('brain-congress-2028', 'Brain Congress 2028', '2028-06-21'::DATE, '2028-06-24'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('cinp-congress-2028-39o-congresso-mundial-de-neuropsicofarmacologia-2028', 'CINP Congress 2028 – 39º Congresso Mundial de Neuropsicofarmacologia', '2028-06-21'::DATE, '2028-06-24'::DATE, 'confirmada', NULL, 'presencial', 'Rio de Janeiro', 'RJ'::CHAR(2), 'Brasil', 'Rio de Janeiro, RJ - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('miccai-2028-31a-conferencia-internacional-sobre-computacao-de-imagem-medica-e-intervencao', 'MICCAI 2028 – 31ª Conferência Internacional sobre Computação de Imagem Médica e Intervenção Assistida por Computador', '2028-10-16'::DATE, '2028-10-20'::DATE, 'confirmada', NULL, 'presencial', 'São Paulo', 'SP'::CHAR(2), 'Brasil', 'São Paulo, SP - Brasil', 'Não informado', '{}'::TEXT[], ARRAY['querocongressos.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('aha-scientific-sessions-2027', 'AHA Scientific Sessions 2027', NULL, NULL, 'a_definir', 'Costuma ser em novembro', 'a_definir', NULL, NULL, NULL, 'A definir', 'Cardiologia', ARRAY['Cardiologia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('congresso-brasileiro-de-cirurgia-plastica-2027', 'Congresso Brasileiro de Cirurgia Plástica 2027', NULL, NULL, 'a_definir', 'Costuma ser em novembro', 'a_definir', NULL, NULL, NULL, 'A definir', 'Cirurgia Plástica', ARRAY['Cirurgia Plástica']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('congresso-brasileiro-de-oncologia-clinica-2027', 'Congresso Brasileiro de Oncologia Clínica 2027', NULL, NULL, 'a_definir', 'Costuma ser no fim do segundo semestre', 'a_definir', NULL, NULL, NULL, 'A definir', 'Oncologia', ARRAY['Oncologia']::TEXT[], ARRAY['agenciadomedico.com.br']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('congresso-wao-asbai-no-brasil-2027', 'Congresso WAO + ASBAI no Brasil 2027', NULL, NULL, 'a_definir', 'Detalhes pendentes', 'presencial', NULL, NULL, 'Brasil', 'Brasil (cidade a definir)', 'Alergia e Imunologia', ARRAY['Alergia e Imunologia']::TEXT[], ARRAY['usebip.com']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+INSERT INTO congressos (slug, nome, data_inicio, data_fim, data_status, data_observacao, modalidade, cidade, estado_uf, pais, local_formatado, tema_principal, temas, fontes) VALUES ('ii-congresso-brasileiro-de-psicofarmacologia-e-intervencoes-cbpi-2027', 'II Congresso Brasileiro de Psicofarmacologia e Intervenções (CBPI 2027)', NULL, NULL, 'a_definir', '2027', 'a_definir', NULL, NULL, NULL, 'A definir', 'Psiquiatria', ARRAY['Psiquiatria']::TEXT[], ARRAY['usebip.com']::TEXT[])
+ON CONFLICT (slug) DO UPDATE SET
+    nome = EXCLUDED.nome,
+    data_inicio = EXCLUDED.data_inicio,
+    data_fim = EXCLUDED.data_fim,
+    data_status = EXCLUDED.data_status,
+    data_observacao = EXCLUDED.data_observacao,
+    modalidade = EXCLUDED.modalidade,
+    cidade = EXCLUDED.cidade,
+    estado_uf = EXCLUDED.estado_uf,
+    pais = EXCLUDED.pais,
+    local_formatado = EXCLUDED.local_formatado,
+    tema_principal = EXCLUDED.tema_principal,
+    temas = EXCLUDED.temas,
+    fontes = EXCLUDED.fontes,
+    atualizado_em = NOW();
+
+-- ============================================================
+-- Autenticação por Token Único, Perfis de Membros e Consenso
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS public.invite_tokens (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    token TEXT NOT NULL UNIQUE,
+    role TEXT NOT NULL DEFAULT 'member' CHECK (role IN ('admin', 'member')),
+    invited_label TEXT,
+    created_by UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+    used_by UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+    used_at TIMESTAMPTZ,
+    expires_at TIMESTAMPTZ DEFAULT (NOW() + INTERVAL '30 days'),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE public.invite_tokens ENABLE ROW LEVEL SECURITY;
+
+-- Token fundador inicial (uso único, sem expiração, cria o primeiro administrador)
+INSERT INTO public.invite_tokens (token, role, invited_label, expires_at)
+VALUES ('DRG-ADMIN-7F4K-9M2Q', 'admin', 'Token fundador inicial (uso único)', NULL)
+ON CONFLICT (token) DO NOTHING;
+
+CREATE TABLE IF NOT EXISTS public.member_profiles (
+    user_id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+    email TEXT NOT NULL,
+    full_name TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'member' CHECK (role IN ('admin', 'member')),
+    academic_stage TEXT,
+    institution TEXT,
+    whatsapp TEXT,
+    areas_of_interest TEXT[] NOT NULL DEFAULT '{}',
+    preferred_modalities TEXT[] NOT NULL DEFAULT '{}',
+    preferred_scopes TEXT[] NOT NULL DEFAULT '{}',
+    preferred_years TEXT[] NOT NULL DEFAULT '{}',
+    research_goals TEXT[] NOT NULL DEFAULT '{}',
+    notes TEXT,
+    onboarding_completed BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE public.member_profiles ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Membros autenticados leem perfis" ON public.member_profiles;
+CREATE POLICY "Membros autenticados leem perfis"
+    ON public.member_profiles FOR SELECT TO authenticated USING (true);
+
+DROP POLICY IF EXISTS "Membro cria proprio perfil" ON public.member_profiles;
+CREATE POLICY "Membro cria proprio perfil"
+    ON public.member_profiles FOR INSERT TO authenticated
+    WITH CHECK (auth.uid() = user_id AND role = 'member');
+
+DROP POLICY IF EXISTS "Membro atualiza proprio perfil" ON public.member_profiles;
+CREATE POLICY "Membro atualiza proprio perfil"
+    ON public.member_profiles FOR UPDATE TO authenticated
+    USING (auth.uid() = user_id)
+    WITH CHECK (auth.uid() = user_id);
+
+-- Impede auto-promoção de role pelo cliente
+CREATE OR REPLACE FUNCTION public.prevent_member_role_escalation()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    IF auth.role() = 'authenticated' AND NEW.role IS DISTINCT FROM OLD.role THEN
+        NEW.role := OLD.role;
+    END IF;
+    NEW.updated_at := NOW();
+    RETURN NEW;
+END;
+$$;
+
+DROP TRIGGER IF EXISTS trg_prevent_member_role_escalation ON public.member_profiles;
+CREATE TRIGGER trg_prevent_member_role_escalation
+    BEFORE UPDATE ON public.member_profiles
+    FOR EACH ROW
+    EXECUTE FUNCTION public.prevent_member_role_escalation();
+
+CREATE TABLE IF NOT EXISTS public.member_congress_interests (
+    id BIGSERIAL PRIMARY KEY,
+    user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+    congress_slug TEXT NOT NULL,
+    interest_level TEXT NOT NULL DEFAULT 'interessado' CHECK (interest_level IN ('prioritario', 'interessado', 'escrever_artigo')),
+    proposed_topic TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    UNIQUE (user_id, congress_slug)
+);
+
+CREATE INDEX IF NOT EXISTS idx_member_congress_interests_slug ON public.member_congress_interests (congress_slug);
+CREATE INDEX IF NOT EXISTS idx_member_congress_interests_user ON public.member_congress_interests (user_id);
+
+ALTER TABLE public.member_congress_interests ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Membros autenticados leem interesses" ON public.member_congress_interests;
+CREATE POLICY "Membros autenticados leem interesses"
+    ON public.member_congress_interests FOR SELECT TO authenticated USING (true);
+
+DROP POLICY IF EXISTS "Membro gerencia proprios interesses" ON public.member_congress_interests;
+CREATE POLICY "Membro gerencia proprios interesses"
+    ON public.member_congress_interests FOR ALL TO authenticated
+    USING (auth.uid() = user_id)
+    WITH CHECK (auth.uid() = user_id);
+
+COMMIT;

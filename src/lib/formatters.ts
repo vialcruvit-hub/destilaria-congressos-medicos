@@ -1,4 +1,4 @@
-import type { Congresso, DataStatus, Modalidade } from '../types/congresso';
+import type { Congresso, DataStatus, InterestLevel, Modalidade } from '../types/congresso';
 
 const MESES_CURTOS = [
   'jan', 'fev', 'mar', 'abr', 'mai', 'jun',
@@ -33,10 +33,10 @@ export function formatDateRange(c: Congresso): string {
   }
 
   if (ini.y === fim.y) {
-    return `${ini.d}/${String(ini.m).padStart(2, '0')} a ${fim.d}/${String(fim.m).padStart(2, '0')}/${ini.y}`;
+    return `${ini.d}/${String(ini.m).padStart(2, '0')} a ${fim.d}/${String(ini.m).padStart(2, '0')}/${ini.y}`;
   }
 
-  return `${ini.d}/${String(ini.m).padStart(2, '0')}/${ini.y} a ${fim.d}/${String(fim.m).padStart(2, '0')}/${fim.y}`;
+  return `${ini.d}/${String(ini.m).padStart(2, '0')}/${ini.y} a ${fim.d}/${String(ini.m).padStart(2, '0')}/${fim.y}`;
 }
 
 export function formatMonthGroup(iso: string | null): string {
@@ -72,10 +72,60 @@ export const DATA_STATUS_LABEL: Record<DataStatus, string> = {
   a_definir: 'A definir',
 };
 
-/**
- * Gera texto em linguagem simples, pronto para leitura humana, WhatsApp, Slack ou e-mail.
- */
-export function exportPlainLanguageText(items: Congresso[], titulo = 'Seleção de Congressos Médicos — Destilaria Research Group'): string {
+export const INTEREST_LEVEL_LABEL: Record<InterestLevel, string> = {
+  escrever_artigo: 'Escrever artigo em grupo',
+  prioritario: 'Prioritário',
+  interessado: 'Interessado',
+};
+
+export function buildGoogleSearchUrl(c: Congresso): string {
+  const year = c.data_inicio ? c.data_inicio.slice(0, 4) : '2027';
+  const place =
+    c.local_formatado && c.local_formatado !== 'Online' && c.local_formatado !== 'A definir'
+      ? c.cidade || c.local_formatado
+      : '';
+  const query = [c.nome, place, year, 'site oficial submissão trabalhos programação']
+    .filter(Boolean)
+    .join(' ');
+  return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+}
+
+export function buildWhatsAppShareUrl(c: Congresso, extraNote?: string): string {
+  const data = formatDateRange(c);
+  const obs = c.data_observacao ? ` (${c.data_observacao})` : '';
+  const tema = c.temas.length > 0 ? c.temas.join(', ') : c.tema_principal;
+  const googleUrl = buildGoogleSearchUrl(c);
+
+  const lines = [
+    `*Destilaria Research Group — Sugestão de Congresso*`,
+    ``,
+    `*${c.nome}*`,
+    `Quando: ${data}${obs}`,
+    `Local: ${c.local_formatado} (${MODALIDADE_LABEL[c.modalidade]})`,
+    `Tema: ${tema}`,
+  ];
+  if (extraNote?.trim()) {
+    lines.push(`Ideia / foco de artigo: ${extraNote.trim()}`);
+  }
+  lines.push(`Pesquisa rápida: ${googleUrl}`);
+  lines.push(``, `Alguém tem interesse em montar grupo para submeter trabalho?`);
+
+  return `https://wa.me/?text=${encodeURIComponent(lines.join('\n'))}`;
+}
+
+export function buildWhatsAppBulkShareUrl(items: Congresso[]): string {
+  const text = exportPlainLanguageText(items);
+  const trimmed =
+    text.length > 1800
+      ? text.slice(0, 1750) + '\n\n(...lista resumida — veja todos na plataforma)'
+      : text;
+  return `https://wa.me/?text=${encodeURIComponent(trimmed)}`;
+}
+
+export function exportPlainLanguageText(
+  items: Congresso[],
+  titulo = 'Seleção de Congressos Médicos — Destilaria Research Group'
+): string {
   if (items.length === 0) return 'Nenhum congresso selecionado.';
 
   const groups = new Map<string, Congresso[]>();
@@ -98,17 +148,19 @@ export function exportPlainLanguageText(items: Congresso[], titulo = 'Seleção 
       const data = formatDateRange(ev);
       const obs = ev.data_observacao ? ` (${ev.data_observacao})` : '';
       const mod = MODALIDADE_LABEL[ev.modalidade];
-      const local = ev.local_formatado === 'Online' ? '100% Online' : `${ev.local_formatado} · ${mod}`;
+      const local =
+        ev.local_formatado === 'Online' ? '100% Online' : `${ev.local_formatado} · ${mod}`;
       const tema = ev.temas.length > 0 ? ev.temas.join(', ') : ev.tema_principal;
       lines.push(`• ${ev.nome}`);
       lines.push(`  Quando: ${data}${obs}`);
       lines.push(`  Onde: ${local}`);
       lines.push(`  Tema: ${tema}`);
+      lines.push(`  Buscar detalhes: ${buildGoogleSearchUrl(ev)}`);
       lines.push('');
     }
   }
 
-  lines.push('Organizado com Destilaria Research Group · Radar de Congressos');
+  lines.push('Organizado pelo Destilaria Research Group');
   return lines.join('\n').trim();
 }
 
@@ -136,7 +188,17 @@ export function exportCsv(items: Congresso[]): string {
     const s = v ?? '';
     return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
   };
-  const header = ['Congresso', 'Data Inicio', 'Data Fim', 'Observacao Data', 'Modalidade', 'Local', 'Tema Principal', 'Temas', 'Fontes'].join(',');
+  const header = [
+    'Congresso',
+    'Data Inicio',
+    'Data Fim',
+    'Observacao Data',
+    'Modalidade',
+    'Local',
+    'Tema Principal',
+    'Temas',
+    'Fontes',
+  ].join(',');
   const rows = items.map((ev) =>
     [
       esc(ev.nome),
