@@ -8,6 +8,19 @@ import type {
   MemberRole,
 } from '../types/congresso';
 import fallbackData from '../data/congressosFallback.json';
+import {
+  batchAddDevCongressInterests,
+  createDevInvite,
+  getDevAllProfiles,
+  getDevGroupInterests,
+  getDevInvites,
+  getDevProfile,
+  isDevSessionActive,
+  removeDevCongressInterest,
+  revokeDevInvite,
+  saveDevCongressInterest,
+  saveDevProfile,
+} from './devAuth';
 
 const SUPABASE_URL =
   import.meta.env.VITE_SUPABASE_URL || 'https://yzuzasrpypsjucxrebjg.supabase.co';
@@ -41,6 +54,9 @@ export async function fetchCongressos(): Promise<Congresso[]> {
 }
 
 export async function fetchMemberProfile(userId: string): Promise<MemberProfile | null> {
+  if (isDevSessionActive()) {
+    return getDevProfile(userId);
+  }
   const { data, error } = await supabase
     .from('member_profiles')
     .select('*')
@@ -57,6 +73,9 @@ export async function fetchMemberProfile(userId: string): Promise<MemberProfile 
 export async function upsertMemberProfile(
   profile: Omit<MemberProfile, 'role' | 'created_at' | 'updated_at'> & { role?: MemberRole }
 ): Promise<{ data: MemberProfile | null; error: string | null }> {
+  if (isDevSessionActive()) {
+    return { data: saveDevProfile(profile), error: null };
+  }
   const { role: _ignoredRole, ...safeUpdate } = profile;
   const { data: existing } = await supabase
     .from('member_profiles')
@@ -87,6 +106,9 @@ export async function upsertMemberProfile(
 }
 
 export async function fetchAllMemberProfiles(): Promise<MemberProfile[]> {
+  if (isDevSessionActive()) {
+    return getDevAllProfiles();
+  }
   const { data, error } = await supabase
     .from('member_profiles')
     .select('*')
@@ -100,6 +122,9 @@ export async function fetchAllMemberProfiles(): Promise<MemberProfile[]> {
 }
 
 export async function fetchGroupInterests(): Promise<MemberCongressInterest[]> {
+  if (isDevSessionActive()) {
+    return getDevGroupInterests();
+  }
   const { data, error } = await supabase
     .from('member_congress_interests')
     .select('*')
@@ -118,6 +143,12 @@ export async function saveCongressInterest(
   level: InterestLevel,
   proposedTopic: string | null
 ): Promise<{ data: MemberCongressInterest | null; error: string | null }> {
+  if (isDevSessionActive()) {
+    return {
+      data: saveDevCongressInterest(userId, congressSlug, level, proposedTopic),
+      error: null,
+    };
+  }
   const { data, error } = await supabase
     .from('member_congress_interests')
     .upsert(
@@ -140,6 +171,10 @@ export async function removeCongressInterest(
   userId: string,
   congressSlug: string
 ): Promise<{ error: string | null }> {
+  if (isDevSessionActive()) {
+    removeDevCongressInterest(userId, congressSlug);
+    return { error: null };
+  }
   const { error } = await supabase
     .from('member_congress_interests')
     .delete()
@@ -154,6 +189,10 @@ export async function batchAddCongressInterests(
   slugs: string[],
   level: InterestLevel = 'escrever_artigo'
 ): Promise<{ error: string | null }> {
+  if (isDevSessionActive()) {
+    batchAddDevCongressInterests(userId, slugs, level);
+    return { error: null };
+  }
   if (slugs.length === 0) return { error: null };
   const rows = slugs.map((slug) => ({
     user_id: userId,
@@ -196,6 +235,9 @@ export async function listInvites(accessToken: string): Promise<{
   invites: InviteToken[];
   error?: string;
 }> {
+  if (isDevSessionActive()) {
+    return { invites: getDevInvites() };
+  }
   try {
     const res = await fetch('/api/invites', {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -212,6 +254,9 @@ export async function createInvite(
   accessToken: string,
   payload: { invitedLabel?: string; role?: MemberRole; expiresInDays?: number }
 ): Promise<{ invite?: InviteToken; error?: string }> {
+  if (isDevSessionActive()) {
+    return { invite: createDevInvite(payload) };
+  }
   try {
     const res = await fetch('/api/invites', {
       method: 'POST',
@@ -233,6 +278,10 @@ export async function revokeInvite(
   accessToken: string,
   id: string
 ): Promise<{ ok: boolean; error?: string }> {
+  if (isDevSessionActive()) {
+    const ok = revokeDevInvite(id);
+    return ok ? { ok: true } : { ok: false, error: 'Token não encontrado ou já utilizado.' };
+  }
   try {
     const res = await fetch(`/api/invites?id=${encodeURIComponent(id)}`, {
       method: 'DELETE',

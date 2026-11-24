@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
-import type { Session } from '@supabase/supabase-js';
 import {
   CheckCircle2,
   ClipboardList,
@@ -30,6 +29,12 @@ import {
   saveCongressInterest,
   supabase,
 } from './lib/supabase';
+import {
+  type AppSession,
+  getDevSession,
+  isDevSessionActive,
+  signOutDevAccount,
+} from './lib/devAuth';
 import { getMonthKey } from './lib/formatters';
 import { BrandLogo, HeroCaneDoodle } from './components/BrandLogo';
 import { FilterBar, type QuickLens } from './components/FilterBar';
@@ -67,7 +72,7 @@ export function App() {
   const [exportOpen, setExportOpen] = useState(false);
   const [methodologyOpen, setMethodologyOpen] = useState(false);
 
-  const [session, setSession] = useState<Session | null>(null);
+  const [session, setSession] = useState<AppSession | null>(null);
   const [profile, setProfile] = useState<MemberProfile | null>(null);
   const [allProfiles, setAllProfiles] = useState<MemberProfile[]>([]);
   const [groupInterests, setGroupInterests] = useState<MemberCongressInterest[]>([]);
@@ -107,15 +112,24 @@ export function App() {
       setLoading(false);
     });
 
-    supabase.auth.getSession().then(({ data }) => {
-      if (!active) return;
-      setSession(data.session);
-      if (data.session?.user) {
-        loadGroupState(data.session.user.id, false);
-      }
-    });
+    const devSess = getDevSession();
+    if (devSess) {
+      setSession(devSess);
+      loadGroupState(devSess.user.id, false);
+    } else {
+      supabase.auth.getSession().then(({ data }) => {
+        if (!active) return;
+        setSession(data.session);
+        if (data.session?.user) {
+          loadGroupState(data.session.user.id, false);
+        }
+      });
+    }
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      if (!nextSession && isDevSessionActive()) {
+        return;
+      }
       setSession(nextSession);
       if (nextSession?.user) {
         loadGroupState(nextSession.user.id, false);
@@ -341,7 +355,12 @@ export function App() {
 
   const handleSignOut = async () => {
     setUserMenuOpen(false);
+    signOutDevAccount();
     await supabase.auth.signOut();
+    setSession(null);
+    setProfile(null);
+    setAllProfiles([]);
+    setGroupInterests([]);
     showToast('Sessão encerrada.');
   };
 
@@ -717,8 +736,16 @@ export function App() {
           open={authModalOpen}
           onClose={() => setAuthModalOpen(false)}
           onAuthenticated={async (isNew) => {
+            const devSess = getDevSession();
+            if (devSess) {
+              setSession(devSess);
+              await loadGroupState(devSess.user.id, false);
+              showToast('Bem-vindo! Sessão de teste ativa.');
+              return;
+            }
             const { data } = await supabase.auth.getSession();
             if (data.session?.user) {
+              setSession(data.session);
               await loadGroupState(data.session.user.id, isNew);
             }
           }}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { KeyRound, Lock, Mail, User, X } from 'lucide-react';
 import { registerWithInviteToken, supabase } from '../lib/supabase';
+import { signInDevAccount } from '../lib/devAuth';
 
 interface AuthModalProps {
   open: boolean;
@@ -31,6 +32,14 @@ export function AuthModal({
     e.preventDefault();
     resetMessages();
     setLoading(true);
+
+    if (signInDevAccount(email, password)) {
+      setLoading(false);
+      onAuthenticated(false);
+      onClose();
+      return;
+    }
+
     try {
       const { error: signErr } = await supabase.auth.signInWithPassword({
         email: email.trim().toLowerCase(),
