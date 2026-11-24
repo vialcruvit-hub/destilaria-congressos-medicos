@@ -1,0 +1,3936 @@
+[
+  {
+    "id": 1,
+    "slug": "x-congresso-brasileiro-de-medicina-de-emergencia-adulto-e-pediatrica-2026",
+    "nome": "X Congresso Brasileiro de Medicina de Emergência Adulto e Pediátrica",
+    "data_inicio": "2026-11-25",
+    "data_fim": "2026-11-28",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Medicina de Emergência",
+    "temas": [
+      "Medicina de Emergência",
+      "Medicina de Emergência Pediátrica",
+      "Terapia Intensiva"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 2,
+    "slug": "71-cba-congresso-brasileiro-de-anestesiologia-2026",
+    "nome": "71° CBA - Congresso Brasileiro de Anestesiologia",
+    "data_inicio": "2026-11-26",
+    "data_fim": "2026-11-29",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Fortaleza",
+    "estado_uf": "CE",
+    "pais": "Brasil",
+    "local_formatado": "Fortaleza, CE - Brasil",
+    "tema_principal": "Anestesiologia",
+    "temas": [
+      "Anestesiologia",
+      "Medicina Perioperatória",
+      "Medicina da Dor"
+    ],
+    "fontes": [
+      "agrupamed.com.br",
+      "medicinahub.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 3,
+    "slug": "hpb-summit-uerj-2026-cirurgia-hepatologia-oncologia-e-transplante-2026",
+    "nome": "HPB Summit UERJ 2026 – Cirurgia, Hepatologia, Oncologia e Transplante",
+    "data_inicio": "2026-11-26",
+    "data_fim": "2026-11-27",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Cirurgia Geral",
+    "temas": [
+      "Cirurgia Geral",
+      "Cirurgia Hepatopancreatobiliar",
+      "Cirurgia Oncológica"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 4,
+    "slug": "ii-congresso-brasileiro-de-neuroimunologia-2026",
+    "nome": "II Congresso Brasileiro de Neuroimunologia",
+    "data_inicio": "2026-11-26",
+    "data_fim": "2026-11-28",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Neurologia",
+    "temas": [
+      "Neurologia",
+      "Neuroimunologia",
+      "Neurologia Clínica"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 5,
+    "slug": "29o-congresso-de-oftalmologia-da-usp-29o-cousp-2026",
+    "nome": "29º Congresso de Oftalmologia da USP — 29º CoUSP 2026",
+    "data_inicio": "2026-12-01",
+    "data_fim": "2026-12-05",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Oftalmologia",
+    "temas": [
+      "Oftalmologia",
+      "Oftalmopediatria"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 6,
+    "slug": "congresso-baiano-de-infectologia-infecto-bahia-2026",
+    "nome": "Congresso Baiano de Infectologia — INFECTO BAHIA 2026",
+    "data_inicio": "2026-12-02",
+    "data_fim": "2026-12-03",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Infectologia",
+    "temas": [
+      "Infectologia",
+      "Clínica Médica",
+      "Medicina Preventiva e Social"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 7,
+    "slug": "congresso-brasileiro-do-sono-2026",
+    "nome": "CONGRESSO BRASILEIRO DO SONO 2026",
+    "data_inicio": "2026-12-02",
+    "data_fim": "2026-12-05",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Medicina do Sono",
+    "temas": [
+      "Medicina do Sono",
+      "Neurologia",
+      "Pneumologia"
+    ],
+    "fontes": [
+      "agrupamed.com.br",
+      "medicinahub.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 8,
+    "slug": "43o-congresso-brasileiro-de-arritmias-cardiacas-2026",
+    "nome": "43º Congresso Brasileiro de Arritmias Cardíacas",
+    "data_inicio": "2026-12-03",
+    "data_fim": "2026-12-05",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Porto Alegre",
+    "estado_uf": "RS",
+    "pais": "Brasil",
+    "local_formatado": "Porto Alegre, RS - Brasil",
+    "tema_principal": "Cardiologia",
+    "temas": [
+      "Cardiologia",
+      "Arritmia Cardíaca",
+      "Eletrofisiologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 9,
+    "slug": "8a-jornada-de-ultrassonografia-da-sbus-ba-2026",
+    "nome": "8ª Jornada de Ultrassonografia da SBUS/BA",
+    "data_inicio": "2026-12-04",
+    "data_fim": "2026-12-05",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Ultrassonografia",
+    "temas": [
+      "Ultrassonografia",
+      "Radiologia e Diagnóstico por Imagem"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 10,
+    "slug": "2o-congresso-de-boas-praticas-medicas-do-cremesp-2o-cbpmc-2026",
+    "nome": "2º Congresso de Boas Práticas Médicas do Cremesp — 2º CBPMC",
+    "data_inicio": "2026-12-18",
+    "data_fim": "2026-12-19",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Cardiologia",
+    "temas": [
+      "Cardiologia",
+      "Ginecologia e Obstetrícia",
+      "Infectologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 11,
+    "slug": "cornea-2027-congresso-regional-de-neurologia-e-neurociencia-aplicada-2027",
+    "nome": "Cornea 2027 – Congresso Regional de Neurologia e Neurociência Aplicada",
+    "data_inicio": "2027-01-14",
+    "data_fim": "2027-01-15",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "online",
+    "cidade": null,
+    "estado_uf": null,
+    "pais": null,
+    "local_formatado": "Online",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 12,
+    "slug": "cordclimed-2027-i-congresso-regional-de-clinica-medica-e-saude-da-familia-2027",
+    "nome": "Cordclimed 2027 – I Congresso Regional de Clínica Médica e Saúde da Família",
+    "data_inicio": "2027-01-20",
+    "data_fim": "2027-01-22",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "online",
+    "cidade": null,
+    "estado_uf": null,
+    "pais": null,
+    "local_formatado": "Online",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 13,
+    "slug": "concardio-2027-ii-congresso-nacional-de-cardiologia-e-praticas-clinicas-avancadas-2027",
+    "nome": "CONCARDIO 2027 – II Congresso Nacional de Cardiologia e Práticas Clínicas Avançadas",
+    "data_inicio": "2027-02-04",
+    "data_fim": "2027-02-06",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "online",
+    "cidade": null,
+    "estado_uf": null,
+    "pais": null,
+    "local_formatado": "Online",
+    "tema_principal": "Cardiologia",
+    "temas": [
+      "Cardiologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 14,
+    "slug": "49o-simasp-simposio-internacional-moacyr-alvaro-2027",
+    "nome": "49º SIMASP – Simpósio Internacional Moacyr Álvaro",
+    "data_inicio": "2027-02-24",
+    "data_fim": "2027-02-27",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Oftalmologia",
+    "temas": [
+      "Oftalmologia",
+      "Catarata",
+      "Cirurgia Refrativa"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 15,
+    "slug": "aaos-annual-meeting-2027",
+    "nome": "AAOS Annual Meeting 2027",
+    "data_inicio": "2027-03-03",
+    "data_fim": "2027-03-06",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Las Vegas",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "Las Vegas, Estados Unidos",
+    "tema_principal": "Ortopedia",
+    "temas": [
+      "Ortopedia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 16,
+    "slug": "ecr-2027",
+    "nome": "ECR 2027",
+    "data_inicio": "2027-03-03",
+    "data_fim": "2027-03-07",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Viena",
+    "estado_uf": null,
+    "pais": "Áustria",
+    "local_formatado": "Viena, Áustria",
+    "tema_principal": "Radiologia e Diagnóstico por Imagem",
+    "temas": [
+      "Radiologia e Diagnóstico por Imagem"
+    ],
+    "fontes": [
+      "star.med.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 17,
+    "slug": "xv-congresso-brasileiro-de-laser-em-medicina-e-cirurgia-2027",
+    "nome": "XV Congresso Brasileiro de Laser em Medicina e Cirurgia",
+    "data_inicio": "2027-03-04",
+    "data_fim": "2027-03-06",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Oftalmologia",
+    "temas": [
+      "Oftalmologia",
+      "Dermatologia",
+      "Cirurgia Vascular"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 18,
+    "slug": "iii-simposio-de-neuro-oncologia-2027",
+    "nome": "III Simpósio de Neuro-Oncologia",
+    "data_inicio": "2027-03-11",
+    "data_fim": "2027-03-13",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Chapecó",
+    "estado_uf": "SC",
+    "pais": "Brasil",
+    "local_formatado": "Chapecó, SC - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 19,
+    "slug": "1o-congresso-baiano-de-longevidade-e-saude-integrativa-2027",
+    "nome": "1º Congresso Baiano de Longevidade e Saúde Integrativa 2027",
+    "data_inicio": "2027-03-12",
+    "data_fim": "2027-03-14",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 20,
+    "slug": "congresso-de-doencas-raras-e-neurodiversidade-2027",
+    "nome": "Congresso de Doenças Raras e Neurodiversidade 2027",
+    "data_inicio": "2027-03-12",
+    "data_fim": "2027-03-14",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Fortaleza",
+    "estado_uf": "CE",
+    "pais": "Brasil",
+    "local_formatado": "Fortaleza, CE - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 21,
+    "slug": "jornada-nordeste-de-anestesiologia-jona-2027",
+    "nome": "Jornada Nordeste de Anestesiologia (JONA 2027)",
+    "data_inicio": "2027-03-13",
+    "data_fim": "2027-03-14",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Luís",
+    "estado_uf": "MA",
+    "pais": "Brasil",
+    "local_formatado": "São Luís, MA - Brasil",
+    "tema_principal": "Anestesiologia",
+    "temas": [
+      "Anestesiologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 22,
+    "slug": "17o-congresso-paulista-de-pediatria-spsp-2027",
+    "nome": "17º Congresso Paulista de Pediatria (SPSP)",
+    "data_inicio": "2027-03-17",
+    "data_fim": "2027-03-20",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Pediatria",
+    "temas": [
+      "Pediatria",
+      "Neonatologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 23,
+    "slug": "10o-congresso-clinica-psiquiatrica-ccp-2027",
+    "nome": "10º Congresso Clínica Psiquiátrica — CCP 2027",
+    "data_inicio": "2027-03-18",
+    "data_fim": "2027-03-20",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Psiquiatria",
+    "temas": [
+      "Psiquiatria",
+      "Neurologia",
+      "Medicina do Sono"
+    ],
+    "fontes": [
+      "tivita.com",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 24,
+    "slug": "1a-feira-brasileira-de-pesquisa-clinica-ii-congresso-brasileiro-de-pesquisa-clinica-sbppc",
+    "nome": "1ª Feira Brasileira de Pesquisa Clínica / II Congresso Brasileiro de Pesquisa Clínica – SBPPC 2027",
+    "data_inicio": "2027-03-18",
+    "data_fim": "2027-03-20",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Pesquisa Clínica Humana e Veterinária",
+    "temas": [
+      "Pesquisa Clínica Humana e Veterinária",
+      "Ciência",
+      "Tecnologia e Inovação"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 25,
+    "slug": "41o-encontro-de-angiologia-e-de-cirurgia-vascular-do-rio-de-janeiro-2027",
+    "nome": "41º Encontro de Angiologia e de Cirurgia Vascular do Rio de Janeiro",
+    "data_inicio": "2027-03-18",
+    "data_fim": "2027-03-20",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Angiologia",
+    "temas": [
+      "Angiologia",
+      "Cirurgia Vascular",
+      "Cirurgia Endovascular"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 26,
+    "slug": "aad-annual-meeting-2027",
+    "nome": "AAD Annual Meeting 2027",
+    "data_inicio": "2027-03-19",
+    "data_fim": "2027-03-23",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "San Francisco",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "San Francisco, Estados Unidos",
+    "tema_principal": "Dermatologia",
+    "temas": [
+      "Dermatologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 27,
+    "slug": "eau-congress-eau27-42o-congresso-anual-da-european-association-of-urology-2027",
+    "nome": "EAU Congress — EAU27 (42º Congresso Anual da European Association of Urology)",
+    "data_inicio": "2027-03-19",
+    "data_fim": "2027-03-22",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Amsterdã",
+    "estado_uf": null,
+    "pais": "Países Baixos",
+    "local_formatado": "Amsterdã, Países Baixos",
+    "tema_principal": "Urologia",
+    "temas": [
+      "Urologia",
+      "Oncologia",
+      "Urologia Reconstrutiva"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 28,
+    "slug": "congresso-norte-nordeste-de-oftalmologia-2027-cnno-2027",
+    "nome": "Congresso Norte-Nordeste de Oftalmologia 2027 — CNNO 2027",
+    "data_inicio": "2027-04-01",
+    "data_fim": "2027-04-03",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Recife",
+    "estado_uf": "PE",
+    "pais": "Brasil",
+    "local_formatado": "Recife, PE - Brasil",
+    "tema_principal": "Oftalmologia",
+    "temas": [
+      "Oftalmologia"
+    ],
+    "fontes": [
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 29,
+    "slug": "gineco-onco-2027-13o-simposio-internacional-multidisciplinar-de-ginecologia-oncologica-202",
+    "nome": "GINECO ONCO 2027 — 13º Simpósio Internacional Multidisciplinar de Ginecologia Oncológica",
+    "data_inicio": "2027-04-02",
+    "data_fim": "2027-04-03",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Ginecologia e Obstetrícia",
+    "temas": [
+      "Ginecologia e Obstetrícia",
+      "Oncologia Clínica",
+      "Oncologia Cirúrgica"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 30,
+    "slug": "viii-congresso-brasileiro-de-dor-orofacial-2027",
+    "nome": "VIII Congresso Brasileiro de Dor Orofacial 2027",
+    "data_inicio": "2027-04-05",
+    "data_fim": "2027-04-07",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 31,
+    "slug": "29o-congresso-brasileiro-de-cardiopatias-congenitas-cardiologia-pediatrica-intervencao-e-c",
+    "nome": "29º Congresso Brasileiro de Cardiopatias Congênitas, Cardiologia Pediátrica, Intervenção e Cirurgia Cardíaca Pediátrica",
+    "data_inicio": "2027-04-07",
+    "data_fim": "2027-04-10",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Recife",
+    "estado_uf": "PE",
+    "pais": "Brasil",
+    "local_formatado": "Recife, PE - Brasil",
+    "tema_principal": "Cardiologia Pediátrica",
+    "temas": [
+      "Cardiologia Pediátrica"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agenciadomedico.com.br",
+      "tivita.com",
+      "agrupamed.com.br",
+      "querocongressos.com.br",
+      "medicinahub.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 32,
+    "slug": "15o-congresso-goiano-de-ginecologia-e-obstetricia-51a-jornada-goiana-de-ginecologia-e-obst",
+    "nome": "15º Congresso Goiano de Ginecologia e Obstetrícia / 51ª Jornada Goiana de Ginecologia e Obstetrícia",
+    "data_inicio": "2027-04-08",
+    "data_fim": "2027-04-10",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Goiânia",
+    "estado_uf": "GO",
+    "pais": "Brasil",
+    "local_formatado": "Goiânia, GO - Brasil",
+    "tema_principal": "Ginecologia e Obstetrícia",
+    "temas": [
+      "Ginecologia e Obstetrícia",
+      "Mastologia",
+      "Reprodução Humana"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 33,
+    "slug": "euro-brazil-2027-congresso-euro-brasileiro-de-medicina-intensiva-2027",
+    "nome": "Euro-Brazil 2027 — Congresso Euro-Brasileiro de Medicina Intensiva",
+    "data_inicio": "2027-04-08",
+    "data_fim": "2027-04-09",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Medicina Intensiva",
+    "temas": [
+      "Medicina Intensiva",
+      "Anestesiologia",
+      "Medicina de Emergência"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 34,
+    "slug": "v-congresso-brasileiro-de-neurogenetica-2027",
+    "nome": "V Congresso Brasileiro de Neurogenética 2027",
+    "data_inicio": "2027-04-08",
+    "data_fim": "2027-04-10",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Neurologia",
+    "temas": [
+      "Neurologia",
+      "Neurologia Infantil",
+      "Neurogenética"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 35,
+    "slug": "23o-sine-simposio-de-neuroendocrinologia-2027",
+    "nome": "23º SINE — Simpósio de Neuroendocrinologia",
+    "data_inicio": "2027-04-09",
+    "data_fim": "2027-04-11",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Endocrinologia e Metabologia",
+    "temas": [
+      "Endocrinologia e Metabologia",
+      "Neuroendocrinologia",
+      "Neurologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 36,
+    "slug": "xii-congresso-internacional-oncologia-d-or-onco-in-rio-2027",
+    "nome": "XII Congresso Internacional Oncologia D'Or (Onco in Rio)",
+    "data_inicio": "2027-04-09",
+    "data_fim": "2027-04-10",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Oncologia",
+    "temas": [
+      "Oncologia",
+      "Oncologia Clínica",
+      "Cirurgia Oncológica"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 37,
+    "slug": "xxiii-jornada-alagoana-de-ginecologia-e-obstetricia-2027",
+    "nome": "XXIII Jornada Alagoana de Ginecologia e Obstetrícia 2027",
+    "data_inicio": "2027-04-09",
+    "data_fim": "2027-04-10",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Maceió",
+    "estado_uf": "AL",
+    "pais": "Brasil",
+    "local_formatado": "Maceió, AL - Brasil",
+    "tema_principal": "Ginecologia e Obstetrícia",
+    "temas": [
+      "Ginecologia e Obstetrícia",
+      "Mastologia",
+      "Patologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 38,
+    "slug": "acc-27-2027",
+    "nome": "ACC.27",
+    "data_inicio": "2027-04-10",
+    "data_fim": "2027-04-12",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Houston",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "Houston, Estados Unidos",
+    "tema_principal": "Cardiologia",
+    "temas": [
+      "Cardiologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 39,
+    "slug": "world-congress-of-cardiology-2027",
+    "nome": "World Congress of Cardiology 2027",
+    "data_inicio": "2027-04-10",
+    "data_fim": "2027-04-12",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Houston",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "Houston, Estados Unidos",
+    "tema_principal": "Cardiologia",
+    "temas": [
+      "Cardiologia"
+    ],
+    "fontes": [
+      "star.med.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 40,
+    "slug": "17o-brazilian-lymphoma-conference-blc-2027",
+    "nome": "17º Brazilian Lymphoma Conference (BLC 2027)",
+    "data_inicio": "2027-04-14",
+    "data_fim": "2027-04-17",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "online",
+    "cidade": null,
+    "estado_uf": null,
+    "pais": null,
+    "local_formatado": "Online",
+    "tema_principal": "Hematologia",
+    "temas": [
+      "Hematologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 41,
+    "slug": "18o-congresso-internacional-de-uro-oncologia-uro-onco-2027",
+    "nome": "18º Congresso Internacional de Uro-Oncologia — URO-ONCO 2027",
+    "data_inicio": "2027-04-14",
+    "data_fim": "2027-04-17",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Urologia",
+    "temas": [
+      "Urologia",
+      "Oncologia Clínica",
+      "Oncologia Cirúrgica"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 42,
+    "slug": "51o-bravs-meeting-retina-2027",
+    "nome": "51º BRAVS Meeting – RETINA 2027",
+    "data_inicio": "2027-04-14",
+    "data_fim": "2027-04-17",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Belo Horizonte",
+    "estado_uf": "MG",
+    "pais": "Brasil",
+    "local_formatado": "Belo Horizonte, MG - Brasil",
+    "tema_principal": "Oftalmologia",
+    "temas": [
+      "Oftalmologia",
+      "Retina e Vítreo"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 43,
+    "slug": "37o-congresso-brasileiro-de-cirurgia-dermatologica-cbcd-2027",
+    "nome": "37º Congresso Brasileiro de Cirurgia Dermatológica (CBCD 2027)",
+    "data_inicio": "2027-04-15",
+    "data_fim": "2027-04-17",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Dermatologia",
+    "temas": [
+      "Dermatologia",
+      "Cirurgia Dermatológica"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 44,
+    "slug": "40o-congresso-norte-nordeste-de-coloproctologia-2027",
+    "nome": "40º Congresso Norte-Nordeste de Coloproctologia",
+    "data_inicio": "2027-04-16",
+    "data_fim": "2027-04-17",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Coloproctologia",
+    "temas": [
+      "Coloproctologia",
+      "Cirurgia Geral",
+      "Cirurgia do Aparelho Digestivo"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 45,
+    "slug": "xxxiii-slac-congresso-latino-americano-de-citopatologia-e-tutorial-da-academia-internacion",
+    "nome": "XXXIII SLAC - Congresso Latino-Americano de Citopatologia e Tutorial da Academia Internacional de Citologia (IAC)",
+    "data_inicio": "2027-04-20",
+    "data_fim": "2027-04-23",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Florianópolis",
+    "estado_uf": "SC",
+    "pais": "Brasil",
+    "local_formatado": "Florianópolis, SC - Brasil",
+    "tema_principal": "Citopatologia",
+    "temas": [
+      "Citopatologia",
+      "Patologia",
+      "Anatomia Patológica"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 46,
+    "slug": "espu-2027-37th-congress-of-the-european-society-for-paediatric-urology-2027",
+    "nome": "ESPU 2027 — 37th Congress of the European Society for Paediatric Urology",
+    "data_inicio": "2027-04-21",
+    "data_fim": "2027-04-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Valletta",
+    "estado_uf": null,
+    "pais": "Malta",
+    "local_formatado": "Valletta, Malta",
+    "tema_principal": "Urologia",
+    "temas": [
+      "Urologia",
+      "Urologia Pediátrica",
+      "Cirurgia Pediátrica"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 47,
+    "slug": "xxii-congresso-da-academia-brasileira-de-neurocirurgia-xxii-cabnc-2027",
+    "nome": "XXII Congresso da Academia Brasileira de Neurocirurgia — XXII CABNc 2027",
+    "data_inicio": "2027-04-21",
+    "data_fim": "2027-04-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Curitiba",
+    "estado_uf": "PR",
+    "pais": "Brasil",
+    "local_formatado": "Curitiba, PR - Brasil",
+    "tema_principal": "Neurocirurgia",
+    "temas": [
+      "Neurocirurgia",
+      "Neuro-Oncologia",
+      "Cirurgia da Base do Crânio"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "agrupamed.com.br",
+      "querocongressos.com.br",
+      "medicinahub.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 48,
+    "slug": "xxv-congresso-brasileiro-de-geriatria-e-gerontologia-cbgg-2027",
+    "nome": "XXV Congresso Brasileiro de Geriatria e Gerontologia (CBGG 2027)",
+    "data_inicio": "2027-04-21",
+    "data_fim": "2027-04-23",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Geriatria e Gerontologia",
+    "temas": [
+      "Geriatria e Gerontologia",
+      "Gerontologia",
+      "Medicina Interna"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 49,
+    "slug": "17o-congresso-paulista-de-endocrinologia-e-metabologia-copem-2027",
+    "nome": "17º Congresso Paulista de Endocrinologia e Metabologia — COPEM 2027",
+    "data_inicio": "2027-04-22",
+    "data_fim": "2027-04-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Endocrinologia e Metabologia",
+    "temas": [
+      "Endocrinologia e Metabologia",
+      "Clínica Médica"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 50,
+    "slug": "18o-congresso-brasileiro-de-alergia-e-imunologia-pediatrica-e-6o-simposio-internacional-de",
+    "nome": "18º Congresso Brasileiro de Alergia e Imunologia Pediátrica e 6º Simpósio Internacional de Dermatologia Pediátrica (Alergoped e Dermaped 2027)",
+    "data_inicio": "2027-04-22",
+    "data_fim": "2027-04-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Alergia e Imunologia",
+    "temas": [
+      "Alergia e Imunologia",
+      "Pediatria",
+      "Dermatologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "star.med.br",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 51,
+    "slug": "19o-congresso-brasileiro-de-medicina-de-familia-e-comunidade-cbmfc-2027",
+    "nome": "19º Congresso Brasileiro de Medicina de Família e Comunidade (CBMFC 2027)",
+    "data_inicio": "2027-04-22",
+    "data_fim": "2027-04-25",
+    "data_status": "confirmada",
+    "data_observacao": "Pré-congresso dia 21",
+    "modalidade": "presencial",
+    "cidade": "Porto Alegre",
+    "estado_uf": "RS",
+    "pais": "Brasil",
+    "local_formatado": "Porto Alegre, RS - Brasil",
+    "tema_principal": "Medicina de Família e Comunidade",
+    "temas": [
+      "Medicina de Família e Comunidade",
+      "Atenção Primária à Saúde"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agenciadomedico.com.br",
+      "tivita.com",
+      "star.med.br",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 52,
+    "slug": "32o-congresso-brasileiro-de-reproducao-humana-cbrh-2027",
+    "nome": "32º Congresso Brasileiro de Reprodução Humana (CBRH 2027)",
+    "data_inicio": "2027-04-22",
+    "data_fim": "2027-04-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Belo Horizonte",
+    "estado_uf": "MG",
+    "pais": "Brasil",
+    "local_formatado": "Belo Horizonte, MG - Brasil",
+    "tema_principal": "Reprodução Humana",
+    "temas": [
+      "Reprodução Humana",
+      "Reprodução Assistida",
+      "Medicina Reprodutiva"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 53,
+    "slug": "copa-saesp-2027-congresso-paulista-de-anestesiologia-2027",
+    "nome": "COPA SAESP 2027 — Congresso Paulista de Anestesiologia",
+    "data_inicio": "2027-04-22",
+    "data_fim": "2027-04-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Anestesiologia",
+    "temas": [
+      "Anestesiologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 54,
+    "slug": "xviii-cbrao-congresso-brasileiro-de-reconstrucao-e-alongamento-osseo-2027",
+    "nome": "XVIII CBRAO – Congresso Brasileiro de Reconstrução e Alongamento Ósseo 2027",
+    "data_inicio": "2027-04-22",
+    "data_fim": "2027-04-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Vitória",
+    "estado_uf": "ES",
+    "pais": "Brasil",
+    "local_formatado": "Vitória, ES - Brasil",
+    "tema_principal": "Ortopedia e Traumatologia",
+    "temas": [
+      "Ortopedia e Traumatologia",
+      "Cirurgia Ortopédica Reconstrutiva",
+      "Reconstrução e Alongamento Ósseo"
+    ],
+    "fontes": [
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 55,
+    "slug": "xiii-congresso-brasileiro-da-soblec-2027",
+    "nome": "XIII Congresso Brasileiro da SOBLEC",
+    "data_inicio": "2027-04-23",
+    "data_fim": "2027-04-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Oftalmologia",
+    "temas": [
+      "Oftalmologia",
+      "Córnea",
+      "Refratometria"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 56,
+    "slug": "torax-2027-xxv-congresso-da-sociedade-brasileira-de-cirurgia-toracica-2027",
+    "nome": "Tórax 2027 – XXV Congresso da Sociedade Brasileira de Cirurgia Torácica",
+    "data_inicio": "2027-04-28",
+    "data_fim": "2027-04-30",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Cirurgia Torácica",
+    "temas": [
+      "Cirurgia Torácica"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 57,
+    "slug": "20o-endosul-2027-congresso-de-endocrinologia-e-metabologia-da-regiao-sul-2027",
+    "nome": "20º ENDOSUL 2027 — Congresso de Endocrinologia e Metabologia da Região Sul",
+    "data_inicio": "2027-04-29",
+    "data_fim": "2027-05-01",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Curitiba",
+    "estado_uf": "PR",
+    "pais": "Brasil",
+    "local_formatado": "Curitiba, PR - Brasil",
+    "tema_principal": "Endocrinologia e Metabologia",
+    "temas": [
+      "Endocrinologia e Metabologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 58,
+    "slug": "3o-congresso-cearense-de-genetica-medica-2027",
+    "nome": "3º Congresso Cearense de Genética Médica 2027",
+    "data_inicio": "2027-04-29",
+    "data_fim": "2027-04-29",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Fortaleza",
+    "estado_uf": "CE",
+    "pais": "Brasil",
+    "local_formatado": "Fortaleza, CE - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 59,
+    "slug": "57a-jornada-paulista-de-radiologia-jpr-2027",
+    "nome": "57ª Jornada Paulista de Radiologia (JPR 2027)",
+    "data_inicio": "2027-04-29",
+    "data_fim": "2027-05-02",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Radiologia e Diagnóstico por Imagem",
+    "temas": [
+      "Radiologia e Diagnóstico por Imagem"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agenciadomedico.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 60,
+    "slug": "viii-cbrate-congresso-da-sociedade-brasileira-de-artroscopia-e-traumatologia-do-esporte-20",
+    "nome": "VIII CBRATE – Congresso da Sociedade Brasileira de Artroscopia e Traumatologia do Esporte 2027",
+    "data_inicio": "2027-04-29",
+    "data_fim": "2027-05-01",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Goiânia",
+    "estado_uf": "GO",
+    "pais": "Brasil",
+    "local_formatado": "Goiânia, GO - Brasil",
+    "tema_principal": "Ortopedia e Traumatologia",
+    "temas": [
+      "Ortopedia e Traumatologia",
+      "Traumatologia do Esporte",
+      "Artroscopia"
+    ],
+    "fontes": [
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 61,
+    "slug": "aan-annual-meeting-2027",
+    "nome": "AAN Annual Meeting 2027",
+    "data_inicio": "2027-05-01",
+    "data_fim": "2027-05-05",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "hibrido",
+    "cidade": "Washington, D.C.",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "Washington, D.C., Estados Unidos (Híbrido)",
+    "tema_principal": "Neurologia",
+    "temas": [
+      "Neurologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br",
+      "star.med.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 62,
+    "slug": "apa-annual-meeting-2027",
+    "nome": "APA Annual Meeting 2027",
+    "data_inicio": "2027-05-01",
+    "data_fim": "2027-05-05",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Nova York",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "Nova York, Estados Unidos",
+    "tema_principal": "Psiquiatria",
+    "temas": [
+      "Psiquiatria"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 63,
+    "slug": "xxxii-congresso-brasileiro-de-trauma-ortopedico-cbto-2027",
+    "nome": "XXXII Congresso Brasileiro de Trauma Ortopédico (CBTO 2027)",
+    "data_inicio": "2027-05-05",
+    "data_fim": "2027-05-07",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Ortopedia e Traumatologia",
+    "temas": [
+      "Ortopedia e Traumatologia",
+      "Trauma Ortopédico",
+      "Cirurgia do Trauma"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 64,
+    "slug": "congresso-socerj-2027-44o-congresso-da-sociedade-de-cardiologia-do-estado-do-rio-de-janeir",
+    "nome": "Congresso SOCERJ 2027 – 44º Congresso da Sociedade de Cardiologia do Estado do Rio de Janeiro",
+    "data_inicio": "2027-05-06",
+    "data_fim": "2027-05-07",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 65,
+    "slug": "xxii-cbosm-2027-congresso-brasileiro-de-obesidade-e-sindrome-metabolica-2027",
+    "nome": "XXII CBOSM 2027 – Congresso Brasileiro de Obesidade e Síndrome Metabólica",
+    "data_inicio": "2027-05-06",
+    "data_fim": "2027-05-08",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Florianópolis",
+    "estado_uf": "SC",
+    "pais": "Brasil",
+    "local_formatado": "Florianópolis, SC - Brasil",
+    "tema_principal": "Endocrinologia e Metabologia",
+    "temas": [
+      "Endocrinologia e Metabologia",
+      "Clínica Médica",
+      "Cardiologia"
+    ],
+    "fontes": [
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 66,
+    "slug": "64o-congresso-brasileiro-de-ginecologia-e-obstetricia-cbgo-2027",
+    "nome": "64º Congresso Brasileiro de Ginecologia e Obstetrícia (CBGO 2027)",
+    "data_inicio": "2027-05-12",
+    "data_fim": "2027-05-15",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Ginecologia e Obstetrícia",
+    "temas": [
+      "Ginecologia e Obstetrícia",
+      "Medicina Fetal",
+      "Reprodução Humana"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agenciadomedico.com.br",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 67,
+    "slug": "21o-congresso-do-departamento-de-hipertensao-arterial-da-sbc-7o-world-hypertension-congres",
+    "nome": "21º Congresso do Departamento de Hipertensão Arterial da SBC + 7º World Hypertension Congress",
+    "data_inicio": "2027-05-13",
+    "data_fim": "2027-05-15",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Goiânia",
+    "estado_uf": "GO",
+    "pais": "Brasil",
+    "local_formatado": "Goiânia, GO - Brasil",
+    "tema_principal": "Cardiologia",
+    "temas": [
+      "Cardiologia",
+      "Hipertensão Arterial",
+      "Nefrologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 68,
+    "slug": "jornada-centro-oeste-de-reumatologia-2027",
+    "nome": "Jornada Centro-Oeste de Reumatologia 2027",
+    "data_inicio": "2027-05-13",
+    "data_fim": "2027-05-15",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Belo Horizonte",
+    "estado_uf": "MG",
+    "pais": "Brasil",
+    "local_formatado": "Belo Horizonte, MG - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 69,
+    "slug": "xii-combined-meeting-congresso-norte-e-nordeste-2027",
+    "nome": "XII Combined Meeting + Congresso Norte e Nordeste",
+    "data_inicio": "2027-05-13",
+    "data_fim": "2027-05-15",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Recife",
+    "estado_uf": "PE",
+    "pais": "Brasil",
+    "local_formatado": "Recife, PE - Brasil",
+    "tema_principal": "Otorrinolaringologia",
+    "temas": [
+      "Otorrinolaringologia",
+      "Cirurgia de Cabeça e Pescoço",
+      "Otologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 70,
+    "slug": "xxii-simposio-internacional-da-sociedade-brasileira-de-glaucoma-sbg-2027",
+    "nome": "XXII Simpósio Internacional da Sociedade Brasileira de Glaucoma — SBG 2027",
+    "data_inicio": "2027-05-13",
+    "data_fim": "2027-05-15",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Oftalmologia",
+    "temas": [
+      "Oftalmologia",
+      "Glaucoma"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 71,
+    "slug": "ats-2027",
+    "nome": "ATS 2027",
+    "data_inicio": "2027-05-14",
+    "data_fim": "2027-05-19",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Nova Orleans",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "Nova Orleans, Estados Unidos",
+    "tema_principal": "Pneumologia",
+    "temas": [
+      "Pneumologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br",
+      "star.med.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 72,
+    "slug": "iv-jornada-de-anestesiologia-do-centro-norte-jacen-2027",
+    "nome": "IV Jornada de Anestesiologia do Centro-Norte — JACEN 2027",
+    "data_inicio": "2027-05-14",
+    "data_fim": "2027-05-15",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Belém",
+    "estado_uf": "PA",
+    "pais": "Brasil",
+    "local_formatado": "Belém, PA - Brasil",
+    "tema_principal": "Anestesiologia",
+    "temas": [
+      "Anestesiologia",
+      "Medicina Intensiva",
+      "Medicina da Dor"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 73,
+    "slug": "ddw-2027",
+    "nome": "DDW 2027",
+    "data_inicio": "2027-05-15",
+    "data_fim": "2027-05-18",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Washington, D.C.",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "Washington, D.C., Estados Unidos",
+    "tema_principal": "Gastroenterologia",
+    "temas": [
+      "Gastroenterologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 74,
+    "slug": "hospitalar-2027",
+    "nome": "Hospitalar 2027",
+    "data_inicio": "2027-05-18",
+    "data_fim": "2027-05-21",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Gestão e Tecnologia em Saúde",
+    "temas": [
+      "Gestão e Tecnologia em Saúde"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br",
+      "star.med.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 75,
+    "slug": "brascrs-2027-xxxiv-congresso-de-catarata-e-cirurgia-refrativa-2027",
+    "nome": "Brascrs 2027 – XXXIV Congresso de Catarata e Cirurgia Refrativa",
+    "data_inicio": "2027-05-19",
+    "data_fim": "2027-05-22",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Oftalmologia",
+    "temas": [
+      "Oftalmologia",
+      "Catarata",
+      "Cirurgia Refrativa"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 76,
+    "slug": "6o-congresso-brasileiro-da-cannabis-medicinal-2027",
+    "nome": "6º Congresso Brasileiro da Cannabis Medicinal",
+    "data_inicio": "2027-05-20",
+    "data_fim": "2027-05-22",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Medicina Canabinoide",
+    "temas": [
+      "Medicina Canabinoide",
+      "Neurologia",
+      "Psiquiatria"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 77,
+    "slug": "congresso-sbao-2027",
+    "nome": "Congresso SBAO 2027",
+    "data_inicio": "2027-05-20",
+    "data_fim": "2027-05-22",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Administração em Oftalmologia",
+    "temas": [
+      "Administração em Oftalmologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 78,
+    "slug": "xx-congresso-da-latin-american-thyroid-society-lats-2027",
+    "nome": "XX Congresso da Latin American Thyroid Society (LATS 2027)",
+    "data_inicio": "2027-05-20",
+    "data_fim": "2027-05-23",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Foz do Iguaçu",
+    "estado_uf": "PR",
+    "pais": "Brasil",
+    "local_formatado": "Foz do Iguaçu, PR - Brasil",
+    "tema_principal": "Endocrinologia e Metabologia",
+    "temas": [
+      "Endocrinologia e Metabologia",
+      "Cirurgia de Cabeça e Pescoço",
+      "Medicina Nuclear"
+    ],
+    "fontes": [
+      "usebip.com",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 79,
+    "slug": "xx-congresso-latino-americano-de-tireoide-2027",
+    "nome": "XX Congresso Latino-americano de Tireóide",
+    "data_inicio": "2027-05-20",
+    "data_fim": "2027-05-23",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Foz do Iguaçu",
+    "estado_uf": "PR",
+    "pais": "Brasil",
+    "local_formatado": "Foz do Iguaçu, PR - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 80,
+    "slug": "acog-annual-meeting-2027",
+    "nome": "ACOG Annual Meeting 2027",
+    "data_inicio": "2027-05-21",
+    "data_fim": "2027-05-23",
+    "data_status": "a_confirmar",
+    "data_observacao": "Confirmar no site",
+    "modalidade": "presencial",
+    "cidade": "Los Angeles",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "Los Angeles, Estados Unidos",
+    "tema_principal": "Ginecologia e Obstetrícia",
+    "temas": [
+      "Ginecologia e Obstetrícia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 81,
+    "slug": "aua-2027-american-urological-association-annual-meeting-2027",
+    "nome": "AUA 2027 — American Urological Association Annual Meeting",
+    "data_inicio": "2027-05-21",
+    "data_fim": "2027-05-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "San Diego",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "San Diego, Estados Unidos",
+    "tema_principal": "Urologia",
+    "temas": [
+      "Urologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 82,
+    "slug": "brain-2027-congress-on-brain-behavior-and-emotions-2027",
+    "nome": "BRAIN 2027 — Congress on Brain, Behavior and Emotions",
+    "data_inicio": "2027-05-26",
+    "data_fim": "2027-05-29",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Porto Alegre",
+    "estado_uf": "RS",
+    "pais": "Brasil",
+    "local_formatado": "Porto Alegre, RS - Brasil",
+    "tema_principal": "Neurologia",
+    "temas": [
+      "Neurologia",
+      "Psiquiatria",
+      "Neurocirurgia"
+    ],
+    "fontes": [
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 83,
+    "slug": "cbdor-2027-18-cbdor-congresso-brasileiro-de-dor-2027",
+    "nome": "CBDOR 2027 – 18° CBDor Congresso Brasileiro de Dor",
+    "data_inicio": "2027-05-26",
+    "data_fim": "2027-05-29",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Medicina da Dor",
+    "temas": [
+      "Medicina da Dor",
+      "Anestesiologia",
+      "Neurologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 84,
+    "slug": "3o-endoscopic-combined-meeting-sbc-2027-endoscopic-spine-surgery-2027",
+    "nome": "3º Endoscopic Combined Meeting SBC 2027 — Endoscopic Spine Surgery",
+    "data_inicio": "2027-05-27",
+    "data_fim": "2027-05-29",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Belém",
+    "estado_uf": "PA",
+    "pais": "Brasil",
+    "local_formatado": "Belém, PA - Brasil",
+    "tema_principal": "Ortopedia e Traumatologia",
+    "temas": [
+      "Ortopedia e Traumatologia",
+      "Cirurgia da Coluna",
+      "Neurocirurgia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 85,
+    "slug": "47o-congresso-da-sociedade-de-cardiologia-do-estado-de-sao-paulo-socesp-2027",
+    "nome": "47º Congresso da Sociedade de Cardiologia do Estado de São Paulo (SOCESP 2027)",
+    "data_inicio": "2027-05-27",
+    "data_fim": "2027-05-29",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Cardiologia",
+    "temas": [
+      "Cardiologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 86,
+    "slug": "xix-congresso-brasileiro-de-medicina-intensiva-pediatrica-cbmiped-2027",
+    "nome": "XIX Congresso Brasileiro de Medicina Intensiva Pediátrica — CBMIPED 2027",
+    "data_inicio": "2027-06-02",
+    "data_fim": "2027-06-05",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Medicina Intensiva Pediátrica",
+    "temas": [
+      "Medicina Intensiva Pediátrica",
+      "Pediatria",
+      "Neonatologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 87,
+    "slug": "xvi-congresso-paulista-de-neurologia-cpn-2027",
+    "nome": "XVI Congresso Paulista de Neurologia — CPN 2027",
+    "data_inicio": "2027-06-02",
+    "data_fim": "2027-06-05",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Santos",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "Santos, SP - Brasil",
+    "tema_principal": "Neurologia",
+    "temas": [
+      "Neurologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 88,
+    "slug": "xiv-troia-2027-congresso-de-trauma-ortopedico-infantil-2027",
+    "nome": "XIV TROIA 2027 — Congresso de Trauma Ortopédico Infantil",
+    "data_inicio": "2027-06-03",
+    "data_fim": "2027-06-05",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Fortaleza",
+    "estado_uf": "CE",
+    "pais": "Brasil",
+    "local_formatado": "Fortaleza, CE - Brasil",
+    "tema_principal": "Ortopedia e Traumatologia",
+    "temas": [
+      "Ortopedia e Traumatologia",
+      "Ortopedia Pediátrica",
+      "Pediatria"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 89,
+    "slug": "xx-congresso-sul-brasileiro-de-oftalmologia-sulbra-2027",
+    "nome": "XX Congresso Sul-Brasileiro de Oftalmologia - SULBRA",
+    "data_inicio": "2027-06-03",
+    "data_fim": "2027-06-05",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Curitiba",
+    "estado_uf": "PR",
+    "pais": "Brasil",
+    "local_formatado": "Curitiba, PR - Brasil",
+    "tema_principal": "Oftalmologia",
+    "temas": [
+      "Oftalmologia",
+      "Retina e Vítreo",
+      "Glaucoma"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 90,
+    "slug": "xxi-congresso-sul-brasileiro-de-medicina-intensiva-2027",
+    "nome": "XXI Congresso Sul-Brasileiro de Medicina Intensiva 2027",
+    "data_inicio": "2027-06-03",
+    "data_fim": "2027-06-05",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Garibaldi",
+    "estado_uf": "RS",
+    "pais": "Brasil",
+    "local_formatado": "Garibaldi, RS - Brasil",
+    "tema_principal": "Medicina Intensiva",
+    "temas": [
+      "Medicina Intensiva"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br",
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 91,
+    "slug": "asco-annual-meeting-2027",
+    "nome": "ASCO Annual Meeting 2027",
+    "data_inicio": "2027-06-04",
+    "data_fim": "2027-06-08",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Chicago",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "Chicago, Estados Unidos",
+    "tema_principal": "Oncologia",
+    "temas": [
+      "Oncologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br",
+      "star.med.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 92,
+    "slug": "iccs-annual-meeting-2027",
+    "nome": "ICCS Annual Meeting 2027",
+    "data_inicio": "2027-06-10",
+    "data_fim": "2027-06-12",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "a_definir",
+    "cidade": null,
+    "estado_uf": null,
+    "pais": null,
+    "local_formatado": "A definir",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 93,
+    "slug": "52o-congresso-brasileiro-de-analises-clinicas-cbac-2027",
+    "nome": "52º Congresso Brasileiro de Análises Clínicas (CBAC 2027)",
+    "data_inicio": "2027-06-13",
+    "data_fim": "2027-06-16",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Belo Horizonte",
+    "estado_uf": "MG",
+    "pais": "Brasil",
+    "local_formatado": "Belo Horizonte, MG - Brasil",
+    "tema_principal": "Análises Clínicas",
+    "temas": [
+      "Análises Clínicas"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 94,
+    "slug": "amwc-brazil-2027-aesthetic-medicine-world-congress-2027",
+    "nome": "AMWC Brazil 2027 – Aesthetic Medicine World Congress",
+    "data_inicio": "2027-06-17",
+    "data_fim": "2027-06-19",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Dermatologia",
+    "temas": [
+      "Dermatologia",
+      "Cirurgia Plástica",
+      "Flebologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 95,
+    "slug": "xx-congresso-mineiro-de-medicina-intensiva-somiti-2027",
+    "nome": "XX Congresso Mineiro de Medicina Intensiva (Somiti 2027)",
+    "data_inicio": "2027-06-17",
+    "data_fim": "2027-06-19",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Belo Horizonte",
+    "estado_uf": "MG",
+    "pais": "Brasil",
+    "local_formatado": "Belo Horizonte, MG - Brasil",
+    "tema_principal": "Medicina Intensiva",
+    "temas": [
+      "Medicina Intensiva",
+      "Medicina de Emergência",
+      "Anestesiologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 96,
+    "slug": "53o-congresso-da-sociedade-brasileira-de-cirurgia-cardiovascular-congresso-sbccv-2027",
+    "nome": "53º Congresso da Sociedade Brasileira de Cirurgia Cardiovascular — Congresso SBCCV 2027",
+    "data_inicio": "2027-06-18",
+    "data_fim": "2027-06-19",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Brasília",
+    "estado_uf": "DF",
+    "pais": "Brasil",
+    "local_formatado": "Brasília, DF - Brasil",
+    "tema_principal": "Cirurgia Cardiovascular",
+    "temas": [
+      "Cirurgia Cardiovascular",
+      "Cardiologia",
+      "Cirurgia Cardíaca"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 97,
+    "slug": "87a-ada-scientific-sessions-2027",
+    "nome": "87ª ADA Scientific Sessions",
+    "data_inicio": "2027-06-18",
+    "data_fim": "2027-06-21",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Washington, D.C.",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "Washington, D.C., Estados Unidos",
+    "tema_principal": "Endocrinologia e Metabologia",
+    "temas": [
+      "Endocrinologia e Metabologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 98,
+    "slug": "xxiv-congresso-paulista-de-medicina-do-sono-2027",
+    "nome": "XXIV Congresso Paulista de Medicina do Sono 2027",
+    "data_inicio": "2027-06-18",
+    "data_fim": "2027-06-19",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Medicina do Sono",
+    "temas": [
+      "Medicina do Sono",
+      "Neurologia",
+      "Pneumologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 99,
+    "slug": "26o-world-congress-of-dermatology-2027",
+    "nome": "26º World Congress of Dermatology",
+    "data_inicio": "2027-06-21",
+    "data_fim": "2027-06-26",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Guadalajara",
+    "estado_uf": null,
+    "pais": "México",
+    "local_formatado": "Guadalajara, México",
+    "tema_principal": "Dermatologia",
+    "temas": [
+      "Dermatologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 100,
+    "slug": "gastrao-2027",
+    "nome": "Gastrão 2027",
+    "data_inicio": "2027-06-23",
+    "data_fim": "2027-06-25",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Gastroenterologia",
+    "temas": [
+      "Gastroenterologia",
+      "Cirurgia do Aparelho Digestivo",
+      "Coloproctologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 101,
+    "slug": "89o-congresso-da-sociedade-brasileira-de-oftalmologia-sbo-2027",
+    "nome": "89º Congresso da Sociedade Brasileira de Oftalmologia — SBO 2027",
+    "data_inicio": "2027-07-01",
+    "data_fim": "2027-07-03",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Belo Horizonte",
+    "estado_uf": "MG",
+    "pais": "Brasil",
+    "local_formatado": "Belo Horizonte, MG - Brasil",
+    "tema_principal": "Oftalmologia",
+    "temas": [
+      "Oftalmologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 102,
+    "slug": "endorecife-2027-congresso-pernambucano-de-endocrinologia-2027",
+    "nome": "ENDORECIFE 2027 - Congresso Pernambucano de Endocrinologia",
+    "data_inicio": "2027-07-01",
+    "data_fim": "2027-07-03",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Recife",
+    "estado_uf": "PE",
+    "pais": "Brasil",
+    "local_formatado": "Recife, PE - Brasil",
+    "tema_principal": "Endocrinologia e Metabologia",
+    "temas": [
+      "Endocrinologia e Metabologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 103,
+    "slug": "ix-congresso-brasileiro-de-hernia-cbh-2027",
+    "nome": "IX Congresso Brasileiro de Hérnia (CBH 2027)",
+    "data_inicio": "2027-07-01",
+    "data_fim": "2027-07-03",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Cirurgia Geral",
+    "temas": [
+      "Cirurgia Geral"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 104,
+    "slug": "41o-congresso-interamericano-de-psicologia-2027",
+    "nome": "41º Congresso Interamericano de Psicologia",
+    "data_inicio": "2027-07-05",
+    "data_fim": "2027-07-09",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Belo Horizonte",
+    "estado_uf": "MG",
+    "pais": "Brasil",
+    "local_formatado": "Belo Horizonte, MG - Brasil",
+    "tema_principal": "Psiquiatria",
+    "temas": [
+      "Psiquiatria"
+    ],
+    "fontes": [
+      "agrupamed.com.br",
+      "medicinahub.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 105,
+    "slug": "5o-congresso-brasileiro-de-medicina-geral-cbmg-2027",
+    "nome": "5º Congresso Brasileiro de Medicina Geral (CBMG 2027)",
+    "data_inicio": "2027-07-08",
+    "data_fim": "2027-07-10",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Medicina Geral",
+    "temas": [
+      "Medicina Geral",
+      "Clínica Médica",
+      "Medicina de Família e Comunidade"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 106,
+    "slug": "aaic-2027",
+    "nome": "AAIC 2027",
+    "data_inicio": "2027-07-18",
+    "data_fim": "2027-07-22",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Chicago",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "Chicago, Estados Unidos",
+    "tema_principal": "Neurologia",
+    "temas": [
+      "Neurologia",
+      "Doença de Alzheimer"
+    ],
+    "fontes": [
+      "bibliomed.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 107,
+    "slug": "cnn-2027-3o-congresso-norte-nordeste-de-nefrologia-em-salvador-2027",
+    "nome": "CNN 2027 – 3º Congresso Norte-Nordeste de Nefrologia em Salvador",
+    "data_inicio": "2027-07-21",
+    "data_fim": "2027-07-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Nefrologia",
+    "temas": [
+      "Nefrologia",
+      "Nefrologia Pediátrica",
+      "Transplante Renal"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 108,
+    "slug": "4a-jornada-de-anestesiologia-do-sul-e-sudeste-brasileiro-jassbra-2027",
+    "nome": "4ª Jornada de Anestesiologia do Sul e Sudeste Brasileiro (JASSBRA 2027)",
+    "data_inicio": "2027-07-29",
+    "data_fim": "2027-07-31",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Belo Horizonte",
+    "estado_uf": "MG",
+    "pais": "Brasil",
+    "local_formatado": "Belo Horizonte, MG - Brasil",
+    "tema_principal": "Anestesiologia",
+    "temas": [
+      "Anestesiologia",
+      "Anestesia Geral",
+      "Anestesia Regional"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 109,
+    "slug": "37o-congresso-brasileiro-de-cirurgia-cbc-2027",
+    "nome": "37º Congresso Brasileiro de Cirurgia (CBC 2027)",
+    "data_inicio": "2027-08-04",
+    "data_fim": "2027-08-07",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Cirurgia Geral",
+    "temas": [
+      "Cirurgia Geral"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 110,
+    "slug": "neuro-in-rio-2027-xii-congresso-da-anerj-2027",
+    "nome": "Neuro in Rio 2027 – XII Congresso da ANERJ",
+    "data_inicio": "2027-08-05",
+    "data_fim": "2027-08-07",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Neurologia",
+    "temas": [
+      "Neurologia",
+      "Neurologia Pediátrica",
+      "Neurofisiologia Clínica"
+    ],
+    "fontes": [
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 111,
+    "slug": "bctrims-2027-28o-congresso-brasileiro-de-esclerose-multipla-e-neuromielite-optica-2027",
+    "nome": "BCTRIMS 2027 – 28º Congresso Brasileiro de Esclerose Múltipla e Neuromielite Óptica",
+    "data_inicio": "2027-08-11",
+    "data_fim": "2027-08-13",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 112,
+    "slug": "32o-congresso-paulista-de-obstetricia-e-ginecologia-32o-congresso-sogesp-2027",
+    "nome": "32º Congresso Paulista de Obstetrícia e Ginecologia — 32º Congresso SOGESP 2027",
+    "data_inicio": "2027-08-19",
+    "data_fim": "2027-08-21",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Ginecologia e Obstetrícia",
+    "temas": [
+      "Ginecologia e Obstetrícia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 113,
+    "slug": "62o-congresso-da-sociedade-brasileira-de-medicina-tropical-medtrop-2027",
+    "nome": "62º Congresso da Sociedade Brasileira de Medicina Tropical (MEDTROP 2027)",
+    "data_inicio": "2027-08-22",
+    "data_fim": "2027-08-25",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Natal",
+    "estado_uf": "RN",
+    "pais": "Brasil",
+    "local_formatado": "Natal, RN - Brasil",
+    "tema_principal": "Infectologia",
+    "temas": [
+      "Infectologia",
+      "Medicina Tropical",
+      "Medicina Preventiva e Social"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 114,
+    "slug": "xv-congresso-brasileiro-de-asma-xii-congressos-brasileiros-de-dpoc-e-tabagismo-xiii-congre",
+    "nome": "XV Congresso Brasileiro de Asma + XII Congressos Brasileiros de DPOC e Tabagismo + XIII Congresso Centro-Oeste de Pneumologia e Tisiologia",
+    "data_inicio": "2027-08-25",
+    "data_fim": "2027-08-28",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Goiânia",
+    "estado_uf": "GO",
+    "pais": "Brasil",
+    "local_formatado": "Goiânia, GO - Brasil",
+    "tema_principal": "Pneumologia",
+    "temas": [
+      "Pneumologia",
+      "Clínica Médica",
+      "Alergia e Imunologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 115,
+    "slug": "cti-recife-2027-congresso-de-terapia-intensiva-de-pernambuco-2027",
+    "nome": "CTI Recife 2027 – Congresso de Terapia Intensiva de Pernambuco",
+    "data_inicio": "2027-08-27",
+    "data_fim": "2027-08-28",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Recife",
+    "estado_uf": "PE",
+    "pais": "Brasil",
+    "local_formatado": "Recife, PE - Brasil",
+    "tema_principal": "Medicina Intensiva",
+    "temas": [
+      "Medicina Intensiva",
+      "Medicina de Emergência"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 116,
+    "slug": "esc-congress-2027",
+    "nome": "ESC Congress 2027",
+    "data_inicio": "2027-08-27",
+    "data_fim": "2027-08-30",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Milão",
+    "estado_uf": null,
+    "pais": "Itália",
+    "local_formatado": "Milão, Itália",
+    "tema_principal": "Cardiologia",
+    "temas": [
+      "Cardiologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br",
+      "star.med.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 117,
+    "slug": "xii-congresso-brasileiro-de-ecografia-vascular-cbev-2027",
+    "nome": "XII Congresso Brasileiro de Ecografia Vascular — CBEV 2027",
+    "data_inicio": "2027-09-02",
+    "data_fim": "2027-09-04",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Angiologia",
+    "temas": [
+      "Angiologia",
+      "Cirurgia Vascular",
+      "Ecografia Vascular"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 118,
+    "slug": "xvi-congresso-brasileiro-de-farmacia-hospitalar-sbrafh-2027",
+    "nome": "XVI Congresso Brasileiro de Farmácia Hospitalar — SBRAFH 2027",
+    "data_inicio": "2027-09-02",
+    "data_fim": "2027-09-04",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Farmácia Hospitalar",
+    "temas": [
+      "Farmácia Hospitalar"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 119,
+    "slug": "congresso-brasileiro-de-atualizacao-em-endocrinologia-e-metabologia-cbaem-2027",
+    "nome": "Congresso Brasileiro de Atualização em Endocrinologia e Metabologia (CBAEM 2027)",
+    "data_inicio": "2027-09-03",
+    "data_fim": "2027-09-06",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Brasília",
+    "estado_uf": "DF",
+    "pais": "Brasil",
+    "local_formatado": "Brasília, DF - Brasil",
+    "tema_principal": "Endocrinologia e Metabologia",
+    "temas": [
+      "Endocrinologia e Metabologia",
+      "Metabologia",
+      "Endocrinologia Pediátrica"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agenciadomedico.com.br",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 120,
+    "slug": "csbd-2027-80o-congresso-brasileiro-de-dermatologia-2027",
+    "nome": "CSBD 2027 – 80º Congresso Brasileiro de Dermatologia",
+    "data_inicio": "2027-09-04",
+    "data_fim": "2027-09-06",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Brasília",
+    "estado_uf": "DF",
+    "pais": "Brasil",
+    "local_formatado": "Brasília, DF - Brasil",
+    "tema_principal": "Dermatologia",
+    "temas": [
+      "Dermatologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agenciadomedico.com.br",
+      "star.med.br",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 121,
+    "slug": "xxix-congresso-internacional-da-abead-2027-alcool-e-outras-drogas-2027",
+    "nome": "XXIX Congresso Internacional da ABEAD 2027 (Álcool e outras Drogas)",
+    "data_inicio": "2027-09-04",
+    "data_fim": "2027-09-07",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Nova Petrópolis",
+    "estado_uf": "RS",
+    "pais": "Brasil",
+    "local_formatado": "Nova Petrópolis, RS - Brasil",
+    "tema_principal": "Psiquiatria",
+    "temas": [
+      "Psiquiatria",
+      "Medicina de Família e Comunidade",
+      "Clínica Médica"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 122,
+    "slug": "44o-congresso-brasileiro-de-reumatologia-2027-sbr-2027",
+    "nome": "44º Congresso Brasileiro de Reumatologia 2027 — SBR 2027",
+    "data_inicio": "2027-09-08",
+    "data_fim": "2027-09-11",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Florianópolis",
+    "estado_uf": "SC",
+    "pais": "Brasil",
+    "local_formatado": "Florianópolis, SC - Brasil",
+    "tema_principal": "Reumatologia",
+    "temas": [
+      "Reumatologia",
+      "Clínica Médica"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agenciadomedico.com.br",
+      "tivita.com",
+      "star.med.br",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 123,
+    "slug": "47o-congresso-brasileiro-de-cirurgia-de-mao-mao-2027",
+    "nome": "47º Congresso Brasileiro de Cirurgia de Mão - MÃO 2027",
+    "data_inicio": "2027-09-08",
+    "data_fim": "2027-09-10",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Campos do Jordão",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "Campos do Jordão, SP - Brasil",
+    "tema_principal": "Cirurgia da Mão",
+    "temas": [
+      "Cirurgia da Mão",
+      "Ortopedia e Traumatologia",
+      "Cirurgia Plástica"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 124,
+    "slug": "71o-congresso-brasileiro-de-oftalmologia-cbo-2027",
+    "nome": "71º Congresso Brasileiro de Oftalmologia (CBO 2027)",
+    "data_inicio": "2027-09-08",
+    "data_fim": "2027-09-11",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Oftalmologia",
+    "temas": [
+      "Oftalmologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agenciadomedico.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 125,
+    "slug": "xxxi-congresso-brasileiro-de-cirurgia-de-cabeca-e-pescoco-cbccp-2027",
+    "nome": "XXXI Congresso Brasileiro de Cirurgia de Cabeça e Pescoço (CBCCP 2027)",
+    "data_inicio": "2027-09-08",
+    "data_fim": "2027-09-10",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Cirurgia de Cabeça e Pescoço",
+    "temas": [
+      "Cirurgia de Cabeça e Pescoço"
+    ],
+    "fontes": [
+      "usebip.com",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 126,
+    "slug": "ers-congress-2027",
+    "nome": "ERS Congress 2027",
+    "data_inicio": "2027-09-11",
+    "data_fim": "2027-09-14",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Milão",
+    "estado_uf": null,
+    "pais": "Itália",
+    "local_formatado": "Milão, Itália",
+    "tema_principal": "Pneumologia",
+    "temas": [
+      "Pneumologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 127,
+    "slug": "25o-congresso-brasileiro-de-infectologia-infecto-2027",
+    "nome": "25º Congresso Brasileiro de Infectologia (Infecto 2027)",
+    "data_inicio": "2027-09-14",
+    "data_fim": "2027-09-17",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Belo Horizonte",
+    "estado_uf": "MG",
+    "pais": "Brasil",
+    "local_formatado": "Belo Horizonte, MG - Brasil",
+    "tema_principal": "Infectologia",
+    "temas": [
+      "Infectologia",
+      "Clínica Médica"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agenciadomedico.com.br",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 128,
+    "slug": "tufh-2027-towards-unity-for-health-2027",
+    "nome": "TUFH 2027 — Towards Unity for Health",
+    "data_inicio": "2027-09-14",
+    "data_fim": "2027-09-17",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Recife",
+    "estado_uf": "PE",
+    "pais": "Brasil",
+    "local_formatado": "Recife, PE - Brasil",
+    "tema_principal": "Saúde Coletiva",
+    "temas": [
+      "Multidisciplinar",
+      "Saúde Coletiva",
+      "Medicina de Família e Comunidade"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 129,
+    "slug": "xxii-congresso-brasileiro-do-quadril-cbq-2027",
+    "nome": "XXII Congresso Brasileiro do Quadril (CBQ 2027)",
+    "data_inicio": "2027-09-15",
+    "data_fim": "2027-09-18",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Campos do Jordão",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "Campos do Jordão, SP - Brasil",
+    "tema_principal": "Ortopedia e Traumatologia",
+    "temas": [
+      "Ortopedia e Traumatologia"
+    ],
+    "fontes": [
+      "usebip.com",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 130,
+    "slug": "56o-congresso-brasileiro-de-radiologia-em-diagnostico-por-imagem-cbr27-2027",
+    "nome": "56º Congresso Brasileiro de Radiologia em Diagnóstico por Imagem (CBR27)",
+    "data_inicio": "2027-09-16",
+    "data_fim": "2027-09-18",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Foz do Iguaçu",
+    "estado_uf": "PR",
+    "pais": "Brasil",
+    "local_formatado": "Foz do Iguaçu, PR - Brasil",
+    "tema_principal": "Radiologia e Diagnóstico por Imagem",
+    "temas": [
+      "Radiologia e Diagnóstico por Imagem",
+      "Ultrassonografia",
+      "Medicina Nuclear"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agenciadomedico.com.br",
+      "tivita.com",
+      "star.med.br",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 131,
+    "slug": "esmo-congress-2027",
+    "nome": "ESMO Congress 2027",
+    "data_inicio": "2027-09-17",
+    "data_fim": "2027-09-21",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Barcelona",
+    "estado_uf": null,
+    "pais": "Espanha",
+    "local_formatado": "Barcelona, Espanha",
+    "tema_principal": "Oncologia",
+    "temas": [
+      "Oncologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br",
+      "star.med.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 132,
+    "slug": "63o-easd-annual-meeting-2027",
+    "nome": "63º EASD Annual Meeting",
+    "data_inicio": "2027-09-20",
+    "data_fim": "2027-09-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Budapeste",
+    "estado_uf": null,
+    "pais": "Hungria",
+    "local_formatado": "Budapeste, Hungria",
+    "tema_principal": "Endocrinologia e Metabologia",
+    "temas": [
+      "Endocrinologia e Metabologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 133,
+    "slug": "36o-eadv-congress-2027",
+    "nome": "36º EADV Congress",
+    "data_inicio": "2027-09-22",
+    "data_fim": "2027-09-25",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Amsterdã",
+    "estado_uf": null,
+    "pais": "Países Baixos",
+    "local_formatado": "Amsterdã, Países Baixos",
+    "tema_principal": "Dermatologia",
+    "temas": [
+      "Dermatologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 134,
+    "slug": "xx-congresso-brasileiro-de-transplantes-abto-2027",
+    "nome": "XX Congresso Brasileiro de Transplantes (ABTO 2027)",
+    "data_inicio": "2027-09-22",
+    "data_fim": "2027-09-25",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Belo Horizonte",
+    "estado_uf": "MG",
+    "pais": "Brasil",
+    "local_formatado": "Belo Horizonte, MG - Brasil",
+    "tema_principal": "Transplantes",
+    "temas": [
+      "Transplantes",
+      "Cirurgia Geral"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agrupamed.com.br",
+      "querocongressos.com.br",
+      "medicinahub.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 135,
+    "slug": "51o-congresso-da-associacao-de-ginecologia-e-obstetricia-do-estado-do-rio-de-janeiro-sgorj",
+    "nome": "51º Congresso da Associação de Ginecologia e Obstetrícia do Estado do Rio de Janeiro — SGORJ",
+    "data_inicio": "2027-09-23",
+    "data_fim": "2027-09-25",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Ginecologia e Obstetrícia",
+    "temas": [
+      "Ginecologia e Obstetrícia",
+      "Medicina Fetal",
+      "Reprodução Humana"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 136,
+    "slug": "congresso-brasileiro-de-microcirurgia-reconstrutiva-2027",
+    "nome": "Congresso Brasileiro de Microcirurgia Reconstrutiva 2027",
+    "data_inicio": "2027-09-23",
+    "data_fim": "2027-09-25",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": null,
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "RJ - Brasil",
+    "tema_principal": "Microcirurgia Reconstrutiva",
+    "temas": [
+      "Microcirurgia Reconstrutiva"
+    ],
+    "fontes": [
+      "usebip.com"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 137,
+    "slug": "75o-congresso-brasileiro-de-coloproctologia-cbcp-2027",
+    "nome": "75º Congresso Brasileiro de Coloproctologia — CBCP 2027",
+    "data_inicio": "2027-09-29",
+    "data_fim": "2027-10-01",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Foz do Iguaçu",
+    "estado_uf": "PR",
+    "pais": "Brasil",
+    "local_formatado": "Foz do Iguaçu, PR - Brasil",
+    "tema_principal": "Coloproctologia",
+    "temas": [
+      "Coloproctologia",
+      "Cirurgia Geral",
+      "Cirurgia do Aparelho Digestivo"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 138,
+    "slug": "65o-congresso-brasileiro-de-educacao-medica-cobem-2027",
+    "nome": "65º Congresso Brasileiro de Educação Médica — COBEM 2027",
+    "data_inicio": "2027-10-07",
+    "data_fim": "2027-10-09",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Educação Médica",
+    "temas": [
+      "Educação Médica",
+      "Clínica Médica",
+      "Medicina de Família e Comunidade"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 139,
+    "slug": "xliv-congresso-brasileiro-de-psiquiatria-cbp-2027",
+    "nome": "XLIV Congresso Brasileiro de Psiquiatria — CBP 2027",
+    "data_inicio": "2027-10-13",
+    "data_fim": "2027-10-16",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Natal",
+    "estado_uf": "RN",
+    "pais": "Brasil",
+    "local_formatado": "Natal, RN - Brasil",
+    "tema_principal": "Psiquiatria",
+    "temas": [
+      "Psiquiatria"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agenciadomedico.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 140,
+    "slug": "82o-congresso-brasileiro-de-cardiologia-82o-cbc-2027-best-of-esc-congress-2027",
+    "nome": "82º Congresso Brasileiro de Cardiologia (82º CBC 2027) / Best of ESC Congress 2027",
+    "data_inicio": "2027-10-14",
+    "data_fim": "2027-10-16",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Cardiologia",
+    "temas": [
+      "Cardiologia"
+    ],
+    "fontes": [
+      "star.med.br",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 141,
+    "slug": "29o-congresso-da-sociedade-brasileira-de-radioterapia-sbrt-2027",
+    "nome": "29º Congresso da Sociedade Brasileira de Radioterapia – SBRT 2027",
+    "data_inicio": "2027-10-20",
+    "data_fim": "2027-10-23",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Porto Alegre",
+    "estado_uf": "RS",
+    "pais": "Brasil",
+    "local_formatado": "Porto Alegre, RS - Brasil",
+    "tema_principal": "Radioterapia",
+    "temas": [
+      "Radioterapia",
+      "Oncologia Clínica",
+      "Oncologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 142,
+    "slug": "maac-2027-medical-advanced-aesthetic-congress-2027",
+    "nome": "MAAC 2027 – Medical Advanced Aesthetic Congress",
+    "data_inicio": "2027-10-21",
+    "data_fim": "2027-10-23",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 143,
+    "slug": "chest-2027",
+    "nome": "CHEST 2027",
+    "data_inicio": "2027-10-24",
+    "data_fim": "2027-10-27",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Vancouver",
+    "estado_uf": null,
+    "pais": "Canadá",
+    "local_formatado": "Vancouver, Canadá",
+    "tema_principal": "Pneumologia",
+    "temas": [
+      "Pneumologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 144,
+    "slug": "congresso-brasileiro-de-hematologia-hemoterapia-e-terapia-celular-hemo-2027",
+    "nome": "Congresso Brasileiro de Hematologia, Hemoterapia e Terapia Celular — HEMO 2027",
+    "data_inicio": "2027-10-27",
+    "data_fim": "2027-10-30",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Hematologia",
+    "temas": [
+      "Hematologia",
+      "Hemoterapia",
+      "Transplantes"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 145,
+    "slug": "xxvi-congresso-da-sociedade-brasileira-de-diabetes-diabetes-2027",
+    "nome": "XXVI Congresso da Sociedade Brasileira de Diabetes (Diabetes 2027)",
+    "data_inicio": "2027-10-27",
+    "data_fim": "2027-10-29",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Curitiba",
+    "estado_uf": "PR",
+    "pais": "Brasil",
+    "local_formatado": "Curitiba, PR - Brasil",
+    "tema_principal": "Endocrinologia e Metabologia",
+    "temas": [
+      "Endocrinologia e Metabologia",
+      "Diabetologia",
+      "Medicina Interna"
+    ],
+    "fontes": [
+      "usebip.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 146,
+    "slug": "xxvi-figo-world-congress-2027",
+    "nome": "XXVI FIGO World Congress",
+    "data_inicio": "2027-10-31",
+    "data_fim": "2027-11-05",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Montreal",
+    "estado_uf": null,
+    "pais": "Canadá",
+    "local_formatado": "Montreal, Canadá",
+    "tema_principal": "Ginecologia e Obstetrícia",
+    "temas": [
+      "Ginecologia e Obstetrícia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 147,
+    "slug": "59o-congresso-anual-da-sociedade-brasileira-de-ortopedia-e-traumatologia-sbot-2027",
+    "nome": "59º Congresso Anual da Sociedade Brasileira de Ortopedia e Traumatologia – SBOT 2027",
+    "data_inicio": "2027-11-10",
+    "data_fim": "2027-11-12",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Ortopedia e Traumatologia",
+    "temas": [
+      "Ortopedia e Traumatologia",
+      "Cirurgia da Mão",
+      "Cirurgia do Joelho"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 148,
+    "slug": "xxvi-semana-brasileira-do-aparelho-digestivo-sbad-2027",
+    "nome": "XXVI Semana Brasileira do Aparelho Digestivo — SBAD 2027",
+    "data_inicio": "2027-11-11",
+    "data_fim": "2027-11-13",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Gastroenterologia",
+    "temas": [
+      "Gastroenterologia",
+      "Endoscopia Digestiva",
+      "Cirurgia do Aparelho Digestivo"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 149,
+    "slug": "xxxii-congresso-brasileiro-de-medicina-intensiva-cbmi-2027",
+    "nome": "XXXII Congresso Brasileiro de Medicina Intensiva — CBMI 2027",
+    "data_inicio": "2027-11-11",
+    "data_fim": "2027-11-13",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Cuiabá",
+    "estado_uf": "MT",
+    "pais": "Brasil",
+    "local_formatado": "Cuiabá, MT - Brasil",
+    "tema_principal": "Medicina Intensiva",
+    "temas": [
+      "Medicina Intensiva",
+      "Anestesiologia",
+      "Medicina de Emergência"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 150,
+    "slug": "rsna-2027",
+    "nome": "RSNA 2027",
+    "data_inicio": "2027-11-14",
+    "data_fim": "2027-11-18",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Chicago",
+    "estado_uf": null,
+    "pais": "Estados Unidos",
+    "local_formatado": "Chicago, Estados Unidos",
+    "tema_principal": "Radiologia e Diagnóstico por Imagem",
+    "temas": [
+      "Radiologia e Diagnóstico por Imagem"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br",
+      "star.med.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 151,
+    "slug": "19o-congresso-brasileiro-de-clinica-medica-cbcm-2027",
+    "nome": "19º Congresso Brasileiro de Clínica Médica (CBCM 2027)",
+    "data_inicio": "2027-11-17",
+    "data_fim": "2027-11-20",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Clínica Médica",
+    "temas": [
+      "Clínica Médica"
+    ],
+    "fontes": [
+      "usebip.com",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 152,
+    "slug": "57o-congresso-brasileiro-de-otorrinolaringologia-e-cirurgia-cervico-facial-2027",
+    "nome": "57º Congresso Brasileiro de Otorrinolaringologia e Cirurgia Cérvico-Facial",
+    "data_inicio": "2027-11-18",
+    "data_fim": "2027-11-20",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Foz do Iguaçu",
+    "estado_uf": "PR",
+    "pais": "Brasil",
+    "local_formatado": "Foz do Iguaçu, PR - Brasil",
+    "tema_principal": "Otorrinolaringologia",
+    "temas": [
+      "Otorrinolaringologia",
+      "Cirurgia de Cabeça e Pescoço",
+      "Otologia"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 153,
+    "slug": "41o-congresso-brasileiro-de-urologia-cbu-2027",
+    "nome": "41º Congresso Brasileiro de Urologia (CBU 2027)",
+    "data_inicio": "2027-11-20",
+    "data_fim": "2027-11-23",
+    "data_status": "confirmada",
+    "data_observacao": "UroWeek a partir de 16 de novembro",
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Urologia",
+    "temas": [
+      "Urologia",
+      "Urologia Geral",
+      "Urologia Pediátrica"
+    ],
+    "fontes": [
+      "usebip.com",
+      "agenciadomedico.com.br",
+      "tivita.com",
+      "querocongressos.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 154,
+    "slug": "72o-congresso-brasileiro-de-anestesiologia-cba-2027",
+    "nome": "72º Congresso Brasileiro de Anestesiologia — CBA 2027",
+    "data_inicio": "2027-11-24",
+    "data_fim": "2027-11-27",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Florianópolis",
+    "estado_uf": "SC",
+    "pais": "Brasil",
+    "local_formatado": "Florianópolis, SC - Brasil",
+    "tema_principal": "Anestesiologia",
+    "temas": [
+      "Anestesiologia",
+      "Medicina Intensiva",
+      "Medicina da Dor"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br",
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 155,
+    "slug": "21o-congresso-brasileiro-de-cirurgia-do-joelho-cbcj-2028",
+    "nome": "21º Congresso Brasileiro de Cirurgia do Joelho – CBCJ 2028",
+    "data_inicio": "2028-04-05",
+    "data_fim": "2028-04-08",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Mata de São João",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Mata de São João, BA - Brasil",
+    "tema_principal": "Ortopedia e Traumatologia",
+    "temas": [
+      "Ortopedia e Traumatologia",
+      "Cirurgia do Joelho",
+      "Medicina Esportiva"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 156,
+    "slug": "sobracil-2028-19o-congresso-brasileiro-de-videocirurgia-2028",
+    "nome": "SOBRACIL 2028 — 19º Congresso Brasileiro de Videocirurgia",
+    "data_inicio": "2028-04-06",
+    "data_fim": "2028-04-08",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Salvador",
+    "estado_uf": "BA",
+    "pais": "Brasil",
+    "local_formatado": "Salvador, BA - Brasil",
+    "tema_principal": "Cirurgia Geral",
+    "temas": [
+      "Cirurgia Geral",
+      "Cirurgia do Aparelho Digestivo",
+      "Cirurgia Bariátrica"
+    ],
+    "fontes": [
+      "medsearch.app"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 157,
+    "slug": "23-congresso-brasileiro-de-cirurgia-do-tornozelo-e-pe-2028",
+    "nome": "23° Congresso Brasileiro de Cirurgia do Tornozelo e Pé 2028",
+    "data_inicio": "2028-05-11",
+    "data_fim": "2028-05-13",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Campo Grande",
+    "estado_uf": "MS",
+    "pais": "Brasil",
+    "local_formatado": "Campo Grande, MS - Brasil",
+    "tema_principal": "Ortopedia e Traumatologia",
+    "temas": [
+      "Ortopedia e Traumatologia"
+    ],
+    "fontes": [
+      "agrupamed.com.br",
+      "querocongressos.com.br",
+      "medicinahub.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 158,
+    "slug": "brain-congress-2028",
+    "nome": "Brain Congress 2028",
+    "data_inicio": "2028-06-21",
+    "data_fim": "2028-06-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 159,
+    "slug": "cinp-congress-2028-39o-congresso-mundial-de-neuropsicofarmacologia-2028",
+    "nome": "CINP Congress 2028 – 39º Congresso Mundial de Neuropsicofarmacologia",
+    "data_inicio": "2028-06-21",
+    "data_fim": "2028-06-24",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "Rio de Janeiro",
+    "estado_uf": "RJ",
+    "pais": "Brasil",
+    "local_formatado": "Rio de Janeiro, RJ - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 160,
+    "slug": "miccai-2028-31a-conferencia-internacional-sobre-computacao-de-imagem-medica-e-intervencao",
+    "nome": "MICCAI 2028 – 31ª Conferência Internacional sobre Computação de Imagem Médica e Intervenção Assistida por Computador",
+    "data_inicio": "2028-10-16",
+    "data_fim": "2028-10-20",
+    "data_status": "confirmada",
+    "data_observacao": null,
+    "modalidade": "presencial",
+    "cidade": "São Paulo",
+    "estado_uf": "SP",
+    "pais": "Brasil",
+    "local_formatado": "São Paulo, SP - Brasil",
+    "tema_principal": "Não informado",
+    "temas": [],
+    "fontes": [
+      "querocongressos.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 161,
+    "slug": "aha-scientific-sessions-2027",
+    "nome": "AHA Scientific Sessions 2027",
+    "data_inicio": null,
+    "data_fim": null,
+    "data_status": "a_definir",
+    "data_observacao": "Costuma ser em novembro",
+    "modalidade": "a_definir",
+    "cidade": null,
+    "estado_uf": null,
+    "pais": null,
+    "local_formatado": "A definir",
+    "tema_principal": "Cardiologia",
+    "temas": [
+      "Cardiologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 162,
+    "slug": "congresso-brasileiro-de-cirurgia-plastica-2027",
+    "nome": "Congresso Brasileiro de Cirurgia Plástica 2027",
+    "data_inicio": null,
+    "data_fim": null,
+    "data_status": "a_definir",
+    "data_observacao": "Costuma ser em novembro",
+    "modalidade": "a_definir",
+    "cidade": null,
+    "estado_uf": null,
+    "pais": null,
+    "local_formatado": "A definir",
+    "tema_principal": "Cirurgia Plástica",
+    "temas": [
+      "Cirurgia Plástica"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 163,
+    "slug": "congresso-brasileiro-de-oncologia-clinica-2027",
+    "nome": "Congresso Brasileiro de Oncologia Clínica 2027",
+    "data_inicio": null,
+    "data_fim": null,
+    "data_status": "a_definir",
+    "data_observacao": "Costuma ser no fim do segundo semestre",
+    "modalidade": "a_definir",
+    "cidade": null,
+    "estado_uf": null,
+    "pais": null,
+    "local_formatado": "A definir",
+    "tema_principal": "Oncologia",
+    "temas": [
+      "Oncologia"
+    ],
+    "fontes": [
+      "agenciadomedico.com.br"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 164,
+    "slug": "congresso-wao-asbai-no-brasil-2027",
+    "nome": "Congresso WAO + ASBAI no Brasil 2027",
+    "data_inicio": null,
+    "data_fim": null,
+    "data_status": "a_definir",
+    "data_observacao": "Detalhes pendentes",
+    "modalidade": "presencial",
+    "cidade": null,
+    "estado_uf": null,
+    "pais": "Brasil",
+    "local_formatado": "Brasil (cidade a definir)",
+    "tema_principal": "Alergia e Imunologia",
+    "temas": [
+      "Alergia e Imunologia"
+    ],
+    "fontes": [
+      "usebip.com"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  },
+  {
+    "id": 165,
+    "slug": "ii-congresso-brasileiro-de-psicofarmacologia-e-intervencoes-cbpi-2027",
+    "nome": "II Congresso Brasileiro de Psicofarmacologia e Intervenções (CBPI 2027)",
+    "data_inicio": null,
+    "data_fim": null,
+    "data_status": "a_definir",
+    "data_observacao": "2027",
+    "modalidade": "a_definir",
+    "cidade": null,
+    "estado_uf": null,
+    "pais": null,
+    "local_formatado": "A definir",
+    "tema_principal": "Psiquiatria",
+    "temas": [
+      "Psiquiatria"
+    ],
+    "fontes": [
+      "usebip.com"
+    ],
+    "atualizado_em": "2026-11-24T14:15:43+00:00"
+  }
+]
