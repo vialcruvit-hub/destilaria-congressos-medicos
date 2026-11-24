@@ -102,47 +102,46 @@ export function AuthModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-[#1F1D1A]/35 backdrop-blur-xs"
+            className="absolute inset-0 bg-[#211F1C]/45 backdrop-blur-xs"
           />
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 10 }}
+            initial={{ opacity: 0, scale: 0.94, y: 14 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.97, y: 8 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 w-full max-w-md overflow-hidden rounded-2xl border border-[#DCD4C6] bg-white shadow-2xl"
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 26 }}
+            className="relative z-10 w-full max-w-md overflow-hidden rounded-3xl border-2 border-[#211F1C] bg-[#FAF7F1] shadow-[8px_8px_0px_#211F1C]"
           >
-            <div className="flex items-start justify-between border-b border-[#E6E0D5] bg-[#F8F6F1] px-6 py-4">
+            <div className="flex items-start justify-between border-b-2 border-[#211F1C] bg-[#FDF6E9] px-6 py-4">
               <div>
-                <div className="text-[11px] font-semibold uppercase tracking-widest text-[#5A6D3A]">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-[#5A6D1F]">
                   Acesso de Membros
                 </div>
-                <h2 className="mt-1 font-editorial text-2xl font-medium text-[#1F1D1A]">
+                <h2 className="mt-0.5 font-display text-xl font-extrabold text-[#211F1C]">
                   Destilaria Research Group
                 </h2>
               </div>
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-lg border border-[#E6E0D5] bg-white p-1.5 text-[#5E584F] hover:text-[#1F1D1A]"
+                className="rounded-xl border-2 border-[#211F1C] bg-white p-1.5 text-[#211F1C] hover:bg-[#F3D2A2]"
                 aria-label="Fechar login"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
 
-            {/* Tabs */}
-            <div className="grid grid-cols-2 border-b border-[#E6E0D5] bg-[#FAF8F4] p-1.5">
+            <div className="grid grid-cols-2 gap-1.5 border-b border-[#E4DDD0] bg-white p-2">
               <button
                 type="button"
                 onClick={() => {
                   setMode('login');
                   resetMessages();
                 }}
-                className={`rounded-lg py-2 text-xs font-semibold transition-colors ${
+                className={`rounded-xl py-2 text-xs font-bold transition-all ${
                   mode === 'login'
-                    ? 'bg-white text-[#1F1D1A] shadow-xs border border-[#E6E0D5]'
-                    : 'text-[#5E584F] hover:text-[#1F1D1A]'
+                    ? 'bg-[#211F1C] text-[#FAF7F1]'
+                    : 'text-[#5C554C] hover:bg-[#FAF7F1] hover:text-[#211F1C]'
                 }`}
               >
                 Entrar
@@ -153,10 +152,10 @@ export function AuthModal({
                   setMode('register');
                   resetMessages();
                 }}
-                className={`rounded-lg py-2 text-xs font-semibold transition-colors ${
+                className={`rounded-xl py-2 text-xs font-bold transition-all ${
                   mode === 'register'
-                    ? 'bg-white text-[#1F1D1A] shadow-xs border border-[#E6E0D5]'
-                    : 'text-[#5E584F] hover:text-[#1F1D1A]'
+                    ? 'bg-[#B7CC49] text-[#211F1C] border-2 border-[#211F1C] shadow-[2px_2px_0px_#211F1C]'
+                    : 'text-[#5C554C] hover:bg-[#FAF7F1] hover:text-[#211F1C]'
                 }`}
               >
                 Criar conta com token
@@ -165,43 +164,43 @@ export function AuthModal({
 
             <form
               onSubmit={mode === 'login' ? handleLogin : handleRegister}
-              className="space-y-4 px-6 py-5"
+              className="space-y-4 bg-white px-6 py-5"
             >
               {mode === 'register' && (
                 <>
                   <div>
-                    <label className="mb-1.5 block text-xs font-semibold text-[#1F1D1A]">
+                    <label className="mb-1.5 block text-xs font-bold text-[#211F1C]">
                       Token único de convite
                     </label>
                     <div className="relative">
-                      <KeyRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#5A6D3A]" />
+                      <KeyRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#859D20]" />
                       <input
                         type="text"
                         required
                         value={token}
                         onChange={(e) => setToken(e.target.value.toUpperCase())}
                         placeholder="Ex.: DRG-XXXX-XXXX-XXXX"
-                        className="w-full rounded-xl border border-[#DCD4C6] bg-[#F8F6F1] py-2.5 pl-9 pr-3 font-mono text-xs uppercase tracking-wider text-[#1F1D1A] placeholder:normal-case placeholder:tracking-normal placeholder:text-[#8A8378] focus:border-[#5A6D3A] focus:bg-white focus:outline-none"
+                        className="w-full rounded-xl border-2 border-[#E4DDD0] bg-[#FAF7F1] py-2.5 pl-9 pr-3 font-mono text-xs uppercase tracking-wider text-[#211F1C] placeholder:normal-case placeholder:tracking-normal placeholder:text-[#8E8679] focus:border-[#211F1C] focus:bg-white focus:outline-none"
                       />
                     </div>
-                    <p className="mt-1 text-[11px] text-[#5E584F]">
-                      Cole aqui o token enviado pela coordenação. Ele é invalidado após o uso.
+                    <p className="mt-1 text-[11px] text-[#6B655B]">
+                      Cole o token enviado pela coordenação. Ele é invalidado após o uso.
                     </p>
                   </div>
 
                   <div>
-                    <label className="mb-1.5 block text-xs font-semibold text-[#1F1D1A]">
+                    <label className="mb-1.5 block text-xs font-bold text-[#211F1C]">
                       Nome completo
                     </label>
                     <div className="relative">
-                      <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8A8378]" />
+                      <User className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8E8679]" />
                       <input
                         type="text"
                         required
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="Como aparecerá para o grupo"
-                        className="w-full rounded-xl border border-[#DCD4C6] bg-[#F8F6F1] py-2.5 pl-9 pr-3 text-sm text-[#1F1D1A] placeholder:text-[#8A8378] focus:border-[#5A6D3A] focus:bg-white focus:outline-none"
+                        className="w-full rounded-xl border-2 border-[#E4DDD0] bg-[#FAF7F1] py-2.5 pl-9 pr-3 text-sm text-[#211F1C] placeholder:text-[#8E8679] focus:border-[#211F1C] focus:bg-white focus:outline-none"
                       />
                     </div>
                   </div>
@@ -209,28 +208,31 @@ export function AuthModal({
               )}
 
               <div>
-                <label className="mb-1.5 block text-xs font-semibold text-[#1F1D1A]">
+                <label className="mb-1.5 block text-xs font-bold text-[#211F1C]">
                   E-mail
                 </label>
                 <div className="relative">
-                  <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8A8378]" />
+                  <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8E8679]" />
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="nome@instituicao.edu.br"
-                    className="w-full rounded-xl border border-[#DCD4C6] bg-[#F8F6F1] py-2.5 pl-9 pr-3 text-sm text-[#1F1D1A] placeholder:text-[#8A8378] focus:border-[#5A6D3A] focus:bg-white focus:outline-none"
+                    className="w-full rounded-xl border-2 border-[#E4DDD0] bg-[#FAF7F1] py-2.5 pl-9 pr-3 text-sm text-[#211F1C] placeholder:text-[#8E8679] focus:border-[#211F1C] focus:bg-white focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="mb-1.5 block text-xs font-semibold text-[#1F1D1A]">
-                  Senha {mode === 'register' && <span className="font-normal text-[#5E584F]">(mín. 8 caracteres)</span>}
+                <label className="mb-1.5 block text-xs font-bold text-[#211F1C]">
+                  Senha{' '}
+                  {mode === 'register' && (
+                    <span className="font-normal text-[#6B655B]">(mín. 8 caracteres)</span>
+                  )}
                 </label>
                 <div className="relative">
-                  <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8A8378]" />
+                  <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8E8679]" />
                   <input
                     type="password"
                     required
@@ -238,18 +240,18 @@ export function AuthModal({
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full rounded-xl border border-[#DCD4C6] bg-[#F8F6F1] py-2.5 pl-9 pr-3 text-sm text-[#1F1D1A] placeholder:text-[#8A8378] focus:border-[#5A6D3A] focus:bg-white focus:outline-none"
+                    className="w-full rounded-xl border-2 border-[#E4DDD0] bg-[#FAF7F1] py-2.5 pl-9 pr-3 text-sm text-[#211F1C] placeholder:text-[#8E8679] focus:border-[#211F1C] focus:bg-white focus:outline-none"
                   />
                 </div>
               </div>
 
               {mode === 'register' && (
                 <div>
-                  <label className="mb-1.5 block text-xs font-semibold text-[#1F1D1A]">
+                  <label className="mb-1.5 block text-xs font-bold text-[#211F1C]">
                     Confirmar senha
                   </label>
                   <div className="relative">
-                    <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8A8378]" />
+                    <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8E8679]" />
                     <input
                       type="password"
                       required
@@ -257,29 +259,30 @@ export function AuthModal({
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full rounded-xl border border-[#DCD4C6] bg-[#F8F6F1] py-2.5 pl-9 pr-3 text-sm text-[#1F1D1A] placeholder:text-[#8A8378] focus:border-[#5A6D3A] focus:bg-white focus:outline-none"
+                      className="w-full rounded-xl border-2 border-[#E4DDD0] bg-[#FAF7F1] py-2.5 pl-9 pr-3 text-sm text-[#211F1C] placeholder:text-[#8E8679] focus:border-[#211F1C] focus:bg-white focus:outline-none"
                     />
                   </div>
                 </div>
               )}
 
               {error && (
-                <div className="rounded-xl border border-[#D8B4A0] bg-[#FAF0EA] px-3.5 py-2.5 text-xs text-[#7D3B23]">
+                <div className="rounded-xl border border-[#D8B4A0] bg-[#FAF0EA] px-3.5 py-2.5 text-xs font-medium text-[#7D3B23]">
                   {error}
                 </div>
               )}
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.97 }}
                 type="submit"
                 disabled={loading}
-                className="flex w-full items-center justify-center rounded-xl bg-[#1F1D1A] py-2.5 text-sm font-semibold text-[#F8F6F1] transition-colors hover:bg-[#36322D] disabled:opacity-60"
+                className="flex w-full items-center justify-center rounded-2xl border-2 border-[#211F1C] bg-[#B7CC49] py-2.5 text-sm font-bold text-[#211F1C] shadow-[3px_3px_0px_#211F1C] transition-colors hover:bg-[#A6BD36] disabled:opacity-60"
               >
                 {loading
                   ? 'Processando...'
                   : mode === 'login'
                     ? 'Entrar na plataforma'
                     : 'Validar token e criar conta'}
-              </button>
+              </motion.button>
             </form>
           </motion.div>
         </div>

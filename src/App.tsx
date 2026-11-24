@@ -6,10 +6,8 @@ import {
   ClipboardList,
   Download,
   KeyRound,
-  LayoutGrid,
   LogOut,
   Sparkles,
-  Table2,
   Trash2,
   UserCheck,
   Users,
@@ -33,8 +31,8 @@ import {
   supabase,
 } from './lib/supabase';
 import { getMonthKey } from './lib/formatters';
-import { BrandLogo } from './components/BrandLogo';
-import { FilterBar } from './components/FilterBar';
+import { BrandLogo, HeroCaneDoodle } from './components/BrandLogo';
+import { FilterBar, type QuickLens } from './components/FilterBar';
 import { CongressTable } from './components/CongressTable';
 import { ExportModal } from './components/ExportModal';
 import { CongressDetailDrawer } from './components/CongressDetailDrawer';
@@ -59,6 +57,7 @@ export function App() {
 
   const [activeTab, setActiveTab] = useState<'calendario' | 'grupo'>('calendario');
   const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
+  const [quickLens, setQuickLens] = useState<QuickLens>('all');
   const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
   const [sortField, setSortField] = useState<SortField>('data');
   const [sortDir, setSortDir] = useState<SortDirection>('asc');
@@ -68,7 +67,6 @@ export function App() {
   const [exportOpen, setExportOpen] = useState(false);
   const [methodologyOpen, setMethodologyOpen] = useState(false);
 
-  // Auth & Pesquisa em grupo
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<MemberProfile | null>(null);
   const [allProfiles, setAllProfiles] = useState<MemberProfile[]>([]);
@@ -78,6 +76,14 @@ export function App() {
   const [typeformOpen, setTypeformOpen] = useState(false);
   const [invitesOpen, setInvitesOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+
+  const showToast = useCallback((message: string) => {
+    setToast(message);
+    setTimeout(() => {
+      setToast((cur) => (cur === message ? null : cur));
+    }, 2800);
+  }, []);
 
   const loadGroupState = useCallback(async (userId: string, openOnboardingIfPending = false) => {
     const [prof, allProfs, ints] = await Promise.all([
@@ -166,9 +172,42 @@ export function App() {
       .sort((a, b) => b.count - a.count || a.uf.localeCompare(b.uf));
   }, [congressos]);
 
+  const profileMap = useMemo(() => {
+    const m = new Map<string, MemberProfile>();
+    for (const p of allProfiles) m.set(p.user_id, p);
+    return m;
+  }, [allProfiles]);
+
+  const myInterestSlugs = useMemo(() => {
+    const uid = session?.user?.id;
+    if (!uid) return new Set<string>();
+    return new Set(groupInterests.filter((i) => i.user_id === uid).map((i) => i.congress_slug));
+  }, [groupInterests, session]);
+
+  const interestCounts = useMemo(() => {
+    const m = new Map<string, number>();
+    for (const i of groupInterests) {
+      m.set(i.congress_slug, (m.get(i.congress_slug) ?? 0) + 1);
+    }
+    return m;
+  }, [groupInterests]);
+
   const filtered = useMemo(() => {
     const q = filters.busca.trim().toLowerCase();
+    const myAreas = profile?.areas_of_interest ?? [];
+
     const list = congressos.filter((c) => {
+      if (quickLens === 'group' && (interestCounts.get(c.slug) ?? 0) === 0) return false;
+      if (quickLens === 'online' && c.modalidade !== 'online') return false;
+      if (quickLens === 'intl' && (!c.pais || c.pais === 'Brasil')) return false;
+      if (quickLens === 'y2027' && (!c.data_inicio || !c.data_inicio.startsWith('2027'))) {
+        return false;
+      }
+      if (quickLens === 'my_areas' && myAreas.length > 0) {
+        const evThemes = c.temas.length > 0 ? c.temas : [c.tema_principal];
+        if (!myAreas.some((a) => evThemes.includes(a))) return false;
+      }
+
       if (q) {
         const hay = [c.nome, c.local_formatado, c.tema_principal, ...c.temas, ...c.fontes]
           .join(' ')
@@ -222,27 +261,7 @@ export function App() {
     });
 
     return list;
-  }, [congressos, filters, sortField, sortDir]);
-
-  const profileMap = useMemo(() => {
-    const m = new Map<string, MemberProfile>();
-    for (const p of allProfiles) m.set(p.user_id, p);
-    return m;
-  }, [allProfiles]);
-
-  const myInterestSlugs = useMemo(() => {
-    const uid = session?.user?.id;
-    if (!uid) return new Set<string>();
-    return new Set(groupInterests.filter((i) => i.user_id === uid).map((i) => i.congress_slug));
-  }, [groupInterests, session]);
-
-  const interestCounts = useMemo(() => {
-    const m = new Map<string, number>();
-    for (const i of groupInterests) {
-      m.set(i.congress_slug, (m.get(i.congress_slug) ?? 0) + 1);
-    }
-    return m;
-  }, [groupInterests]);
+  }, [congressos, filters, quickLens, interestCounts, profile, sortField, sortDir]);
 
   const selectedItems = useMemo(
     () => congressos.filter((c) => selectedSlugs.has(c.slug)),
@@ -290,8 +309,10 @@ export function App() {
     }
     if (myInterestSlugs.has(c.slug)) {
       await removeCongressInterest(uid, c.slug);
+      showToast('Interesse removido da lista do grupo.');
     } else {
       await saveCongressInterest(uid, c.slug, 'escrever_artigo', null);
+      showToast('Interesse marcado para grupo de artigo!');
     }
     const ints = await fetchGroupInterests();
     setGroupInterests(ints);
@@ -306,6 +327,7 @@ export function App() {
     await saveCongressInterest(uid, c.slug, level, topic);
     const ints = await fetchGroupInterests();
     setGroupInterests(ints);
+    showToast('Interesse salvo para o grupo!');
   };
 
   const handleRemoveDetailInterest = async (c: Congresso) => {
@@ -314,114 +336,102 @@ export function App() {
     await removeCongressInterest(uid, c.slug);
     const ints = await fetchGroupInterests();
     setGroupInterests(ints);
+    showToast('Interesse removido.');
   };
 
   const handleSignOut = async () => {
     setUserMenuOpen(false);
     await supabase.auth.signOut();
+    showToast('Sessão encerrada.');
   };
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="min-h-screen pb-24">
-        {/* Top Bar */}
-        <header className="sticky top-0 z-30 border-b border-[#E6E0D5] bg-[#F8F6F1]/92 backdrop-blur-md">
-          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
-            <div className="flex items-center gap-6">
+      <div className="min-h-screen pb-28">
+        {/* Top Bar aberta, logo solta sem box */}
+        <header className="sticky top-0 z-30 border-b border-[#E7DFD2] bg-[#FAF7F1]/90 backdrop-blur-md">
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+            <div className="flex items-center gap-7">
               <BrandLogo />
 
-              <nav className="hidden items-center gap-1 rounded-xl border border-[#E6E0D5] bg-white p-1 sm:inline-flex">
+              {/* Navegação aberta sem box container */}
+              <nav className="hidden items-center gap-5 sm:flex">
                 <button
                   type="button"
                   onClick={() => setActiveTab('calendario')}
-                  className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                  className={`relative py-1.5 text-sm font-bold transition-colors ${
                     activeTab === 'calendario'
-                      ? 'bg-[#1F1D1A] text-[#F8F6F1]'
-                      : 'text-[#5E584F] hover:text-[#1F1D1A]'
+                      ? 'text-[#211F1C]'
+                      : 'text-[#6B655B] hover:text-[#211F1C]'
                   }`}
                 >
-                  Calendário
+                  <span>Calendário</span>
+                  {activeTab === 'calendario' && (
+                    <motion.span
+                      layoutId="navIndicator"
+                      className="absolute inset-x-0 -bottom-0.5 h-[3px] rounded-full bg-[#B7CC49] ring-1 ring-[#211F1C]"
+                    />
+                  )}
                 </button>
+
                 <button
                   type="button"
                   onClick={() => setActiveTab('grupo')}
-                  className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                  className={`relative inline-flex items-center gap-1.5 py-1.5 text-sm font-bold transition-colors ${
                     activeTab === 'grupo'
-                      ? 'bg-[#1F1D1A] text-[#F8F6F1]'
-                      : 'text-[#5E584F] hover:text-[#1F1D1A]'
+                      ? 'text-[#211F1C]'
+                      : 'text-[#6B655B] hover:text-[#211F1C]'
                   }`}
                 >
-                  <Users className="h-3.5 w-3.5" />
+                  <Users className="h-4 w-4" />
                   <span>Interesses do Grupo</span>
+                  {activeTab === 'grupo' && (
+                    <motion.span
+                      layoutId="navIndicator"
+                      className="absolute inset-x-0 -bottom-0.5 h-[3px] rounded-full bg-[#B7CC49] ring-1 ring-[#211F1C]"
+                    />
+                  )}
                 </button>
               </nav>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
-              {activeTab === 'calendario' && (
-                <div className="inline-flex rounded-xl border border-[#E6E0D5] bg-white p-0.5">
-                  <button
-                    type="button"
-                    onClick={() => setViewMode('table')}
-                    className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-colors ${
-                      viewMode === 'table'
-                        ? 'bg-[#F2EEE6] text-[#1F1D1A]'
-                        : 'text-[#5E584F] hover:text-[#1F1D1A]'
-                    }`}
-                  >
-                    <Table2 className="h-3.5 w-3.5" />
-                    <span className="hidden md:inline">Tabela</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setViewMode('cards')}
-                    className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-colors ${
-                      viewMode === 'cards'
-                        ? 'bg-[#F2EEE6] text-[#1F1D1A]'
-                        : 'text-[#5E584F] hover:text-[#1F1D1A]'
-                    }`}
-                  >
-                    <LayoutGrid className="h-3.5 w-3.5" />
-                    <span className="hidden md:inline">Cards</span>
-                  </button>
-                </div>
-              )}
-
-              <button
+            <div className="flex items-center gap-2.5">
+              <motion.button
+                whileTap={{ scale: 0.96 }}
                 type="button"
                 onClick={() => setExportOpen(true)}
-                className="inline-flex items-center gap-1.5 rounded-xl border border-[#CED9BC] bg-[#EEF2E7] px-3.5 py-2 text-xs font-semibold text-[#35441E] transition-colors hover:bg-[#E4ECD8]"
+                className="inline-flex items-center gap-1.5 rounded-2xl border-2 border-[#211F1C] bg-[#B7CC49] px-3.5 py-2 text-xs sm:text-sm font-bold text-[#211F1C] shadow-[3px_3px_0px_#211F1C] transition-colors hover:bg-[#A8BE38]"
               >
-                <Download className="h-3.5 w-3.5" />
+                <Download className="h-4 w-4" />
                 <span>
                   {selectedItems.length > 0
                     ? `Exportar (${selectedItems.length})`
                     : 'Exportar'}
                 </span>
-              </button>
+              </motion.button>
 
-              {/* Auth / Member Menu */}
               {session ? (
                 <div className="relative">
-                  <button
+                  <motion.button
+                    whileTap={{ scale: 0.96 }}
                     type="button"
                     onClick={() => setUserMenuOpen((v) => !v)}
-                    className="inline-flex items-center gap-2 rounded-xl border border-[#E6E0D5] bg-white px-3 py-2 text-xs font-semibold text-[#1F1D1A] hover:border-[#CFC7B8]"
+                    className="inline-flex items-center gap-2 rounded-2xl border-2 border-[#211F1C] bg-white px-3 py-2 text-xs font-bold text-[#211F1C] shadow-[3px_3px_0px_#211F1C] hover:bg-[#FDF6E9]"
                   >
-                    <UserCheck className="h-3.5 w-3.5 text-[#5A6D3A]" />
-                    <span className="max-w-[130px] truncate">
+                    <UserCheck className="h-4 w-4 text-[#859D20]" />
+                    <span className="max-w-[120px] truncate">
                       {profile?.full_name || session.user.email}
                     </span>
-                  </button>
+                  </motion.button>
 
                   <AnimatePresence>
                     {userMenuOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                        initial={{ opacity: 0, y: 8, scale: 0.97 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 4, scale: 0.98 }}
-                        transition={{ duration: 0.16 }}
-                        className="absolute right-0 mt-2 w-56 rounded-xl border border-[#DCD4C6] bg-white p-1.5 shadow-lg z-40"
+                        exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                        transition={{ type: 'spring', stiffness: 360, damping: 26 }}
+                        className="absolute right-0 mt-2 w-56 rounded-2xl border-2 border-[#211F1C] bg-white p-1.5 shadow-[4px_4px_0px_#211F1C] z-40"
                       >
                         <button
                           type="button"
@@ -429,9 +439,9 @@ export function App() {
                             setUserMenuOpen(false);
                             setTypeformOpen(true);
                           }}
-                          className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs font-medium text-[#1F1D1A] hover:bg-[#F8F6F1]"
+                          className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-xs font-semibold text-[#211F1C] hover:bg-[#FAF7F1]"
                         >
-                          <ClipboardList className="h-3.5 w-3.5 text-[#5A6D3A]" />
+                          <ClipboardList className="h-3.5 w-3.5 text-[#859D20]" />
                           <span>Meu questionário de áreas</span>
                         </button>
 
@@ -442,19 +452,19 @@ export function App() {
                               setUserMenuOpen(false);
                               setInvitesOpen(true);
                             }}
-                            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs font-medium text-[#1F1D1A] hover:bg-[#F8F6F1]"
+                            className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-xs font-semibold text-[#211F1C] hover:bg-[#FAF7F1]"
                           >
-                            <KeyRound className="h-3.5 w-3.5 text-[#8F6B3A]" />
+                            <KeyRound className="h-3.5 w-3.5 text-[#D49A4A]" />
                             <span>Gerar tokens de convite</span>
                           </button>
                         )}
 
-                        <div className="my-1 border-t border-[#EFEBE2]" />
+                        <div className="my-1 border-t border-[#EFE8DA]" />
 
                         <button
                           type="button"
                           onClick={handleSignOut}
-                          className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs font-medium text-[#7D3B23] hover:bg-[#FAF0EA]"
+                          className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left text-xs font-semibold text-[#7D3B23] hover:bg-[#FAF0EA]"
                         >
                           <LogOut className="h-3.5 w-3.5" />
                           <span>Sair</span>
@@ -464,25 +474,26 @@ export function App() {
                   </AnimatePresence>
                 </div>
               ) : (
-                <button
+                <motion.button
+                  whileTap={{ scale: 0.96 }}
                   type="button"
                   onClick={() => setAuthModalOpen(true)}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-[#1F1D1A] px-3.5 py-2 text-xs font-semibold text-[#F8F6F1] transition-colors hover:bg-[#35322D]"
+                  className="inline-flex items-center gap-1.5 rounded-2xl border-2 border-[#211F1C] bg-[#211F1C] px-3.5 py-2 text-xs sm:text-sm font-bold text-[#FAF7F1] shadow-[3px_3px_0px_#B7CC49] hover:bg-[#35322D]"
                 >
                   <KeyRound className="h-3.5 w-3.5" />
                   <span>Entrar / Convite</span>
-                </button>
+                </motion.button>
               )}
             </div>
           </div>
 
-          {/* Mobile navigation */}
-          <div className="flex border-t border-[#E6E0D5] bg-white px-4 py-1.5 sm:hidden">
+          {/* Mobile tabs */}
+          <div className="flex gap-4 border-t border-[#E7DFD2] px-4 py-2 sm:hidden">
             <button
               type="button"
               onClick={() => setActiveTab('calendario')}
-              className={`flex-1 rounded-lg py-1.5 text-xs font-semibold ${
-                activeTab === 'calendario' ? 'bg-[#1F1D1A] text-[#F8F6F1]' : 'text-[#5E584F]'
+              className={`text-xs font-bold ${
+                activeTab === 'calendario' ? 'text-[#211F1C] underline decoration-[#B7CC49] decoration-2 underline-offset-4' : 'text-[#6B655B]'
               }`}
             >
               Calendário
@@ -490,8 +501,8 @@ export function App() {
             <button
               type="button"
               onClick={() => setActiveTab('grupo')}
-              className={`flex-1 rounded-lg py-1.5 text-xs font-semibold ${
-                activeTab === 'grupo' ? 'bg-[#1F1D1A] text-[#F8F6F1]' : 'text-[#5E584F]'
+              className={`text-xs font-bold ${
+                activeTab === 'grupo' ? 'text-[#211F1C] underline decoration-[#B7CC49] decoration-2 underline-offset-4' : 'text-[#6B655B]'
               }`}
             >
               Interesses do Grupo
@@ -500,47 +511,49 @@ export function App() {
         </header>
 
         <main className="mx-auto max-w-7xl space-y-6 px-4 pt-6 sm:px-6">
-          {/* Editorial Hero (limpo, sem excesso de badges nem mostradores de estatística) */}
+          {/* Hero aberto diretamente no canvas pontilhado — SEM BOX */}
           <motion.section
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-2xl border border-[#E6E0D5] bg-white px-6 py-6 sm:px-8 sm:py-7 shadow-xs"
+            className="flex flex-col justify-between gap-4 pt-1 lg:flex-row lg:items-center"
           >
-            <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
-              <div className="max-w-3xl">
-                <h1 className="font-editorial text-2xl sm:text-4xl font-medium tracking-tight text-[#1F1D1A]">
-                  Radar de Congressos Médicos
-                </h1>
-                <p className="mt-2 text-sm text-[#5E584F] leading-relaxed">
-                  Mapeamento colaborativo para identificar congressos de interesse comum entre os
-                  membros do Destilaria Research Group e organizar frentes para escrita de artigos
-                  científicos.{' '}
-                  <button
-                    type="button"
-                    onClick={() => setMethodologyOpen(true)}
-                    className="inline font-medium text-[#5A6D3A] underline decoration-[#5A6D3A]/45 underline-offset-4 transition-colors hover:text-[#35441E] hover:decoration-[#35441E]"
-                  >
-                    Metodologia e critérios de seleção →
-                  </button>
-                </p>
-              </div>
-
-              {session && (
+            <div className="max-w-3xl">
+              <h1 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-[#211F1C]">
+                Radar de Congressos Médicos
+              </h1>
+              <p className="mt-2 text-sm sm:text-[15px] text-[#5C554C] leading-relaxed">
+                Encontre congressos de interesse comum entre os membros do Destilaria Research
+                Group para formar grupos de pesquisa e escrever artigos juntos.{' '}
                 <button
                   type="button"
-                  onClick={() => setTypeformOpen(true)}
-                  className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-[#CED9BC] bg-[#EEF2E7] px-4 py-2.5 text-xs font-semibold text-[#35441E] transition-colors hover:bg-[#E4ECD8]"
+                  onClick={() => setMethodologyOpen(true)}
+                  className="inline font-bold text-[#211F1C] underline decoration-[#B7CC49] decoration-2 underline-offset-4 transition-colors hover:text-[#5A6D1F]"
                 >
-                  <ClipboardList className="h-4 w-4" />
-                  <span>
-                    {profile?.onboarding_completed
-                      ? 'Editar áreas de interesse'
-                      : 'Preencher questionário de interesses'}
-                  </span>
+                  Como selecionamos os congressos →
                 </button>
+              </p>
+
+              {session && (
+                <div className="mt-4">
+                  <motion.button
+                    whileTap={{ scale: 0.97 }}
+                    type="button"
+                    onClick={() => setTypeformOpen(true)}
+                    className="inline-flex items-center gap-2 rounded-2xl border-2 border-[#211F1C] bg-[#FDF6E9] px-4 py-2 text-xs font-bold text-[#211F1C] shadow-[3px_3px_0px_#211F1C] hover:bg-[#F3D2A2]"
+                  >
+                    <ClipboardList className="h-4 w-4 text-[#859D20]" />
+                    <span>
+                      {profile?.onboarding_completed
+                        ? 'Editar minhas áreas e questionário'
+                        : 'Preencher questionário de interesses'}
+                    </span>
+                  </motion.button>
+                </div>
               )}
             </div>
+
+            <HeroCaneDoodle />
           </motion.section>
 
           {activeTab === 'calendario' ? (
@@ -548,6 +561,12 @@ export function App() {
               <FilterBar
                 filters={filters}
                 onChange={setFilters}
+                quickLens={quickLens}
+                onQuickLensChange={setQuickLens}
+                hasGroupInterests={groupInterests.length > 0}
+                hasMyAreas={(profile?.areas_of_interest.length ?? 0) > 0}
+                viewMode={viewMode}
+                onViewModeChange={setViewMode}
                 availableThemes={availableThemes}
                 availableMonths={availableMonths}
                 availableUFs={availableUFs}
@@ -556,9 +575,9 @@ export function App() {
               />
 
               {loading ? (
-                <div className="rounded-2xl border border-[#E6E0D5] bg-white p-12 text-center shadow-xs">
-                  <div className="mx-auto h-7 w-7 animate-spin rounded-full border-2 border-[#E6E0D5] border-t-[#5A6D3A]" />
-                  <p className="mt-3 text-sm font-medium text-[#5E584F]">
+                <div className="rounded-3xl border-2 border-[#211F1C] bg-white p-12 text-center shadow-[5px_5px_0px_#211F1C]">
+                  <div className="mx-auto h-8 w-8 animate-spin rounded-full border-3 border-[#E4DDD0] border-t-[#211F1C]" />
+                  <p className="mt-3 text-sm font-medium text-[#5C554C]">
                     Carregando calendário de congressos...
                   </p>
                 </div>
@@ -576,7 +595,10 @@ export function App() {
                   sortField={sortField}
                   sortDir={sortDir}
                   onSort={handleSort}
-                  onClearFilters={() => setFilters(INITIAL_FILTERS)}
+                  onClearFilters={() => {
+                    setFilters(INITIAL_FILTERS);
+                    setQuickLens('all');
+                  }}
                 />
               )}
             </>
@@ -595,39 +617,55 @@ export function App() {
           )}
         </main>
 
-        {/* Floating Selection Bar */}
+        {/* Toast de feedback tátil */}
+        <AnimatePresence>
+          {toast && (
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 360, damping: 26 }}
+              className="fixed bottom-20 right-5 z-50 rounded-2xl border-2 border-[#211F1C] bg-[#B7CC49] px-4 py-2 text-xs font-bold text-[#211F1C] shadow-[4px_4px_0px_#211F1C]"
+            >
+              {toast}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Barra flutuante de seleção */}
         <AnimatePresence>
           {selectedItems.length > 0 && (
             <motion.div
-              initial={{ opacity: 0, y: 28, scale: 0.97 }}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 28, scale: 0.97 }}
-              transition={{ type: 'spring', stiffness: 320, damping: 28 }}
-              className="fixed bottom-5 left-1/2 z-40 flex -translate-x-1/2 items-center gap-3 rounded-2xl border border-[#36322D] bg-[#1F1D1A] px-4 py-2.5 text-[#F8F6F1] shadow-xl"
+              exit={{ opacity: 0, y: 40, scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 360, damping: 28 }}
+              className="fixed bottom-5 left-1/2 z-40 flex -translate-x-1/2 items-center gap-3 rounded-2xl border-2 border-[#211F1C] bg-[#211F1C] px-4 py-2.5 text-[#FAF7F1] shadow-[5px_5px_0px_#B7CC49]"
             >
-              <div className="flex items-center gap-2 text-xs sm:text-sm font-medium">
-                <CheckCircle2 className="h-4 w-4 text-[#8E9F63]" />
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold">
+                <CheckCircle2 className="h-4 w-4 text-[#B7CC49]" />
                 <span className="tabular-nums">
                   {selectedItems.length}{' '}
                   {selectedItems.length === 1 ? 'selecionado' : 'selecionados'}
                 </span>
               </div>
 
-              <div className="h-4 w-px bg-white/15" />
+              <div className="h-4 w-px bg-white/20" />
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.96 }}
                 type="button"
                 onClick={() => setExportOpen(true)}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-[#5A6D3A] px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-[#6B8047]"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#B7CC49] px-3 py-1.5 text-xs font-bold text-[#211F1C] hover:bg-[#CBE05A]"
               >
                 <Sparkles className="h-3.5 w-3.5" />
                 <span>Exportar em linguagem simples</span>
-              </button>
+              </motion.button>
 
               <button
                 type="button"
                 onClick={() => setSelectedSlugs(new Set())}
-                className="rounded-lg p-1.5 text-[#B9B09F] hover:bg-white/10 hover:text-white"
+                className="rounded-lg p-1.5 text-[#CFC6B8] hover:bg-white/10 hover:text-white"
                 title="Limpar seleção"
                 aria-label="Limpar seleção"
               >
@@ -637,7 +675,7 @@ export function App() {
           )}
         </AnimatePresence>
 
-        {/* Modals & Drawers */}
+        {/* Modais & Drawers */}
         <CongressDetailDrawer
           congresso={detailTarget}
           selected={detailTarget ? selectedSlugs.has(detailTarget.slug) : false}
@@ -700,11 +738,9 @@ export function App() {
               setProfile(updatedProfile);
               await loadGroupState(session.user.id, false);
               if (updatedProfile.areas_of_interest.length > 0) {
-                setFilters((prev) => ({
-                  ...prev,
-                  temas: updatedProfile.areas_of_interest,
-                }));
+                setQuickLens('my_areas');
               }
+              showToast('Preferências salvas com sucesso!');
             }}
           />
         )}
@@ -715,7 +751,7 @@ export function App() {
           onClose={() => setInvitesOpen(false)}
         />
 
-        <footer className="mx-auto mt-12 max-w-7xl px-4 text-center text-xs text-[#8A8378] sm:px-6">
+        <footer className="mx-auto mt-12 max-w-7xl px-4 text-center text-xs text-[#6B655B] sm:px-6">
           Destilaria Research Group · Planejamento Colaborativo de Congressos Médicos
         </footer>
       </div>

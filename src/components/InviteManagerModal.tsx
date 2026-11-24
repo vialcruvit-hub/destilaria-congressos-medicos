@@ -87,12 +87,12 @@ export function InviteManagerModal({ open, accessToken, onClose }: InviteManager
 
   const getStatus = (inv: InviteToken): { label: string; style: string } => {
     if (inv.used_at) {
-      return { label: 'Utilizado', style: 'bg-[#F2EEE6] text-[#5E584F] border-[#E6E0D5]' };
+      return { label: 'Utilizado', style: 'bg-[#F2ECE1] text-[#6B655B] border-[#DCD3C4]' };
     }
     if (inv.expires_at && new Date(inv.expires_at).getTime() <= Date.now()) {
-      return { label: 'Expirado', style: 'bg-[#FAF0EA] text-[#7D3B23] border-[#E6C8B8]' };
+      return { label: 'Expirado', style: 'bg-[#FAF0EA] text-[#7D3B23] border-[#D8B4A0]' };
     }
-    return { label: 'Disponível', style: 'bg-[#EEF2E7] text-[#45562B] border-[#CED9BC]' };
+    return { label: 'Disponível', style: 'bg-[#F2F6DF] text-[#211F1C] border-[#211F1C]' };
   };
 
   return (
@@ -104,30 +104,30 @@ export function InviteManagerModal({ open, accessToken, onClose }: InviteManager
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-[#1F1D1A]/35 backdrop-blur-xs"
+            className="absolute inset-0 bg-[#211F1C]/45 backdrop-blur-xs"
           />
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 10 }}
+            initial={{ opacity: 0, scale: 0.94, y: 14 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.97, y: 8 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 flex max-h-[88vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-[#DCD4C6] bg-white shadow-2xl"
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 26 }}
+            className="relative z-10 flex max-h-[88vh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl border-2 border-[#211F1C] bg-[#FAF7F1] shadow-[8px_8px_0px_#211F1C]"
           >
-            <div className="flex items-start justify-between border-b border-[#E6E0D5] bg-[#F8F6F1] px-6 py-4">
+            <div className="flex items-start justify-between border-b-2 border-[#211F1C] bg-[#FDF6E9] px-6 py-4">
               <div>
-                <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-[#5A6D3A]">
+                <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#5A6D1F]">
                   <KeyRound className="h-3.5 w-3.5" />
                   <span>Administração de Convites</span>
                 </div>
-                <h2 className="mt-1 font-editorial text-2xl font-medium text-[#1F1D1A]">
+                <h2 className="mt-1 font-display text-xl font-extrabold text-[#211F1C]">
                   Gerar tokens de acesso único
                 </h2>
               </div>
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-lg border border-[#E6E0D5] bg-white p-1.5 text-[#5E584F] hover:text-[#1F1D1A]"
+                className="rounded-xl border-2 border-[#211F1C] bg-white p-1.5 text-[#211F1C] hover:bg-[#F3D2A2]"
                 aria-label="Fechar gerenciador de convites"
               >
                 <X className="h-4 w-4" />
@@ -136,10 +136,10 @@ export function InviteManagerModal({ open, accessToken, onClose }: InviteManager
 
             <form
               onSubmit={handleGenerate}
-              className="flex flex-col gap-3 border-b border-[#E6E0D5] bg-[#FAF8F4] px-6 py-4 sm:flex-row sm:items-end"
+              className="flex flex-col gap-3 border-b border-[#E4DDD0] bg-white px-6 py-4 sm:flex-row sm:items-end"
             >
               <div className="flex-1">
-                <label className="mb-1 block text-xs font-semibold text-[#5E584F]">
+                <label className="mb-1 block text-xs font-bold text-[#211F1C]">
                   Identificação do convidado (opcional)
                 </label>
                 <input
@@ -147,51 +147,52 @@ export function InviteManagerModal({ open, accessToken, onClose }: InviteManager
                   value={label}
                   onChange={(e) => setLabel(e.target.value)}
                   placeholder="Ex.: Dra. Mariana Silva"
-                  className="w-full rounded-xl border border-[#DCD4C6] bg-white px-3 py-2 text-sm text-[#1F1D1A] placeholder:text-[#8A8378] focus:border-[#5A6D3A] focus:outline-none"
+                  className="w-full rounded-xl border-2 border-[#E4DDD0] bg-[#FAF7F1] px-3 py-2 text-sm text-[#211F1C] placeholder:text-[#8E8679] focus:border-[#211F1C] focus:bg-white focus:outline-none"
                 />
               </div>
 
               <div className="sm:w-36">
-                <label className="mb-1 block text-xs font-semibold text-[#5E584F]">
+                <label className="mb-1 block text-xs font-bold text-[#211F1C]">
                   Perfil
                 </label>
                 <select
                   value={role}
                   onChange={(e) => setRole(e.target.value as MemberRole)}
-                  className="w-full rounded-xl border border-[#DCD4C6] bg-white px-3 py-2 text-sm text-[#1F1D1A] focus:border-[#5A6D3A] focus:outline-none"
+                  className="w-full rounded-xl border-2 border-[#E4DDD0] bg-[#FAF7F1] px-3 py-2 text-sm text-[#211F1C] focus:border-[#211F1C] focus:bg-white focus:outline-none"
                 >
                   <option value="member">Membro</option>
                   <option value="admin">Admin</option>
                 </select>
               </div>
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.96 }}
                 type="submit"
                 disabled={creating}
-                className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#5A6D3A] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#495A2E] disabled:opacity-60"
+                className="inline-flex items-center justify-center gap-1.5 rounded-xl border-2 border-[#211F1C] bg-[#B7CC49] px-4 py-2 text-sm font-bold text-[#211F1C] shadow-[2px_2px_0px_#211F1C] hover:bg-[#A6BD36] disabled:opacity-60"
               >
                 <Plus className="h-4 w-4" />
                 <span>{creating ? 'Gerando...' : 'Gerar token'}</span>
-              </button>
+              </motion.button>
             </form>
 
             {error && (
-              <div className="mx-6 mt-4 rounded-xl border border-[#D8B4A0] bg-[#FAF0EA] px-3.5 py-2.5 text-xs text-[#7D3B23]">
+              <div className="mx-6 mt-4 rounded-xl border border-[#D8B4A0] bg-[#FAF0EA] px-3.5 py-2.5 text-xs font-medium text-[#7D3B23]">
                 {error}
               </div>
             )}
 
             <div className="flex-1 overflow-y-auto px-6 py-4">
               {loading ? (
-                <div className="py-10 text-center text-sm text-[#5E584F]">
+                <div className="py-10 text-center text-sm text-[#6B655B]">
                   Carregando convites...
                 </div>
               ) : invites.length === 0 ? (
-                <div className="py-10 text-center text-sm text-[#5E584F]">
+                <div className="py-10 text-center text-sm text-[#6B655B]">
                   Nenhum token emitido ainda.
                 </div>
               ) : (
-                <div className="divide-y divide-[#EFEBE2] rounded-xl border border-[#E6E0D5]">
+                <div className="divide-y divide-[#E4DDD0] rounded-2xl border border-[#DDD4C4] bg-white">
                   {invites.map((inv) => {
                     const st = getStatus(inv);
                     const canUse = !inv.used_at;
@@ -202,21 +203,21 @@ export function InviteManagerModal({ open, accessToken, onClose }: InviteManager
                       >
                         <div>
                           <div className="flex flex-wrap items-center gap-2">
-                            <code className="font-mono text-xs font-semibold text-[#1F1D1A]">
+                            <code className="font-mono text-xs font-bold text-[#211F1C]">
                               {inv.token}
                             </code>
                             <span
-                              className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${st.style}`}
+                              className={`rounded-full border px-2 py-0.5 text-[10px] font-bold ${st.style}`}
                             >
                               {st.label}
                             </span>
                             {inv.role === 'admin' && (
-                              <span className="rounded-full border border-[#DFCEB2] bg-[#F6EFE4] px-2 py-0.5 text-[10px] font-semibold text-[#7A592A]">
+                              <span className="rounded-full border border-[#211F1C] bg-[#F3D2A2] px-2 py-0.5 text-[10px] font-bold text-[#211F1C]">
                                 Admin
                               </span>
                             )}
                           </div>
-                          <div className="mt-1 text-xs text-[#5E584F]">
+                          <div className="mt-1 text-xs text-[#6B655B]">
                             {inv.invited_label || 'Convite sem rótulo'} · Criado em{' '}
                             {new Date(inv.created_at).toLocaleDateString('pt-BR')}
                           </div>
@@ -227,10 +228,10 @@ export function InviteManagerModal({ open, accessToken, onClose }: InviteManager
                             <button
                               type="button"
                               onClick={() => copyText(inv.id, inv.token)}
-                              className="inline-flex items-center gap-1 rounded-lg border border-[#E6E0D5] bg-[#F8F6F1] px-2.5 py-1.5 text-xs font-medium text-[#1F1D1A] hover:border-[#CFC7B8]"
+                              className="inline-flex items-center gap-1 rounded-xl border border-[#DCD3C4] bg-[#FAF7F1] px-2.5 py-1.5 text-xs font-semibold text-[#211F1C] hover:border-[#211F1C]"
                             >
                               {copiedId === inv.id ? (
-                                <Check className="h-3.5 w-3.5 text-[#5A6D3A]" />
+                                <Check className="h-3.5 w-3.5 text-[#5A6D1F]" />
                               ) : (
                                 <Copy className="h-3.5 w-3.5" />
                               )}
@@ -241,7 +242,7 @@ export function InviteManagerModal({ open, accessToken, onClose }: InviteManager
                               href={buildWhatsAppInviteUrl(inv)}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1 rounded-lg border border-[#CED9BC] bg-[#EEF2E7] px-2.5 py-1.5 text-xs font-medium text-[#3F5025] hover:bg-[#E4ECD8]"
+                              className="inline-flex items-center gap-1 rounded-xl border border-[#211F1C] bg-[#F2F6DF] px-2.5 py-1.5 text-xs font-bold text-[#211F1C] hover:bg-[#E4EEB8]"
                               title="Enviar convite por WhatsApp"
                             >
                               <MessageCircle className="h-3.5 w-3.5" />
@@ -251,7 +252,7 @@ export function InviteManagerModal({ open, accessToken, onClose }: InviteManager
                             <button
                               type="button"
                               onClick={() => handleRevoke(inv.id)}
-                              className="rounded-lg border border-[#E6E0D5] p-1.5 text-[#8A8378] hover:border-[#D8B4A0] hover:text-[#7D3B23]"
+                              className="rounded-xl p-1.5 text-[#8E8679] hover:bg-[#FAF0EA] hover:text-[#7D3B23]"
                               title="Revogar token"
                               aria-label="Revogar token"
                             >

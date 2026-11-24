@@ -94,79 +94,83 @@ export function GroupConsensusView({
 
   if (!isAuthenticated) {
     return (
-      <div className="rounded-2xl border border-[#E6E0D5] bg-white px-6 py-14 text-center shadow-xs">
-        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-[#E6E0D5] bg-[#F8F6F1] text-[#5A6D3A]">
-          <Lock className="h-5 w-5" />
+      <div className="rounded-3xl border-2 border-[#211F1C] bg-white px-6 py-14 text-center shadow-[5px_5px_0px_#211F1C]">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-[#211F1C] bg-[#FDF6E9] shadow-[3px_3px_0px_#211F1C]">
+          <Lock className="h-6 w-6 text-[#211F1C]" />
         </div>
-        <h2 className="font-editorial text-2xl font-medium text-[#1F1D1A]">
+        <h2 className="font-display text-xl font-extrabold text-[#211F1C]">
           Consenso e Grupos de Artigos
         </h2>
-        <p className="mx-auto mt-2 max-w-lg text-sm text-[#5E584F]">
-          Entre com sua conta ou utilize o token de convite enviado pelo grupo para visualizar quais
-          congressos reúnem mais membros interessados em produzir artigos juntos.
+        <p className="mx-auto mt-2 max-w-lg text-sm text-[#6B655B]">
+          Entre com sua conta ou cole seu token único de convite para visualizar quais congressos
+          reúnem mais membros interessados em escrever artigos juntos.
         </p>
-        <button
+        <motion.button
+          whileTap={{ scale: 0.96 }}
           type="button"
           onClick={onOpenAuth}
-          className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#1F1D1A] px-5 py-2.5 text-xs font-semibold text-[#F8F6F1] hover:bg-[#35322D]"
+          className="mt-6 inline-flex items-center gap-2 rounded-2xl border-2 border-[#211F1C] bg-[#B7CC49] px-5 py-2.5 text-xs font-bold text-[#211F1C] shadow-[3px_3px_0px_#211F1C] hover:bg-[#A6BD36]"
         >
           <span>Entrar ou criar conta com token</span>
-        </button>
+        </motion.button>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      {/* Top action banner */}
-      <div className="flex flex-col justify-between gap-4 rounded-2xl border border-[#E6E0D5] bg-white p-5 sm:flex-row sm:items-center">
+    <div className="space-y-8">
+      {/* Cabeçalho aberto no canvas (sem box externo) */}
+      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div>
-          <h2 className="font-editorial text-xl font-medium text-[#1F1D1A]">
+          <h2 className="font-display text-xl sm:text-2xl font-extrabold text-[#211F1C]">
             Interesses em comum do grupo ({profiles.length}{' '}
             {profiles.length === 1 ? 'membro' : 'membros'})
           </h2>
-          <p className="mt-0.5 text-xs text-[#5E584F]">
-            Identifique convergências para formar grupos de escrita e alinhar submissões no WhatsApp.
+          <p className="mt-1 text-sm text-[#6B655B]">
+            Encontre convergências para formar grupos de escrita e alinhar submissões no WhatsApp.
           </p>
         </div>
-        <button
+        <motion.button
+          whileTap={{ scale: 0.96 }}
           type="button"
           onClick={onOpenTypeform}
-          className="inline-flex items-center gap-1.5 rounded-xl border border-[#CED9BC] bg-[#EEF2E7] px-3.5 py-2 text-xs font-semibold text-[#35441E] hover:bg-[#E4ECD8]"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-2xl border-2 border-[#211F1C] bg-[#F3D2A2] px-4 py-2 text-xs font-bold text-[#211F1C] shadow-[3px_3px_0px_#211F1C] hover:bg-[#EFC384]"
         >
           <Sparkles className="h-3.5 w-3.5" />
           <span>Atualizar meu questionário</span>
-        </button>
+        </motion.button>
       </div>
 
-      {/* Top Shared Areas */}
+      {/* Áreas mais votadas abertas no canvas */}
       {topThemes.length > 0 && (
-        <section className="rounded-2xl border border-[#E6E0D5] bg-white p-5">
-          <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-[#5E584F]">
+        <section className="space-y-2.5">
+          <div className="text-xs font-bold uppercase tracking-wider text-[#6B655B]">
             Áreas mais escolhidas pelos membros
           </div>
           <div className="flex flex-wrap gap-2">
             {topThemes.map((t) => (
               <span
                 key={t.name}
-                className="inline-flex items-center gap-2 rounded-full border border-[#E6E0D5] bg-[#F8F6F1] px-3 py-1 text-xs font-medium text-[#1F1D1A]"
+                className="inline-flex items-center gap-2 rounded-full border border-[#211F1C] bg-white px-3 py-1 text-xs font-semibold text-[#211F1C]"
               >
                 <span>{t.name}</span>
-                <span className="font-semibold text-[#5A6D3A] tabular-nums">{t.count}</span>
+                <span className="rounded-full bg-[#B7CC49] px-1.5 text-[10px] font-bold text-[#211F1C] tabular-nums">
+                  {t.count}
+                </span>
               </span>
             ))}
           </div>
         </section>
       )}
 
-      {/* Congress Consensus Ranking */}
+      {/* Ranking de Congressos */}
       <section className="space-y-3">
-        <div className="text-xs font-semibold uppercase tracking-wider text-[#5E584F]">
+        <div className="text-xs font-bold uppercase tracking-wider text-[#6B655B]">
           Congressos com interesse sinalizado ({rankedCongresses.length})
         </div>
 
         {rankedCongresses.length === 0 ? (
-          <div className="rounded-2xl border border-[#E6E0D5] bg-white p-8 text-center text-sm text-[#5E584F]">
+          <div className="rounded-3xl border-2 border-[#211F1C] bg-white p-8 text-center text-sm text-[#6B655B] shadow-[4px_4px_0px_#211F1C]">
             Nenhum congresso foi sinalizado ainda. Marque interesse diretamente na tabela ou pelo
             questionário para iniciar o consenso.
           </div>
@@ -177,9 +181,9 @@ export function GroupConsensusView({
               return (
                 <motion.div
                   key={congresso.slug}
-                  initial={{ opacity: 0, y: 6 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="rounded-2xl border border-[#E6E0D5] bg-white p-4 transition-colors hover:border-[#CFC7B8]"
+                  className="rounded-3xl border-2 border-[#211F1C] bg-white p-4 sm:p-5 shadow-[4px_4px_0px_#211F1C]"
                 >
                   <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
                     <div
@@ -187,18 +191,18 @@ export function GroupConsensusView({
                       onClick={() => onOpenDetail(congresso)}
                     >
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-[#EEF2E7] px-2.5 py-0.5 text-xs font-semibold text-[#45562B] tabular-nums">
+                        <span className="inline-flex items-center gap-1 rounded-full border border-[#211F1C] bg-[#B7CC49] px-2.5 py-0.5 text-xs font-bold text-[#211F1C] tabular-nums">
                           <Users className="h-3 w-3" />
                           {items.length} {items.length === 1 ? 'interessado' : 'interessados'}
                         </span>
-                        <span className="text-xs font-medium text-[#5E584F]">
+                        <span className="text-xs font-semibold text-[#6B655B]">
                           {congresso.tema_principal}
                         </span>
                       </div>
-                      <h3 className="mt-2 font-display text-base font-semibold text-[#1F1D1A] hover:underline">
+                      <h3 className="mt-2 font-display text-base font-extrabold text-[#211F1C] hover:underline">
                         {congresso.nome}
                       </h3>
-                      <div className="mt-1 text-xs text-[#5E584F]">
+                      <div className="mt-1 text-xs text-[#6B655B]">
                         {formatDateRange(congresso)} · {congresso.local_formatado}
                       </div>
 
@@ -208,17 +212,15 @@ export function GroupConsensusView({
                           return (
                             <span
                               key={it.user_id}
-                              className="inline-flex items-center gap-1.5 rounded-lg border border-[#E6E0D5] bg-[#F8F6F1] px-2.5 py-1 text-[11px] text-[#1F1D1A]"
+                              className="inline-flex items-center gap-1.5 rounded-lg bg-[#FAF7F1] px-2.5 py-1 text-[11px] text-[#211F1C] ring-1 ring-[#E4DDD0]"
                               title={it.proposed_topic || undefined}
                             >
-                              <span className="font-medium">
-                                {p?.full_name || 'Membro'}
-                              </span>
-                              <span className="text-[#8A8378]">
+                              <span className="font-bold">{p?.full_name || 'Membro'}</span>
+                              <span className="text-[#6B655B]">
                                 · {INTEREST_LEVEL_LABEL[it.interest_level]}
                               </span>
                               {it.proposed_topic && (
-                                <span className="italic text-[#5A6D3A]">
+                                <span className="italic text-[#5A6D1F]">
                                   &ldquo;{it.proposed_topic}&rdquo;
                                 </span>
                               )}
@@ -229,34 +231,35 @@ export function GroupConsensusView({
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2 lg:shrink-0">
-                      <button
+                      <motion.button
+                        whileTap={{ scale: 0.96 }}
                         type="button"
                         onClick={() => onToggleInterest(congresso)}
-                        className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-colors ${
+                        className={`inline-flex items-center gap-1.5 rounded-xl border-2 border-[#211F1C] px-3 py-1.5 text-xs font-bold transition-colors ${
                           myInterest
-                            ? 'border-[#5A6D3A] bg-[#EEF2E7] text-[#35441E]'
-                            : 'border-[#E6E0D5] bg-white text-[#1F1D1A] hover:border-[#CFC7B8]'
+                            ? 'bg-[#B7CC49] text-[#211F1C]'
+                            : 'bg-white text-[#211F1C] hover:bg-[#FAF7F1]'
                         }`}
                       >
                         {myInterest ? <Check className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
-                        <span>{myInterest ? 'Interesse marcado' : 'Também tenho interesse'}</span>
-                      </button>
+                        <span>{myInterest ? 'Interesse marcado' : 'Também quero'}</span>
+                      </motion.button>
 
                       <a
                         href={buildGoogleSearchUrl(congresso)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-xl border border-[#E6E0D5] bg-[#F8F6F1] px-3 py-1.5 text-xs font-medium text-[#1F1D1A] hover:border-[#CFC7B8]"
+                        className="inline-flex items-center gap-1.5 rounded-xl border-2 border-[#211F1C] bg-[#FDF6E9] px-3 py-1.5 text-xs font-bold text-[#211F1C] hover:bg-[#F3D2A2]"
                       >
                         <span>Google</span>
-                        <ExternalLink className="h-3.5 w-3.5 text-[#5E584F]" />
+                        <ExternalLink className="h-3.5 w-3.5" />
                       </a>
 
                       <a
                         href={buildWhatsAppShareUrl(congresso)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-xl border border-[#CED9BC] bg-[#EEF2E7] px-3 py-1.5 text-xs font-medium text-[#35441E] hover:bg-[#E4ECD8]"
+                        className="inline-flex items-center gap-1.5 rounded-xl border-2 border-[#211F1C] bg-[#F2F6DF] px-3 py-1.5 text-xs font-bold text-[#211F1C] hover:bg-[#E4EEB8]"
                       >
                         <MessageCircle className="h-3.5 w-3.5" />
                         <span>WhatsApp</span>
@@ -270,22 +273,22 @@ export function GroupConsensusView({
         )}
       </section>
 
-      {/* Member directory */}
+      {/* Diretório de membros */}
       {profiles.length > 0 && (
         <section className="space-y-3">
-          <div className="text-xs font-semibold uppercase tracking-wider text-[#5E584F]">
-            Diretório de Membros ({profiles.length})
+          <div className="text-xs font-bold uppercase tracking-wider text-[#6B655B]">
+            Membros do grupo ({profiles.length})
           </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
             {profiles.map((p) => (
               <div
                 key={p.user_id}
-                className="rounded-2xl border border-[#E6E0D5] bg-white p-4 text-xs"
+                className="rounded-3xl border-2 border-[#211F1C] bg-white p-4 text-xs shadow-[3px_3px_0px_#211F1C]"
               >
-                <div className="font-display text-sm font-semibold text-[#1F1D1A]">
+                <div className="font-display text-sm font-extrabold text-[#211F1C]">
                   {p.full_name}
                 </div>
-                <div className="mt-0.5 text-[#5E584F]">
+                <div className="mt-0.5 text-[#6B655B]">
                   {[p.academic_stage, p.institution].filter(Boolean).join(' · ') ||
                     'Pesquisador(a)'}
                 </div>
@@ -294,20 +297,20 @@ export function GroupConsensusView({
                     {p.areas_of_interest.slice(0, 4).map((a) => (
                       <span
                         key={a}
-                        className="rounded-full bg-[#EEF2E7] px-2 py-0.5 text-[10px] font-medium text-[#45562B]"
+                        className="rounded-full bg-[#F2F6DF] px-2 py-0.5 text-[10px] font-bold text-[#211F1C] ring-1 ring-[#211F1C]/20"
                       >
                         {a}
                       </span>
                     ))}
                     {p.areas_of_interest.length > 4 && (
-                      <span className="text-[10px] text-[#8A8378]">
+                      <span className="text-[10px] text-[#6B655B]">
                         +{p.areas_of_interest.length - 4}
                       </span>
                     )}
                   </div>
                 )}
                 {p.notes && (
-                  <p className="mt-2 line-clamp-2 italic text-[#5E584F]">
+                  <p className="mt-2 line-clamp-2 italic text-[#6B655B]">
                     &ldquo;{p.notes}&rdquo;
                   </p>
                 )}

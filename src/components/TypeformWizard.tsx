@@ -150,6 +150,13 @@ export function TypeformWizard({
     setStep((s) => Math.max(0, s - 1));
   };
 
+  const handleStepKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && step < totalSteps - 1) {
+      e.preventDefault();
+      next();
+    }
+  };
+
   const handleFinish = async () => {
     setSaving(true);
     setError(null);
@@ -198,125 +205,133 @@ export function TypeformWizard({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-[#1F1D1A]/40 backdrop-blur-xs"
+            className="absolute inset-0 bg-[#211F1C]/45 backdrop-blur-xs"
           />
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.97, y: 12 }}
+            initial={{ opacity: 0, scale: 0.94, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.97, y: 8 }}
-            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-[#DCD4C6] bg-[#FFFFFF] shadow-2xl"
+            exit={{ opacity: 0, scale: 0.95, y: 12 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 26 }}
+            className="relative z-10 flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl border-2 border-[#211F1C] bg-[#FAF7F1] shadow-[8px_8px_0px_#211F1C]"
           >
             {/* Top progress bar */}
-            <div className="border-b border-[#E6E0D5] bg-[#F8F6F1] px-6 py-4">
+            <div className="border-b-2 border-[#211F1C] bg-[#FDF6E9] px-6 py-4">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold uppercase tracking-widest text-[#5A6D3A]">
-                  Mapeamento do Pesquisador · Etapa {step + 1} de {totalSteps}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full border border-[#211F1C] bg-[#F3D2A2] px-2.5 py-0.5 text-[11px] font-extrabold text-[#211F1C] tabular-nums">
+                    0{step + 1} / 0{totalSteps}
+                  </span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#6B655B]">
+                    Perfil &amp; Interesses do Pesquisador
+                  </span>
+                </div>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="rounded-lg border border-[#E6E0D5] bg-white p-1 text-[#5E584F] hover:text-[#1F1D1A]"
+                  className="rounded-xl border-2 border-[#211F1C] bg-white p-1 text-[#211F1C] hover:bg-[#F3D2A2]"
                   aria-label="Fechar questionário"
                 >
                   <X className="h-4 w-4" />
                 </button>
               </div>
-              <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-[#E6E0D5]">
+              <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full border border-[#211F1C] bg-white">
                 <motion.div
-                  className="h-full rounded-full bg-[#5A6D3A]"
+                  className="h-full bg-[#B7CC49]"
                   initial={false}
                   animate={{ width: `${((step + 1) / totalSteps) * 100}%` }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 26 }}
                 />
               </div>
             </div>
 
             {/* Step Body */}
-            <div className="flex-1 overflow-y-auto px-6 py-6 sm:px-8">
+            <div className="flex-1 overflow-y-auto bg-white px-6 py-6 sm:px-8">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={step}
                   custom={direction}
-                  initial={{ opacity: 0, x: direction * 20 }}
+                  initial={{ opacity: 0, x: direction * 24 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: direction * -20 }}
-                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                  exit={{ opacity: 0, x: direction * -24 }}
+                  transition={{ type: 'spring', stiffness: 320, damping: 28 }}
                 >
                   {step === 0 && (
                     <div className="space-y-4">
                       <div>
-                        <h2 className="font-editorial text-2xl font-medium text-[#1F1D1A]">
+                        <h2 className="font-display text-xl sm:text-2xl font-extrabold text-[#211F1C]">
                           Como os colegas devem identificar você?
                         </h2>
-                        <p className="mt-1 text-sm text-[#5E584F]">
-                          Esses dados ajudam a conectar membros para escrever artigos e submeter
-                          trabalhos em conjunto.
+                        <p className="mt-1 text-sm text-[#6B655B]">
+                          Esses dados conectam membros para formar grupos e escrever artigos juntos.
                         </p>
                       </div>
 
                       <div className="grid gap-3.5 sm:grid-cols-2">
                         <div className="sm:col-span-2">
-                          <label className="mb-1 block text-xs font-semibold text-[#1F1D1A]">
+                          <label className="mb-1 block text-xs font-bold text-[#211F1C]">
                             Nome completo
                           </label>
                           <input
                             type="text"
                             value={fullName}
                             onChange={(e) => setFullName(e.target.value)}
+                            onKeyDown={handleStepKeyDown}
                             placeholder="Ex.: Lucas Andrade"
-                            className="w-full rounded-xl border border-[#DCD4C6] bg-[#F8F6F1] px-3.5 py-2.5 text-sm focus:border-[#5A6D3A] focus:bg-white focus:outline-none"
+                            className="w-full rounded-xl border-2 border-[#E4DDD0] bg-[#FAF7F1] px-3.5 py-2.5 text-sm focus:border-[#211F1C] focus:bg-white focus:outline-none"
                           />
                         </div>
 
                         <div>
-                          <label className="mb-1 block text-xs font-semibold text-[#1F1D1A]">
+                          <label className="mb-1 block text-xs font-bold text-[#211F1C]">
                             Instituição / Liga / Hospital
                           </label>
                           <input
                             type="text"
                             value={institution}
                             onChange={(e) => setInstitution(e.target.value)}
+                            onKeyDown={handleStepKeyDown}
                             placeholder="Ex.: USP / UNIFESP / HC"
-                            className="w-full rounded-xl border border-[#DCD4C6] bg-[#F8F6F1] px-3.5 py-2.5 text-sm focus:border-[#5A6D3A] focus:bg-white focus:outline-none"
+                            className="w-full rounded-xl border-2 border-[#E4DDD0] bg-[#FAF7F1] px-3.5 py-2.5 text-sm focus:border-[#211F1C] focus:bg-white focus:outline-none"
                           />
                         </div>
 
                         <div>
-                          <label className="mb-1 block text-xs font-semibold text-[#1F1D1A]">
+                          <label className="mb-1 block text-xs font-bold text-[#211F1C]">
                             WhatsApp (opcional)
                           </label>
                           <input
                             type="text"
                             value={whatsapp}
                             onChange={(e) => setWhatsapp(e.target.value)}
+                            onKeyDown={handleStepKeyDown}
                             placeholder="(11) 99999-9999"
-                            className="w-full rounded-xl border border-[#DCD4C6] bg-[#F8F6F1] px-3.5 py-2.5 text-sm focus:border-[#5A6D3A] focus:bg-white focus:outline-none"
+                            className="w-full rounded-xl border-2 border-[#E4DDD0] bg-[#FAF7F1] px-3.5 py-2.5 text-sm focus:border-[#211F1C] focus:bg-white focus:outline-none"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="mb-2 block text-xs font-semibold text-[#1F1D1A]">
+                        <label className="mb-2 block text-xs font-bold text-[#211F1C]">
                           Momento acadêmico / profissional
                         </label>
                         <div className="flex flex-wrap gap-2">
                           {ACADEMIC_STAGES.map((st) => {
                             const active = academicStage === st;
                             return (
-                              <button
+                              <motion.button
+                                whileTap={{ scale: 0.96 }}
                                 key={st}
                                 type="button"
                                 onClick={() => setAcademicStage(st)}
-                                className={`rounded-xl border px-3.5 py-2 text-xs font-medium transition-colors ${
+                                className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all ${
                                   active
-                                    ? 'border-[#5A6D3A] bg-[#EEF2E7] text-[#35441E]'
-                                    : 'border-[#E6E0D5] bg-white text-[#433F39] hover:border-[#CFC7B8]'
+                                    ? 'border-[#211F1C] bg-[#B7CC49] text-[#211F1C] shadow-[2px_2px_0px_#211F1C]'
+                                    : 'border-[#DDD4C4] bg-[#FAF7F1] text-[#3F3B35] hover:border-[#211F1C]'
                                 }`}
                               >
                                 {st}
-                              </button>
+                              </motion.button>
                             );
                           })}
                         </div>
@@ -327,23 +342,23 @@ export function TypeformWizard({
                   {step === 1 && (
                     <div className="space-y-4">
                       <div>
-                        <h2 className="font-editorial text-2xl font-medium text-[#1F1D1A]">
+                        <h2 className="font-display text-xl sm:text-2xl font-extrabold text-[#211F1C]">
                           Quais áreas médicas mais te interessam?
                         </h2>
-                        <p className="mt-1 text-sm text-[#5E584F]">
+                        <p className="mt-1 text-sm text-[#6B655B]">
                           Escolha uma ou mais especialidades para encontrar pares com interesses em
                           comum.
                         </p>
                       </div>
 
                       <div className="relative">
-                        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8A8378]" />
+                        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8E8679]" />
                         <input
                           type="text"
                           value={areaSearch}
                           onChange={(e) => setAreaSearch(e.target.value)}
                           placeholder="Filtrar especialidades (ex.: Cardiologia, Neurologia, Oncologia)..."
-                          className="w-full rounded-xl border border-[#DCD4C6] bg-[#F8F6F1] py-2 pl-9 pr-3 text-xs focus:border-[#5A6D3A] focus:bg-white focus:outline-none"
+                          className="w-full rounded-xl border-2 border-[#E4DDD0] bg-[#FAF7F1] py-2 pl-9 pr-3 text-xs focus:border-[#211F1C] focus:bg-white focus:outline-none"
                         />
                       </div>
 
@@ -351,22 +366,21 @@ export function TypeformWizard({
                         {filteredThemeOptions.map((t) => {
                           const selected = areas.includes(t.name);
                           return (
-                            <button
+                            <motion.button
+                              whileTap={{ scale: 0.95 }}
                               key={t.name}
                               type="button"
                               onClick={() => toggleItem(areas, setAreas, t.name)}
-                              className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+                              className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all ${
                                 selected
-                                  ? 'border-[#5A6D3A] bg-[#EEF2E7] text-[#35441E]'
-                                  : 'border-[#E6E0D5] bg-white text-[#433F39] hover:border-[#CFC7B8]'
+                                  ? 'border-[#211F1C] bg-[#B7CC49] text-[#211F1C] shadow-[1.5px_1.5px_0px_#211F1C]'
+                                  : 'border-[#DDD4C4] bg-[#FAF7F1] text-[#3F3B35] hover:border-[#211F1C] hover:bg-white'
                               }`}
                             >
-                              {selected && <Check className="h-3 w-3" />}
+                              {selected && <Check className="h-3 w-3 stroke-[3]" />}
                               <span>{t.name}</span>
-                              <span className="text-[10px] text-[#8A8378] tabular-nums">
-                                {t.count}
-                              </span>
-                            </button>
+                              <span className="text-[10px] opacity-65 tabular-nums">{t.count}</span>
+                            </motion.button>
                           );
                         })}
                       </div>
@@ -376,80 +390,83 @@ export function TypeformWizard({
                   {step === 2 && (
                     <div className="space-y-5">
                       <div>
-                        <h2 className="font-editorial text-2xl font-medium text-[#1F1D1A]">
+                        <h2 className="font-display text-xl sm:text-2xl font-extrabold text-[#211F1C]">
                           Que tipos de congresso você busca?
                         </h2>
-                        <p className="mt-1 text-sm text-[#5E584F]">
-                          Defina modalidade, abrangência e janela de tempo preferida.
+                        <p className="mt-1 text-sm text-[#6B655B]">
+                          Defina modalidade, abrangência e anos preferidos.
                         </p>
                       </div>
 
                       <div>
-                        <div className="mb-2 text-xs font-semibold text-[#1F1D1A]">Modalidade</div>
+                        <div className="mb-2 text-xs font-bold text-[#211F1C]">Modalidade</div>
                         <div className="flex flex-wrap gap-2">
                           {MODALIDADES_OPTIONS.map((m) => {
                             const active = modalities.includes(m.id);
                             return (
-                              <button
+                              <motion.button
+                                whileTap={{ scale: 0.96 }}
                                 key={m.id}
                                 type="button"
                                 onClick={() => toggleItem(modalities, setModalities, m.id)}
-                                className={`rounded-xl border px-4 py-2 text-xs font-medium transition-colors ${
+                                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition-all ${
                                   active
-                                    ? 'border-[#5A6D3A] bg-[#EEF2E7] text-[#35441E]'
-                                    : 'border-[#E6E0D5] bg-white text-[#433F39] hover:border-[#CFC7B8]'
+                                    ? 'border-[#211F1C] bg-[#F3D2A2] text-[#211F1C] shadow-[2px_2px_0px_#211F1C]'
+                                    : 'border-[#DDD4C4] bg-[#FAF7F1] text-[#3F3B35] hover:border-[#211F1C]'
                                 }`}
                               >
                                 {m.label}
-                              </button>
+                              </motion.button>
                             );
                           })}
                         </div>
                       </div>
 
                       <div>
-                        <div className="mb-2 text-xs font-semibold text-[#1F1D1A]">Abrangência</div>
+                        <div className="mb-2 text-xs font-bold text-[#211F1C]">Abrangência</div>
                         <div className="flex flex-wrap gap-2">
                           {SCOPES_OPTIONS.map((sc) => {
                             const active = scopes.includes(sc.id);
                             return (
-                              <button
+                              <motion.button
+                                whileTap={{ scale: 0.96 }}
                                 key={sc.id}
                                 type="button"
                                 onClick={() => toggleItem(scopes, setScopes, sc.id)}
-                                className={`rounded-xl border px-4 py-2 text-xs font-medium transition-colors ${
+                                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition-all ${
                                   active
-                                    ? 'border-[#5A6D3A] bg-[#EEF2E7] text-[#35441E]'
-                                    : 'border-[#E6E0D5] bg-white text-[#433F39] hover:border-[#CFC7B8]'
+                                    ? 'border-[#211F1C] bg-[#F3D2A2] text-[#211F1C] shadow-[2px_2px_0px_#211F1C]'
+                                    : 'border-[#DDD4C4] bg-[#FAF7F1] text-[#3F3B35] hover:border-[#211F1C]'
                                 }`}
                               >
                                 {sc.label}
-                              </button>
+                              </motion.button>
                             );
                           })}
                         </div>
                       </div>
 
                       <div>
-                        <div className="mb-2 text-xs font-semibold text-[#1F1D1A]">
+                        <div className="mb-2 text-xs font-bold text-[#211F1C]">
                           Horizonte de planejamento
                         </div>
                         <div className="flex flex-wrap gap-2">
                           {YEARS_OPTIONS.map((y) => {
                             const active = years.includes(y);
                             return (
-                              <button
+                              <motion.button
+                                whileTap={{ scale: 0.96 }}
                                 key={y}
                                 type="button"
                                 onClick={() => toggleItem(years, setYears, y)}
-                                className={`rounded-xl border px-4 py-2 text-xs font-medium tabular-nums transition-colors ${
+                                className={`rounded-full border px-4 py-1.5 text-xs font-bold tabular-nums transition-all ${
                                   active
-                                    ? 'border-[#5A6D3A] bg-[#EEF2E7] text-[#35441E]'
-                                    : 'border-[#E6E0D5] bg-white text-[#433F39] hover:border-[#CFC7B8]'
+                                    ? 'border-[#211F1C] bg-[#B7CC49] text-[#211F1C] shadow-[2px_2px_0px_#211F1C]'
+                                    : 'border-[#DDD4C4] bg-[#FAF7F1] text-[#3F3B35] hover:border-[#211F1C]'
                                 }`}
                               >
                                 {y}
-                              </button>
+                              </motion.button>
                             );
                           })}
                         </div>
@@ -460,10 +477,10 @@ export function TypeformWizard({
                   {step === 3 && (
                     <div className="space-y-4">
                       <div>
-                        <h2 className="font-editorial text-2xl font-medium text-[#1F1D1A]">
+                        <h2 className="font-display text-xl sm:text-2xl font-extrabold text-[#211F1C]">
                           Como você quer atuar nos artigos do grupo?
                         </h2>
-                        <p className="mt-1 text-sm text-[#5E584F]">
+                        <p className="mt-1 text-sm text-[#6B655B]">
                           Selecione formatos de produção e descreva temas que gostaria de pesquisar.
                         </p>
                       </div>
@@ -472,24 +489,25 @@ export function TypeformWizard({
                         {RESEARCH_GOALS.map((g) => {
                           const active = goals.includes(g);
                           return (
-                            <button
+                            <motion.button
+                              whileTap={{ scale: 0.96 }}
                               key={g}
                               type="button"
                               onClick={() => toggleItem(goals, setGoals, g)}
-                              className={`rounded-xl border px-3.5 py-2 text-xs font-medium transition-colors ${
+                              className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all ${
                                 active
-                                  ? 'border-[#5A6D3A] bg-[#EEF2E7] text-[#35441E]'
-                                  : 'border-[#E6E0D5] bg-white text-[#433F39] hover:border-[#CFC7B8]'
+                                  ? 'border-[#211F1C] bg-[#B7CC49] text-[#211F1C] shadow-[2px_2px_0px_#211F1C]'
+                                  : 'border-[#DDD4C4] bg-[#FAF7F1] text-[#3F3B35] hover:border-[#211F1C]'
                               }`}
                             >
                               {g}
-                            </button>
+                            </motion.button>
                           );
                         })}
                       </div>
 
                       <div>
-                        <label className="mb-1.5 block text-xs font-semibold text-[#1F1D1A]">
+                        <label className="mb-1.5 block text-xs font-bold text-[#211F1C]">
                           Temas específicos ou ideias iniciais de artigo (opcional)
                         </label>
                         <textarea
@@ -497,7 +515,7 @@ export function TypeformWizard({
                           value={notes}
                           onChange={(e) => setNotes(e.target.value)}
                           placeholder="Ex.: Tenho interesse em revisão sistemática em cardiologia preventiva ou cirurgia minimamente invasiva..."
-                          className="w-full rounded-xl border border-[#DCD4C6] bg-[#F8F6F1] p-3 text-sm text-[#1F1D1A] placeholder:text-[#8A8378] focus:border-[#5A6D3A] focus:bg-white focus:outline-none"
+                          className="w-full rounded-xl border-2 border-[#E4DDD0] bg-[#FAF7F1] p-3 text-sm text-[#211F1C] placeholder:text-[#8E8679] focus:border-[#211F1C] focus:bg-white focus:outline-none"
                         />
                       </div>
                     </div>
@@ -506,17 +524,17 @@ export function TypeformWizard({
                   {step === 4 && (
                     <div className="space-y-4">
                       <div>
-                        <h2 className="font-editorial text-2xl font-medium text-[#1F1D1A]">
+                        <h2 className="font-display text-xl sm:text-2xl font-extrabold text-[#211F1C]">
                           Congressos alinhados ao seu perfil
                         </h2>
-                        <p className="mt-1 text-sm text-[#5E584F]">
-                          Marque os eventos que deseja sinalizar como interesse comum do grupo (você
-                          também pode pesquisar no Google antes de decidir).
+                        <p className="mt-1 text-sm text-[#6B655B]">
+                          Marque eventos que deseja sinalizar como interesse comum do grupo (use o
+                          botão do Google para conferir detalhes antes).
                         </p>
                       </div>
 
                       {suggestedCongresses.length === 0 ? (
-                        <div className="rounded-xl border border-[#E6E0D5] bg-[#F8F6F1] p-4 text-xs text-[#5E584F]">
+                        <div className="rounded-2xl border border-[#DDD4C4] bg-[#FAF7F1] p-4 text-xs text-[#6B655B]">
                           Nenhum evento corresponde exatamente à combinação escolhida. Você pode
                           concluir e explorar toda a tabela na tela principal.
                         </div>
@@ -527,10 +545,10 @@ export function TypeformWizard({
                             return (
                               <div
                                 key={c.slug}
-                                className={`flex items-start justify-between gap-3 rounded-xl border p-3 transition-colors ${
+                                className={`flex items-start justify-between gap-3 rounded-2xl border-2 p-3 transition-all ${
                                   selected
-                                    ? 'border-[#5A6D3A] bg-[#EEF2E7]/70'
-                                    : 'border-[#E6E0D5] bg-white hover:border-[#CFC7B8]'
+                                    ? 'border-[#211F1C] bg-[#FDF6E9] shadow-[3px_3px_0px_#B7CC49]'
+                                    : 'border-[#E4DDD0] bg-[#FAF7F1] hover:border-[#211F1C] hover:bg-white'
                                 }`}
                               >
                                 <button
@@ -539,19 +557,19 @@ export function TypeformWizard({
                                   className="flex flex-1 items-start gap-2.5 text-left"
                                 >
                                   <span
-                                    className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border ${
+                                    className={`mt-0.5 flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded border-2 ${
                                       selected
-                                        ? 'border-[#5A6D3A] bg-[#5A6D3A] text-white'
-                                        : 'border-[#CFC7B8] bg-white'
+                                        ? 'border-[#211F1C] bg-[#B7CC49] text-[#211F1C]'
+                                        : 'border-[#BDB4A4] bg-white'
                                     }`}
                                   >
-                                    {selected && <Check className="h-3 w-3" />}
+                                    {selected && <Check className="h-3 w-3 stroke-[3]" />}
                                   </span>
                                   <div>
-                                    <div className="text-xs font-semibold text-[#1F1D1A]">
+                                    <div className="font-display text-xs font-bold text-[#211F1C]">
                                       {c.nome}
                                     </div>
-                                    <div className="mt-0.5 text-[11px] text-[#5E584F]">
+                                    <div className="mt-0.5 text-[11px] text-[#6B655B]">
                                       {formatDateRange(c)} · {c.local_formatado} ·{' '}
                                       {c.tema_principal}
                                     </div>
@@ -562,7 +580,7 @@ export function TypeformWizard({
                                   href={buildGoogleSearchUrl(c)}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex shrink-0 items-center gap-1 rounded-lg border border-[#E6E0D5] bg-[#F8F6F1] px-2 py-1 text-[11px] font-medium text-[#5E584F] hover:text-[#1F1D1A]"
+                                  className="inline-flex shrink-0 items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-semibold text-[#5C554C] hover:bg-[#F3D2A2] hover:text-[#211F1C]"
                                   title="Pesquisar informações no Google"
                                 >
                                   <span>Google</span>
@@ -579,43 +597,45 @@ export function TypeformWizard({
               </AnimatePresence>
 
               {error && (
-                <div className="mt-4 rounded-xl border border-[#D8B4A0] bg-[#FAF0EA] px-3.5 py-2.5 text-xs text-[#7D3B23]">
+                <div className="mt-4 rounded-xl border border-[#D8B4A0] bg-[#FAF0EA] px-3.5 py-2.5 text-xs font-medium text-[#7D3B23]">
                   {error}
                 </div>
               )}
             </div>
 
             {/* Footer nav */}
-            <div className="flex items-center justify-between border-t border-[#E6E0D5] bg-[#F8F6F1] px-6 py-4">
+            <div className="flex items-center justify-between border-t-2 border-[#211F1C] bg-[#FDF6E9] px-6 py-4">
               <button
                 type="button"
                 onClick={back}
                 disabled={step === 0 || saving}
-                className="inline-flex items-center gap-1.5 rounded-xl border border-[#E6E0D5] bg-white px-3.5 py-2 text-xs font-semibold text-[#5E584F] hover:text-[#1F1D1A] disabled:opacity-40"
+                className="inline-flex items-center gap-1.5 rounded-xl border-2 border-[#211F1C] bg-white px-3.5 py-2 text-xs font-bold text-[#211F1C] hover:bg-[#FAF7F1] disabled:opacity-40"
               >
                 <ArrowLeft className="h-3.5 w-3.5" />
                 <span>Voltar</span>
               </button>
 
               {step < totalSteps - 1 ? (
-                <button
+                <motion.button
+                  whileTap={{ scale: 0.96 }}
                   type="button"
                   onClick={next}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-[#1F1D1A] px-4 py-2 text-xs font-semibold text-[#F8F6F1] hover:bg-[#35322D]"
+                  className="inline-flex items-center gap-1.5 rounded-xl border-2 border-[#211F1C] bg-[#F3D2A2] px-4 py-2 text-xs font-bold text-[#211F1C] shadow-[2px_2px_0px_#211F1C] hover:bg-[#EFC384]"
                 >
                   <span>Continuar</span>
                   <ArrowRight className="h-3.5 w-3.5" />
-                </button>
+                </motion.button>
               ) : (
-                <button
+                <motion.button
+                  whileTap={{ scale: 0.96 }}
                   type="button"
                   onClick={handleFinish}
                   disabled={saving}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-[#5A6D3A] px-5 py-2 text-xs font-semibold text-white hover:bg-[#495A2E] disabled:opacity-60"
+                  className="inline-flex items-center gap-1.5 rounded-xl border-2 border-[#211F1C] bg-[#B7CC49] px-5 py-2 text-xs font-bold text-[#211F1C] shadow-[2px_2px_0px_#211F1C] hover:bg-[#A6BD36] disabled:opacity-60"
                 >
                   <Sparkles className="h-3.5 w-3.5" />
                   <span>{saving ? 'Salvando...' : 'Salvar preferências'}</span>
-                </button>
+                </motion.button>
               )}
             </div>
           </motion.div>
